@@ -1,4 +1,4 @@
-import { BackgroundBeamsWithCollision } from "@/components/background-beams";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams";
 import { Button } from "@/components/ui/button";
 import { FC } from "react";
 import Link from "next/link";
