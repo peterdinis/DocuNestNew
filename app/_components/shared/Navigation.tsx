@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import ThemeButton from './ThemeButton'
 
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,11 +29,14 @@ const Navigation: FC = () => {
             </Link>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link href="/dashboard" className="text-gray-600 prose prose-a: hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Services</Link>
-                <Link href="/projects" className="text-gray-600 prose prose-a: hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Pricing</Link>
-                <Button variant={"outline"} className="text-gray-600 prose prose-a: hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Register</Button>
-                <Button variant={"outline"} className="text-gray-600 prose prose-a: hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Login</Button>
+                <Link href="/dashboard" className="text-gray-600 prose prose-a: dark:text-sky-50 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Services</Link>
+                <Link href="/projects" className="text-gray-600 prose prose-a: dark:text-sky-50 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Pricing</Link>
+                <Button variant={"outline"} className="text-gray-600 prose prose-a: dark:text-sky-50 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Register</Button>
+                <Button variant={"outline"} className="text-gray-600 prose prose-a: dark:text-sky-50 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Login</Button>
               </div>
+            </div>
+            <div className="ml-5">
+            <ThemeButton />
             </div>
           </div>
           <div className="hidden md:block">
