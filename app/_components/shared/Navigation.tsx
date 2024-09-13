@@ -13,11 +13,28 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import ThemeButton from './ThemeButton';
+import { useSession, signOut } from 'next-auth/react';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 const Navigation: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const { data: session } = useSession();
     const toggleMenu = () => setIsOpen(!isOpen);
+    const {toast} = useToast();
+    const router = useRouter();
+
+    const logoutUser = () => {
+        signOut({
+            redirect: false,
+        });
+        toast({
+            title: "Logout DONE",
+            duration: 2000,
+            className: "bg-green-800 text-white font-bold"
+        })
+        router.push('/login');
+    };
 
     return (
         <nav className='bg-background shadow-md'>
@@ -100,7 +117,7 @@ const Navigation: FC = () => {
                                     <DropdownMenuItem>
                                         Settings
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>
+                                    <DropdownMenuItem onClick={logoutUser}>
                                         Sign out
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
