@@ -4,17 +4,23 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import useRegisterUser from '@/app/_hooks/users/useRegisterUser';
 import { registerSchema } from './authSchema';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardFooter, CardContent } from '@/components/ui/card';
+import {
+    Card,
+    CardHeader,
+    CardFooter,
+    CardContent,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { RegisterUser } from '@/app/_store/mutations/authMutations';
+import { useToast } from '@/hooks/use-toast';
 
 const RegisterForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
-
+    const { toast } = useToast();
     const {
         register,
         handleSubmit,
@@ -32,22 +38,49 @@ const RegisterForm: FC = () => {
         try {
             await registerUserMut(data, {
                 onSuccess: () => {
-                    reset(); // Reset the form after successful registration
+                    reset();
                 },
-                onError: (error) => {
-                    console.error('Registration error:', error);
-                    // Optionally handle the error by displaying a message
+                onError: (error: any) => {
+                    // Handle known error cases here
+                    if (error.response?.status === 400) {
+                        toast({
+                            title: 'Please check the information you provided and try again.',
+                            duration: 2000,
+                            className:
+                                'bg-red-800 text-white font-bold text-xl',
+                        });
+                    } else if (error.response?.status === 500) {
+                        toast({
+                            title: 'Server is currently unavailable. Please try again later',
+                            duration: 2000,
+                            className:
+                                'bg-red-800 text-white font-bold text-xl',
+                        });
+                    } else {
+                        toast({
+                            title: 'Something went wrong. Please try again.',
+                            duration: 2000,
+                            className:
+                                'bg-red-800 text-white font-bold text-xl',
+                        });
+                    }
                 },
             });
         } catch (err) {
-            console.error('Unexpected error:', err);
+            toast({
+                title: 'An unexpected error occurred. Please try again later.',
+                duration: 2000,
+                className: 'bg-red-800 text-white font-bold text-xl',
+            });
         }
     };
 
     return (
         <div className='flex h-screen flex-col items-center justify-center'>
             <Card className='w-full max-w-md'>
-                <CardHeader className='text-center text-2xl'>Register</CardHeader>
+                <CardHeader className='text-center text-2xl'>
+                    Register
+                </CardHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent className='space-y-4'>
                         <div className='space-y-2'>
@@ -60,7 +93,9 @@ const RegisterForm: FC = () => {
                                 {...register('name')}
                             />
                             {errors.name && (
-                                <p className='font-bold text-red-600'>Name is required</p>
+                                <p className='font-bold text-red-600'>
+                                    Name is required
+                                </p>
                             )}
                         </div>
 
@@ -74,11 +109,13 @@ const RegisterForm: FC = () => {
                                 {...register('email')}
                             />
                             {errors.email && (
-                                <p className='font-bold text-red-600'>Email is required</p>
+                                <p className='font-bold text-red-600'>
+                                    Email is required
+                                </p>
                             )}
                         </div>
 
-                        <div className='space-y-2 relative'>
+                        <div className='relative space-y-2'>
                             <div>Password</div>
                             <Input
                                 id='password'
@@ -89,7 +126,7 @@ const RegisterForm: FC = () => {
                             <button
                                 type='button'
                                 onClick={toggleVisibility}
-                                className='absolute inset-y-0 right-0 flex mt-5 items-center px-2'
+                                className='absolute inset-y-0 right-0 top-3 flex items-center px-2'
                             >
                                 {isVisible ? (
                                     <EyeOff className='h-5 w-5' />
@@ -98,7 +135,9 @@ const RegisterForm: FC = () => {
                                 )}
                             </button>
                             {errors.password && (
-                                <p className='font-bold text-red-600'>Password is required</p>
+                                <p className='font-bold text-red-600'>
+                                    Password is required
+                                </p>
                             )}
                         </div>
                     </CardContent>
@@ -109,14 +148,18 @@ const RegisterForm: FC = () => {
                             className='w-full'
                             disabled={isPending}
                         >
-                            {isPending ? 'Registering...' : 'Register'}
+                            {isPending ? <Loader2 className='animate-spin w-8 h-8' /> : 'Register'}
                         </Button>
                     </CardFooter>
                 </form>
             </Card>
             <div className='mt-4'>
                 <span className='text-sm'>Already have an account?</span>
-                <Link href='/login' className='ml-4 text-sm text-blue-500' prefetch={false}>
+                <Link
+                    href='/login'
+                    className='ml-4 text-sm text-blue-500'
+                    prefetch={false}
+                >
                     Login
                 </Link>
             </div>
