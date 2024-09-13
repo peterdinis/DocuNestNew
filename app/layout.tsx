@@ -4,6 +4,7 @@ import './globals.css';
 import Navigation from './_components/shared/Navigation';
 import ThemeProvider from './_components/shared/providers/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
+import QueryProvider from './_components/shared/providers/QueryProvider';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -32,9 +33,11 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <ThemeProvider>
-                    <Navigation />
-                    {children}
-                    <Toaster />
+                    <QueryProvider>
+                        <Navigation />
+                        {children}
+                        <Toaster />
+                    </QueryProvider>
                 </ThemeProvider>
             </body>
         </html>
