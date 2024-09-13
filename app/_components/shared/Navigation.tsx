@@ -47,13 +47,23 @@ const Navigation: FC = () => {
                                     variant={'outline'}
                                     className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                                 >
-                                    Register
+                                    <Link
+                                        className='dark:text-white'
+                                        href='/register'
+                                    >
+                                        Register
+                                    </Link>
                                 </Button>
                                 <Button
                                     variant={'outline'}
-                                    className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                                    className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
                                 >
-                                    Login
+                                    <Link
+                                        className='dark:text-white'
+                                        href='/login'
+                                    >
+                                        Login
+                                    </Link>
                                 </Button>
                             </div>
                         </div>
