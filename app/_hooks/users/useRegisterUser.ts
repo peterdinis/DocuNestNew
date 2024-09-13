@@ -3,29 +3,32 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { RegisterUser, registerUser } from '@/app/_store/mutations/authMutations';
+import {
+    RegisterUser,
+    registerUser,
+} from '@/app/_store/mutations/authMutations';
 
 const useRegisterUser = () => {
     const router = useRouter();
-    const {toast} = useToast();
+    const { toast } = useToast();
 
     return useMutation({
         mutationKey: ['registerUser'],
         mutationFn: async (data: RegisterUser) => registerUser(data),
         onSuccess: () => {
             toast({
-                title: "Register DONE",
+                title: 'Register DONE',
                 duration: 2000,
-                className: "bg-green-800 text-white font-bold"
-            })
+                className: 'bg-green-800 text-white font-bold',
+            });
             router.push('/login');
         },
         onError: () => {
             toast({
-                title: "Register Failed",
+                title: 'Register Failed',
                 duration: 2000,
-                className: "bg-red-800 text-white font-bold"
-            })
+                className: 'bg-red-800 text-white font-bold',
+            });
         },
     });
 };

@@ -10,7 +10,12 @@ import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { loginSchema } from './authSchema';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardFooter, CardContent } from '@/components/ui/card';
+import {
+    Card,
+    CardHeader,
+    CardFooter,
+    CardContent,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 
 const LoginForm: FC = () => {
@@ -39,23 +44,23 @@ const LoginForm: FC = () => {
 
             if (result?.error) {
                 toast({
-                    title: "Login error: " + result.error,
+                    title: 'Login error: ' + result.error,
                     duration: 2000,
-                    className: "bg-red-800 text-white font-bold"
+                    className: 'bg-red-800 text-white font-bold',
                 });
             } else {
                 toast({
-                    title: "Login successful",
+                    title: 'Login successful',
                     duration: 2000,
-                    className: "bg-green-800 text-white font-bold"
+                    className: 'bg-green-800 text-white font-bold',
                 });
                 router.push('/dashboard');
             }
         } catch (error) {
             toast({
-                title: "Unexpected error",
+                title: 'Unexpected error',
                 duration: 2000,
-                className: "bg-red-800 text-white font-bold"
+                className: 'bg-red-800 text-white font-bold',
             });
         } finally {
             setLoading(false);
@@ -84,7 +89,7 @@ const LoginForm: FC = () => {
                                 </p>
                             )}
                         </div>
-                        <div className='space-y-2 relative'>
+                        <div className='relative space-y-2'>
                             <div>Password</div>
                             <Input
                                 id='password'
@@ -119,7 +124,11 @@ const LoginForm: FC = () => {
                             className='w-full'
                             disabled={loading}
                         >
-                            {loading ? <Loader2 className='animate-spin h-8 w-8' /> : 'Login'}
+                            {loading ? (
+                                <Loader2 className='h-8 w-8 animate-spin' />
+                            ) : (
+                                'Login'
+                            )}
                         </Button>
                     </CardFooter>
                 </form>
