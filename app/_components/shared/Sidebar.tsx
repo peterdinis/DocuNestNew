@@ -27,11 +27,11 @@ const Sidebar: FC = () => {
     const sidebarVariants = {
         open: {
             width: '18rem',
-            transition: { type: 'spring', stiffness: 100 },
+            transition: { type: 'tween', duration: 0.3, ease: 'easeOut' },
         },
         closed: {
             width: '4rem',
-            transition: { type: 'spring', stiffness: 100 },
+            transition: { type: 'tween', duration: 0.3, ease: 'easeOut' },
         },
     };
 
