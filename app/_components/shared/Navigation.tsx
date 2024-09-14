@@ -21,7 +21,7 @@ const Navigation: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session } = useSession();
     const toggleMenu = () => setIsOpen(!isOpen);
-    const {toast} = useToast();
+    const { toast } = useToast();
     const router = useRouter();
 
     const logoutUser = () => {
@@ -29,10 +29,10 @@ const Navigation: FC = () => {
             redirect: false,
         });
         toast({
-            title: "Logout DONE",
+            title: 'Logout DONE',
             duration: 2000,
-            className: "bg-green-800 text-white font-bold"
-        })
+            className: 'bg-green-800 text-white font-bold',
+        });
         router.push('/login');
     };
 
