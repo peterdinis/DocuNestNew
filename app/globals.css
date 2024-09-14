@@ -64,7 +64,6 @@ html::-webkit-scrollbar-thumb {
     border: 2px solid #16003e;
 }
 
-
 @layer base {
     :root {
         --background: 0 0% 100%;

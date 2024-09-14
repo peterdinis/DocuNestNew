@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Plus, MoreVertical, Menu, X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import CreateNewWorkspaceModal from '../workspaces/CreateNewWorkspaceModal';
 
 interface Document {
     id: number;
@@ -43,7 +44,12 @@ const Sidebar: FC = () => {
             variants={sidebarVariants}
         >
             <div className='mb-6 flex items-center justify-between'>
-                {isOpen && <span className='font-bold prose prose-p:'> {session!.user!.email}</span>}
+                {isOpen && (
+                    <span className='prose-p: prose font-bold'>
+                        {' '}
+                        {session!.user!.email}
+                    </span>
+                )}
                 <button onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? (
                         <X className='h-6 w-6 text-gray-700' />
@@ -59,7 +65,7 @@ const Sidebar: FC = () => {
                         <h2 className='text-lg font-semibold'>
                             Create new workspace
                         </h2>
-                        <Plus className='h-5 w-5 cursor-pointer text-gray-700' />
+                        <CreateNewWorkspaceModal />
                     </div>
                 </div>
             )}
