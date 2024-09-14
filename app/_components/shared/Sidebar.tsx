@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -17,12 +17,12 @@ const Sidebar: FC = () => {
     { id: 2, name: 'Untitled document' },
     { id: 3, name: 'Untitled document' },
   ];
-  
+
   const storageUsed = 3;
   const maxStorage = 6;
 
   const sidebarVariants = {
-    open: { width: '18rem', transition: { type: 'spring', stiffness: 100 } }, 
+    open: { width: '18rem', transition: { type: 'spring', stiffness: 100 } },
     closed: { width: '4rem', transition: { type: 'spring', stiffness: 100 } },
   };
 
@@ -35,12 +35,7 @@ const Sidebar: FC = () => {
     >
 
       <div className="flex justify-between items-center mb-6">
-        {isOpen && <div className="rounded-full bg-gray-300 w-8 h-8"></div>}
-        {isOpen ? (
-          <Bell className="w-6 h-6 text-gray-700" />
-        ) : (
-          <div></div>
-        )}
+        {isOpen && <div className="rounded-full bg-gray-300 w-8 h-8" />}
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
         </button>
@@ -76,7 +71,7 @@ const Sidebar: FC = () => {
             <div
               className="bg-blue-500 h-2 rounded-full"
               style={{ width: `${(storageUsed / maxStorage) * 100}%` }}
-            ></div>
+            />
           </div>
           <p className="text-xs text-gray-500">{`${storageUsed} out of ${maxStorage} files used`}</p>
         </div>

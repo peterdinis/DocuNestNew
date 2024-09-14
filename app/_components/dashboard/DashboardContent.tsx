@@ -1,11 +1,13 @@
-import { FC } from "react";
+"use client"
+
+import { FC} from "react";
 
 const DashboardContent: FC = () => {
     return (
         <>
-            CONTENT
+            LANDING PAGE
         </>
-    )
-}
+    );
+};
 
 export default DashboardContent;
