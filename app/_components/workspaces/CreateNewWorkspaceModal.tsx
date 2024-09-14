@@ -16,7 +16,7 @@ const CreateNewWorkspaceModal: FC = () => {
         <Dialog>
             <DialogTrigger>
                 <Button variant={'link'} size='default'>
-                    <Plus className='h-5 w-5 cursor-pointer text-gray-700' />
+                    <Plus className='h-5 w-5 cursor-pointer text-gray-700 dark:text-white' />
                 </Button>
             </DialogTrigger>
             <DialogContent>

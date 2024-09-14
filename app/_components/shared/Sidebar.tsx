@@ -10,7 +10,7 @@ import {
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -50,22 +50,22 @@ const Sidebar: FC = () => {
 
     return (
         <motion.div
-            className='flex h-screen flex-col bg-white p-4 shadow-lg'
+            className='flex h-screen flex-col bg-zinc-100 p-4 shadow-lg dark:bg-stone-900'
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             variants={sidebarVariants}
         >
             <div className='mb-6 flex items-center justify-between'>
                 {isOpen && (
-                    <span className='prose-p: prose font-bold'>
+                    <span className='prose-p: prose font-bold dark:text-white'>
                         {session!.user!.email}
                     </span>
                 )}
                 <button onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? (
-                        <X className='h-6 w-6 text-gray-700' />
+                        <X className='h-6 w-6 text-gray-700 dark:text-white' />
                     ) : (
-                        <Menu className='h-6 w-6 text-gray-700' />
+                        <Menu className='h-6 w-6 text-gray-700 dark:text-white' />
                     )}
                 </button>
             </div>
@@ -73,7 +73,7 @@ const Sidebar: FC = () => {
             {isOpen && (
                 <div className='mb-6'>
                     <div className='mb-4 flex items-center justify-between'>
-                        <h2 className='text-lg font-semibold'>
+                        <h2 className='text-lg font-semibold dark:text-white'>
                             Create new workspace
                         </h2>
                         <CreateNewWorkspaceModal />
@@ -93,7 +93,9 @@ const Sidebar: FC = () => {
                                     <div className='flex items-center space-x-2'>
                                         <FileText className='h-5 w-5 text-blue-500' />
                                         {isOpen && (
-                                            <span className='text-sm'>{doc.name}</span>
+                                            <span className='text-sm dark:text-white'>
+                                                {doc.name}
+                                            </span>
                                         )}
                                     </div>
 
@@ -102,14 +104,22 @@ const Sidebar: FC = () => {
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <button>
-                                                    <MoreVertical className='h-4 w-4 ml-4 text-gray-500' />
+                                                    <MoreVertical className='ml-4 h-4 w-4 text-gray-500' />
                                                 </button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent sideOffset={5}>
-                                                <DropdownMenuItem onSelect={() => alert('Rename clicked')}>
+                                                <DropdownMenuItem
+                                                    onSelect={() =>
+                                                        alert('Rename clicked')
+                                                    }
+                                                >
                                                     Rename
                                                 </DropdownMenuItem>
-                                                <DropdownMenuItem onSelect={() => alert('Delete clicked')}>
+                                                <DropdownMenuItem
+                                                    onSelect={() =>
+                                                        alert('Delete clicked')
+                                                    }
+                                                >
                                                     Delete
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
@@ -118,7 +128,7 @@ const Sidebar: FC = () => {
                                 </div>
                             </TooltipTrigger>
                             {!isOpen && (
-                                <TooltipContent>
+                                <TooltipContent className='dark:text-white'>
                                     {doc.name}
                                 </TooltipContent>
                             )}
