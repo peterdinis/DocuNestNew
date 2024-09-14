@@ -46,7 +46,8 @@ const Navigation: FC = () => {
                                 DocuNest
                             </span>
                         </Link>
-                        <div className='hidden md:block'>
+                        {!session?.user! && (
+                            <div className='hidden md:block'>
                             <div className='ml-10 flex items-baseline space-x-4'>
                                 <Link
                                     href='/dashboard'
@@ -84,6 +85,7 @@ const Navigation: FC = () => {
                                 </Button>
                             </div>
                         </div>
+                        )}
                         <div className='ml-5'>
                             <ThemeButton />
                         </div>
