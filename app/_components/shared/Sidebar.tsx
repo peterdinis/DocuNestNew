@@ -2,9 +2,21 @@
 
 import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Plus, MoreVertical, Menu, X } from 'lucide-react';
+import { FileText, MoreVertical, Menu, X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import CreateNewWorkspaceModal from '../workspaces/CreateNewWorkspaceModal';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 
 interface Document {
     id: number;
@@ -46,7 +58,6 @@ const Sidebar: FC = () => {
             <div className='mb-6 flex items-center justify-between'>
                 {isOpen && (
                     <span className='prose-p: prose font-bold'>
-                        {' '}
                         {session!.user!.email}
                     </span>
                 )}
@@ -72,18 +83,47 @@ const Sidebar: FC = () => {
 
             <div className='space-y-4'>
                 {documents.map((doc) => (
-                    <div
-                        key={doc.id}
-                        className='flex cursor-pointer items-center justify-between rounded-md p-2 hover:bg-gray-200'
-                    >
-                        <div className='flex items-center space-x-2'>
-                            <FileText className='h-5 w-5 text-blue-500' />
-                            {isOpen && (
-                                <span className='text-sm'>{doc.name}</span>
+                    <TooltipProvider key={doc.id}>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <div
+                                    className='flex cursor-pointer items-center justify-between rounded-md p-2 hover:bg-gray-200'
+                                    data-testid={`document-${doc.id}`}
+                                >
+                                    <div className='flex items-center space-x-2'>
+                                        <FileText className='h-5 w-5 text-blue-500' />
+                                        {isOpen && (
+                                            <span className='text-sm'>{doc.name}</span>
+                                        )}
+                                    </div>
+
+                                    {/* Dropdown Menu Trigger */}
+                                    {isOpen && (
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <button>
+                                                    <MoreVertical className='h-4 w-4 ml-4 text-gray-500' />
+                                                </button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent sideOffset={5}>
+                                                <DropdownMenuItem onSelect={() => alert('Rename clicked')}>
+                                                    Rename
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem onSelect={() => alert('Delete clicked')}>
+                                                    Delete
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    )}
+                                </div>
+                            </TooltipTrigger>
+                            {!isOpen && (
+                                <TooltipContent>
+                                    {doc.name}
+                                </TooltipContent>
                             )}
-                        </div>
-                        <MoreVertical className='h-4 w-4 text-gray-500' />
-                    </div>
+                        </Tooltip>
+                    </TooltipProvider>
                 ))}
             </div>
 
