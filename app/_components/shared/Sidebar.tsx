@@ -18,11 +18,7 @@ import {
     DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import useDisplayLatestsWorkspaces from '@/app/_hooks/workspaces/useDisplayLatestsWorkspaces';
-
-interface Document {
-    id: number;
-    name: string;
-}
+import { Workspace } from '@prisma/client';
 
 const Sidebar: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +79,7 @@ const Sidebar: FC = () => {
                 {error && <p className='text-lg text-red-500 font-bold prose prose-p:'>Error loading workspaces</p>}
                 {workspaces?.length === 0 && <p className='text-lg text-red-500 font-bold prose prose-p:'>No workspaces found</p>}
 
-                {workspaces?.map((workspace: Document) => (
+                {workspaces?.workspaces && workspaces?.workspaces.map((workspace: Workspace) => (
                     <TooltipProvider key={workspace.id}>
                         <Tooltip>
                             <TooltipTrigger>

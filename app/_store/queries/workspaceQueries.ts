@@ -24,7 +24,7 @@ export const fetchAllWorkspaces = async() => {
 
 
 export const fetchLatestsWorkspaces = async() => {
-    const request = await axios.get("/api/workspces/latests");
+    const request = await axios.get("/api/workspaces/latests");
     return request.data;
 }
 
