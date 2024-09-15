@@ -48,47 +48,44 @@ const Navigation: FC = () => {
                         </Link>
                         {!session?.user! && (
                             <div className='hidden md:block'>
-                            <div className='ml-10 flex items-baseline space-x-4'>
-                                <Link
-                                    href='/dashboard'
-                                    className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                                >
-                                    Services
-                                </Link>
-                                <Link
-                                    href='/projects'
-                                    className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                                >
-                                    Pricing
-                                </Link>
-                                <Button
-                                    variant={'outline'}
-                                    className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                                >
+                                <div className='ml-10 flex items-baseline space-x-4'>
                                     <Link
-                                        className='dark:text-white'
-                                        href='/register'
+                                        href='/dashboard'
+                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                                     >
-                                        Register
+                                        Services
                                     </Link>
-                                </Button>
-                                <Button
-                                    variant={'outline'}
-                                    className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
-                                >
                                     <Link
-                                        className='dark:text-white'
-                                        href='/login'
+                                        href='/projects'
+                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                                     >
-                                        Login
+                                        Pricing
                                     </Link>
-                                </Button>
+                                    <Button
+                                        variant={'outline'}
+                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                                    >
+                                        <Link
+                                            className='dark:text-white'
+                                            href='/register'
+                                        >
+                                            Register
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        variant={'outline'}
+                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
+                                    >
+                                        <Link
+                                            className='dark:text-white'
+                                            href='/login'
+                                        >
+                                            Login
+                                        </Link>
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
                         )}
-                        <div className='ml-5'>
-                            <ThemeButton />
-                        </div>
                     </div>
                     <div className='hidden md:block'>
                         <div className='ml-4 flex items-center md:ml-6'>
@@ -117,7 +114,7 @@ const Navigation: FC = () => {
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
                                         <Link href="/dashboard">
-                                        Profile
+                                            Profile
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem onClick={logoutUser}>
@@ -125,6 +122,10 @@ const Navigation: FC = () => {
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
+                            {/* Move ThemeButton here */}
+                            <div className='ml-5'>
+                                <ThemeButton />
+                            </div>
                         </div>
                     </div>
                     <div className='md:hidden'>
