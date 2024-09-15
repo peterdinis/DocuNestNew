@@ -87,7 +87,7 @@ const Sidebar: FC = () => {
                         <Tooltip>
                             <TooltipTrigger>
                                 <div
-                                    className='flex cursor-pointer items-center justify-between rounded-md p-2 hover:bg-gray-200'
+                                    className='flex cursor-pointer items-center justify-between rounded-md p-2'
                                     data-testid={`document-${doc.id}`}
                                 >
                                     <div className='flex items-center space-x-2'>
