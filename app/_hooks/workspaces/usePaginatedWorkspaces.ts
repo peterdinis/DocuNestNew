@@ -9,7 +9,7 @@ const usePaginatedWorkspaces = ({
     page,
 }: PaginatedWorkspace) => {
     return useQuery({
-        queryKey: ['myPaginatedDocuments', query, page],
+        queryKey: ['myPaginatedWorkspaces', query, page],
         queryFn: () => fetchAllPaginatedWorkspaces({ query, page }),
         staleTime: Infinity,
         refetchIntervalInBackground: true,
