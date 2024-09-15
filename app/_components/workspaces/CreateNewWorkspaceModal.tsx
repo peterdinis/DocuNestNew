@@ -1,4 +1,6 @@
-import { FC } from 'react';
+'use client';
+
+import { FC, useState } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -10,8 +12,39 @@ import {
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import Header from '../shared/Header';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import {
+    Form,
+    FormItem,
+    FormLabel,
+    FormControl,
+    FormDescription,
+    FormMessage,
+    FormField,
+} from '@/components/ui/form';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { Input } from '@/components/ui/input';
+import useCreateWorkspace from '@/app/_hooks/workspaces/useCreateWorkspace';
+
+type WorkspaceFormData = {
+    name: string;
+    description: string;
+    emojiName: string;
+};
 
 const CreateNewWorkspaceModal: FC = () => {
+    const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
+    const { mutate: createWorkspace } = useCreateWorkspace();
+    const form = useForm<WorkspaceFormData>();
+
+    const onSubmit: SubmitHandler<WorkspaceFormData> = (data) => {
+        createWorkspace({
+            name: data.name,
+            description: data.description,
+            workspaceEmoji: selectedEmoji,
+        });
+    };
+
     return (
         <Dialog>
             <DialogTrigger>
@@ -25,11 +58,64 @@ const CreateNewWorkspaceModal: FC = () => {
                         <Header text='Create new workspace' />
                     </DialogTitle>
                     <DialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your account and remove your data from our
-                        servers.
+                        This action cannot be undone. You are creating a new
+                        workspace.
                     </DialogDescription>
                 </DialogHeader>
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className='space-y-4'
+                    >
+                        
+                        <FormField
+                            name='name'
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder='Workspace Name'
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            name='description'
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Description</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder='Workspace Description'
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormItem>
+                            <FormLabel>Emoji</FormLabel>
+                            <EmojiPicker
+                                onEmojiClick={(emojiObject: EmojiClickData) =>
+                                    setSelectedEmoji(emojiObject.emoji)
+                                }
+                            />
+                            <FormDescription>
+                                Selected Emoji: {selectedEmoji}
+                            </FormDescription>
+                        </FormItem>
+
+                        <Button type='submit'>Create Workspace</Button>
+                    </form>
+                </Form>
             </DialogContent>
         </Dialog>
     );
