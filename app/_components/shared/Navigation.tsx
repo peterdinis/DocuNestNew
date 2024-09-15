@@ -89,12 +89,6 @@ const Navigation: FC = () => {
                     </div>
                     <div className='hidden md:block'>
                         <div className='ml-4 flex items-center md:ml-6'>
-                            <Button variant='ghost' size='icon'>
-                                <Bell className='h-5 w-5' />
-                                <span className='sr-only'>
-                                    View notifications
-                                </span>
-                            </Button>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button
@@ -142,31 +136,30 @@ const Navigation: FC = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Toggle mobile menu */}
+            
             <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
                 <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
                     <Link
                         href='/dashboard'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
                     >
                         Dashboard
                     </Link>
                     <Link
                         href='/projects'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
                     >
                         Projects
                     </Link>
                     <Link
                         href='/tasks'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
                     >
                         Tasks
                     </Link>
                     <Link
                         href='/team'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
                     >
                         Team
                     </Link>
@@ -184,10 +177,6 @@ const Navigation: FC = () => {
                                 jane@example.com
                             </div>
                         </div>
-                        <Button variant='ghost' size='icon' className='ml-auto'>
-                            <Bell className='h-6 w-6' />
-                            <span className='sr-only'>View notifications</span>
-                        </Button>
                     </div>
                     <div className='mt-3 space-y-1 px-2'>
                         <Button
