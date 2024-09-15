@@ -25,12 +25,7 @@ import {
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { Input } from '@/components/ui/input';
 import useCreateWorkspace from '@/app/_hooks/workspaces/useCreateWorkspace';
-
-type WorkspaceFormData = {
-    name: string;
-    description: string;
-    emojiName: string;
-};
+import { WorkspaceFormData } from '@/app/_types/workspaceTypes';
 
 const CreateNewWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
@@ -43,6 +38,7 @@ const CreateNewWorkspaceModal: FC = () => {
             description: data.description,
             workspaceEmoji: selectedEmoji,
         });
+        form.reset();
     };
 
     return (
@@ -67,7 +63,7 @@ const CreateNewWorkspaceModal: FC = () => {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className='space-y-4'
                     >
-                        
+
                         <FormField
                             name='name'
                             control={form.control}

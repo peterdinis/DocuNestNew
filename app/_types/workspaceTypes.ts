@@ -3,3 +3,6 @@ export type WorkspaceType = {
     workspaceEmoji: string;
     description: string;
 }
+
+export type WorkspaceFormData = {
+} & WorkspaceType;
