@@ -22,11 +22,8 @@ import { Workspace } from '@prisma/client';
 
 const Sidebar: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-
     const { data: session } = useSession();
-
     const { data: workspaces, isLoading, error } = useDisplayLatestsWorkspaces();
-
     const storageUsed = 3;
     const maxStorage = 6;
 
@@ -74,17 +71,17 @@ const Sidebar: FC = () => {
                 </div>
             )}
 
-            <div className='space-y-4'>
+            <div className='flex-1 overflow-y-auto space-y-4'>
                 {isLoading && <Loader2 className='animate-spin w-8 h-8' />}
-                {error && <p className='text-lg text-red-500 font-bold prose prose-p:'>Error loading workspaces</p>}
-                {workspaces?.length === 0 && <p className='text-lg text-red-500 font-bold prose prose-p:'>No workspaces found</p>}
+                {error && <p className='text-lg text-red-500 font-bold'>Error loading workspaces</p>}
+                {workspaces?.length === 0 && <p className='text-lg text-red-500 font-bold'>No workspaces found</p>}
 
-                {workspaces?.workspaces && workspaces?.workspaces.map((workspace: Workspace) => (
+                {workspaces?.workspaces?.map((workspace: Workspace) => (
                     <TooltipProvider key={workspace.id}>
                         <Tooltip>
                             <TooltipTrigger>
                                 <div
-                                    className='flex cursor-pointer items-center justify-between rounded-md p-2'
+                                    className='flex cursor-pointer items-center justify-between rounded-md p-2 bg-white dark:bg-gray-800'
                                     data-testid={`workspace-${workspace.id}`}
                                 >
                                     <div className='flex items-center space-x-2'>
