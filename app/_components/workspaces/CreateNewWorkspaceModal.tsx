@@ -4,13 +4,12 @@ import { FC, useState } from 'react';
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
 import Header from '../shared/Header';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {
@@ -29,7 +28,7 @@ import { WorkspaceFormData } from '@/app/_types/workspaceTypes';
 
 const CreateNewWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
-    const { mutate: createWorkspace } = useCreateWorkspace();
+    const { mutate: createWorkspace, isPending } = useCreateWorkspace();
     const form = useForm<WorkspaceFormData>();
 
     const onSubmit: SubmitHandler<WorkspaceFormData> = (data) => {
@@ -53,17 +52,12 @@ const CreateNewWorkspaceModal: FC = () => {
                     <DialogTitle>
                         <Header text='Create new workspace' />
                     </DialogTitle>
-                    <DialogDescription>
-                        This action cannot be undone. You are creating a new
-                        workspace.
-                    </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
                         className='space-y-4'
                     >
-
                         <FormField
                             name='name'
                             control={form.control}
@@ -97,6 +91,7 @@ const CreateNewWorkspaceModal: FC = () => {
                                 </FormItem>
                             )}
                         />
+                        
                         <FormItem>
                             <FormLabel>Emoji</FormLabel>
                             <EmojiPicker
@@ -109,7 +104,9 @@ const CreateNewWorkspaceModal: FC = () => {
                             </FormDescription>
                         </FormItem>
 
-                        <Button type='submit'>Create Workspace</Button>
+                        <Button type='submit' disabled={isPending}>
+                            {isPending ? <Loader2 className='animate-spin w-8 h-8' /> : 'Create Workspace'}
+                        </Button>
                     </form>
                 </Form>
             </DialogContent>

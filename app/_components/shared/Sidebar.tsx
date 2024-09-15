@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, MoreVertical, Menu, X } from 'lucide-react';
+import { FileText, MoreVertical, Menu, X, Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import CreateNewWorkspaceModal from '../workspaces/CreateNewWorkspaceModal';
 import {
@@ -17,22 +17,15 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-
-interface Document {
-    id: number;
-    name: string;
-}
+import useDisplayLatestsWorkspaces from '@/app/_hooks/workspaces/useDisplayLatestsWorkspaces';
+import { Workspace } from '@prisma/client';
 
 const Sidebar: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const { data: session } = useSession();
 
-    const documents: Document[] = [
-        { id: 1, name: 'Untitled document' },
-        { id: 2, name: 'Untitled document' },
-        { id: 3, name: 'Untitled document' },
-    ];
+    const { data: workspaces, isLoading, error } = useDisplayLatestsWorkspaces();
 
     const storageUsed = 3;
     const maxStorage = 6;
@@ -58,7 +51,7 @@ const Sidebar: FC = () => {
             <div className='mb-6 flex items-center justify-between'>
                 {isOpen && (
                     <span className='prose-p: prose font-bold dark:text-white'>
-                        {session!.user!.email}
+                        {session?.user?.email}
                     </span>
                 )}
                 <button onClick={() => setIsOpen(!isOpen)}>
@@ -82,24 +75,27 @@ const Sidebar: FC = () => {
             )}
 
             <div className='space-y-4'>
-                {documents.map((doc) => (
-                    <TooltipProvider key={doc.id}>
+                {isLoading && <Loader2 className='animate-spin w-8 h-8' />}
+                {error && <p className='text-lg text-red-500 font-bold prose prose-p:'>Error loading workspaces</p>}
+                {workspaces?.length === 0 && <p className='text-lg text-red-500 font-bold prose prose-p:'>No workspaces found</p>}
+
+                {workspaces?.workspaces && workspaces?.workspaces.map((workspace: Workspace) => (
+                    <TooltipProvider key={workspace.id}>
                         <Tooltip>
                             <TooltipTrigger>
                                 <div
                                     className='flex cursor-pointer items-center justify-between rounded-md p-2'
-                                    data-testid={`document-${doc.id}`}
+                                    data-testid={`workspace-${workspace.id}`}
                                 >
                                     <div className='flex items-center space-x-2'>
                                         <FileText className='h-5 w-5 text-blue-500' />
                                         {isOpen && (
                                             <span className='text-sm dark:text-white'>
-                                                {doc.name}
+                                                {workspace.name}
                                             </span>
                                         )}
                                     </div>
 
-                                    {/* Dropdown Menu Trigger */}
                                     {isOpen && (
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -129,7 +125,7 @@ const Sidebar: FC = () => {
                             </TooltipTrigger>
                             {!isOpen && (
                                 <TooltipContent className='dark:text-white'>
-                                    {doc.name}
+                                    {workspace.name}
                                 </TooltipContent>
                             )}
                         </Tooltip>

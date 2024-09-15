@@ -6,3 +6,11 @@ export type WorkspaceType = {
 
 export type WorkspaceFormData = {
 } & WorkspaceType;
+
+export type BasePaginatedWorkspaces = {
+    page: number;
+    limit: number;
+    query: string;
+}
+
+export type PaginatedWorkspace = Pick<BasePaginatedWorkspaces, 'page' | 'query'>;

@@ -2,7 +2,6 @@
 
 import { useMutation } from "@tanstack/react-query"
 import { useToast } from "@/hooks/use-toast"
-import { queryClient } from "@/app/_store/queryClient"
 import { WorkspaceType } from "@/app/_types/workspaceTypes"
 import { createWorkspace } from "@/app/_store/mutations/workspaceMutations"
 
