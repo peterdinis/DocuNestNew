@@ -34,10 +34,20 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "stripeCustomerId" TEXT,
-    "stripeSubscriptionId" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Workspace" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "workspaceEmoji" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Workspace_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
