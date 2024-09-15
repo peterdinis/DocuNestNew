@@ -8,10 +8,10 @@ const DashboardContent: FC = () => {
     return (
         <div className='mt-20 flex flex-1 justify-center align-top'>
             <div className='text-center'>
-                <h2 className='mt-6 text-3xl font-extrabold prose prose-h2: dark:text-sky-50 text-gray-900'>
+                <h2 className='prose-h2: prose mt-6 text-3xl font-extrabold text-gray-900 dark:text-sky-50'>
                     Welcome to DocuNest
                 </h2>
-                <p className='mt-2 text-sm text-gray-600 dark:text-sky-50 font-bold'>
+                <p className='mt-2 text-sm font-bold text-gray-600 dark:text-sky-50'>
                     Get started by creating your first workspace. You can add
                     notes and invite collaborators to your workspace.
                 </p>

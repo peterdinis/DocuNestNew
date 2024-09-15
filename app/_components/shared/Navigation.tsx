@@ -113,9 +113,7 @@ const Navigation: FC = () => {
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
-                                        <Link href="/dashboard">
-                                            Profile
-                                        </Link>
+                                        <Link href='/dashboard'>Profile</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem onClick={logoutUser}>
                                         Sign out
