@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Bell, User } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -89,12 +89,6 @@ const Navigation: FC = () => {
                     </div>
                     <div className='hidden md:block'>
                         <div className='ml-4 flex items-center md:ml-6'>
-                            <Button variant='ghost' size='icon'>
-                                <Bell className='h-5 w-5' />
-                                <span className='sr-only'>
-                                    View notifications
-                                </span>
-                            </Button>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button
@@ -109,7 +103,7 @@ const Navigation: FC = () => {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align='end'>
                                     <DropdownMenuLabel>
-                                        My Account
+                                        {session?.user.name}
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
@@ -143,30 +137,29 @@ const Navigation: FC = () => {
                 </div>
             </div>
 
-            {/* Toggle mobile menu */}
             <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
                 <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
                     <Link
                         href='/dashboard'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Dashboard
                     </Link>
                     <Link
                         href='/projects'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Projects
                     </Link>
                     <Link
                         href='/tasks'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Tasks
                     </Link>
                     <Link
                         href='/team'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Team
                     </Link>
@@ -177,34 +170,25 @@ const Navigation: FC = () => {
                             <User className='h-10 w-10 rounded-full' />
                         </div>
                         <div className='ml-3'>
-                            <div className='text-base font-medium text-gray-800'>
-                                Jane Doe
+                            <div className='text-base font-medium text-gray-800 dark:text-sky-50'>
+                                {session?.user.name}
                             </div>
-                            <div className='text-sm font-medium text-gray-500'>
-                                jane@example.com
+                            <div className='text-sm font-medium text-gray-500 dark:text-sky-50'>
+                                {session?.user.email}
                             </div>
                         </div>
-                        <Button variant='ghost' size='icon' className='ml-auto'>
-                            <Bell className='h-6 w-6' />
-                            <span className='sr-only'>View notifications</span>
-                        </Button>
                     </div>
                     <div className='mt-3 space-y-1 px-2'>
                         <Button
                             variant='ghost'
-                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-primary'
+                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                         >
-                            Profile
+                            <Link href='/dashboard'>Dashboard</Link>
                         </Button>
                         <Button
                             variant='ghost'
-                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-primary'
-                        >
-                            Settings
-                        </Button>
-                        <Button
-                            variant='ghost'
-                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-primary'
+                            onClick={logoutUser}
+                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                         >
                             Sign out
                         </Button>

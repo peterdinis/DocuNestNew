@@ -17,7 +17,7 @@ export async function GET() {
             userId: session.user.id,
         },
         orderBy: {
-            createdAt: 'desc', 
+            createdAt: 'desc',
         },
         take: 3,
     });

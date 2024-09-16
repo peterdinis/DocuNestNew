@@ -1,3 +1,4 @@
+// Sidebar.tsx
 'use client';
 
 import { FC, useState } from 'react';
@@ -25,7 +26,11 @@ const Sidebar: FC = () => {
 
     const { data: session } = useSession();
 
-    const { data: workspaces, isLoading, error } = useDisplayLatestsWorkspaces();
+    const {
+        data: workspaces,
+        isLoading,
+        error,
+    } = useDisplayLatestsWorkspaces();
 
     const storageUsed = 3;
     const maxStorage = 6;
@@ -43,14 +48,15 @@ const Sidebar: FC = () => {
 
     return (
         <motion.div
-            className='flex h-screen flex-col bg-zinc-100 p-4 shadow-lg dark:bg-stone-900'
+            className='flex h-screen w-full max-w-[18rem] flex-col bg-zinc-100 p-4 shadow-lg dark:bg-stone-900 md:w-auto'
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             variants={sidebarVariants}
         >
+            {/* Top Section */}
             <div className='mb-6 flex items-center justify-between'>
                 {isOpen && (
-                    <span className='prose-p: prose font-bold dark:text-white'>
+                    <span className='prose font-bold dark:text-white'>
                         {session?.user?.email}
                     </span>
                 )}
@@ -63,6 +69,7 @@ const Sidebar: FC = () => {
                 </button>
             </div>
 
+            {/* Workspaces */}
             {isOpen && (
                 <div className='mb-6'>
                     <div className='mb-4 flex items-center justify-between'>
@@ -75,11 +82,19 @@ const Sidebar: FC = () => {
             )}
 
             <div className='space-y-4'>
-                {isLoading && <Loader2 className='animate-spin w-8 h-8' />}
-                {error && <p className='text-lg text-red-500 font-bold prose prose-p:'>Error loading workspaces</p>}
-                {workspaces?.length === 0 && <p className='text-lg text-red-500 font-bold prose prose-p:'>No workspaces found</p>}
+                {isLoading && <Loader2 className='h-8 w-8 animate-spin' />}
+                {error && (
+                    <p className='text-lg font-bold text-red-500'>
+                        Error loading workspaces
+                    </p>
+                )}
+                {workspaces?.workspaces?.length === 0 && (
+                    <p className='text-lg font-bold text-red-500'>
+                        No workspaces found
+                    </p>
+                )}
 
-                {workspaces?.workspaces && workspaces?.workspaces.map((workspace: Workspace) => (
+                {workspaces?.workspaces?.map((workspace: Workspace) => (
                     <TooltipProvider key={workspace.id}>
                         <Tooltip>
                             <TooltipTrigger>
@@ -133,6 +148,7 @@ const Sidebar: FC = () => {
                 ))}
             </div>
 
+            {/* Storage Info */}
             {isOpen && (
                 <div className='mt-auto'>
                     <div className='mb-2 h-2 rounded-full bg-gray-200'>
@@ -143,7 +159,9 @@ const Sidebar: FC = () => {
                             }}
                         />
                     </div>
-                    <p className='text-xs text-gray-500'>{`${storageUsed} out of ${maxStorage} files used`}</p>
+                    <p className='text-xs text-gray-500'>
+                        {`${storageUsed} out of ${maxStorage} files used`}
+                    </p>
                 </div>
             )}
         </motion.div>
