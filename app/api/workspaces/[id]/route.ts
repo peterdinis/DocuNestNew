@@ -26,12 +26,12 @@ export async function GET(request: NextRequest) {
     const findOneWorkspace = await db.workspace.findUnique({
         where: {
             id,
-            userId: session.user.id
-        }
+            userId: session.user.id,
+        },
     });
 
-    if(!findOneWorkspace) {
-        throw new Error("Document not found");
+    if (!findOneWorkspace) {
+        throw new Error('Document not found');
     }
 
     return NextResponse.json(findOneWorkspace);

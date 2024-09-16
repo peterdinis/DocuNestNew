@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import { useQuery} from "@tanstack/react-query"
-import { fetchAllWorkspaces } from "@/app/_store/queries/workspaceQueries"
+import { useQuery } from '@tanstack/react-query';
+import { fetchAllWorkspaces } from '@/app/_store/queries/workspaceQueries';
 
 const useDisplayAllWorkspaces = () => {
     return useQuery({
@@ -11,7 +11,7 @@ const useDisplayAllWorkspaces = () => {
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: true,
         refetchOnMount: true,
-    })
-}
+    });
+};
 
 export default useDisplayAllWorkspaces;

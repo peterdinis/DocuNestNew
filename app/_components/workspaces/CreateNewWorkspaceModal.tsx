@@ -91,7 +91,7 @@ const CreateNewWorkspaceModal: FC = () => {
                                 </FormItem>
                             )}
                         />
-                        
+
                         <FormItem>
                             <FormLabel>Emoji</FormLabel>
                             <EmojiPicker
@@ -105,7 +105,11 @@ const CreateNewWorkspaceModal: FC = () => {
                         </FormItem>
 
                         <Button type='submit' disabled={isPending}>
-                            {isPending ? <Loader2 className='animate-spin w-8 h-8' /> : 'Create Workspace'}
+                            {isPending ? (
+                                <Loader2 className='h-8 w-8 animate-spin' />
+                            ) : (
+                                'Create Workspace'
+                            )}
                         </Button>
                     </form>
                 </Form>
