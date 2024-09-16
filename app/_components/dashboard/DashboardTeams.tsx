@@ -16,9 +16,9 @@ const DashboardTeams: FC = () => {
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>Workspace Members</CardTitle>
+                    <CardTitle>All my members</CardTitle>
                     <CardDescription>
-                        Your project collaborators
+                        Your members in all workspaces
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
