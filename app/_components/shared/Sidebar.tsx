@@ -13,10 +13,10 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-    { icon: HomeIcon, label: 'Home', href: '#' },
-    { icon: FileTextIcon, label: 'Documents', href: '#' },
-    { icon: UserIcon, label: 'Users', href: '#' },
-    { icon: SettingsIcon, label: 'Settings', href: '#' },
+    { icon: HomeIcon, label: 'Home', href: '/dashboard' },
+    { icon: FileTextIcon, label: 'Workspaces', href: '/workspaces' },
+    { icon: UserIcon, label: 'Teams', href: '/teams' },
+    { icon: SettingsIcon, label: 'Settings', href: '/settings' },
 ];
 
 const Sidebar: FC = () => {
@@ -25,7 +25,6 @@ const Sidebar: FC = () => {
     return (
         <>
             <div className='flex h-screen'>
-                {/* Mobile sidebar */}
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
                         <Button
@@ -40,8 +39,8 @@ const Sidebar: FC = () => {
                     <SheetContent side='left' className='w-[240px] p-0'>
                         <div className='h-full py-6'>
                             <div className='mb-4 px-4'>
-                                <h2 className='text-lg font-semibold'>
-                                    My App
+                                <h2 className='text-primary text-lg font-semibold'>
+                                    Docu Nest
                                 </h2>
                             </div>
                             <ScrollArea className='h-[calc(100vh-5rem)] px-2'>
@@ -62,11 +61,10 @@ const Sidebar: FC = () => {
                     </SheetContent>
                 </Sheet>
 
-                {/* Desktop sidebar */}
                 <aside className='hidden w-[240px] border-r lg:block'>
                     <div className='h-full py-6'>
                         <div className='mb-4 px-4'>
-                            <h2 className='text-lg font-semibold'>My App</h2>
+                            <h2 className='text-primary text-xl font-semibold'>Docu Nest</h2>
                         </div>
                         <ScrollArea className='h-[calc(100vh-5rem)] px-2'>
                             <nav className='space-y-1'>
@@ -84,18 +82,6 @@ const Sidebar: FC = () => {
                         </ScrollArea>
                     </div>
                 </aside>
-
-                {/* Main content */}
-                <main className='flex-1 p-6'>
-                    <h1 className='mb-4 text-2xl font-semibold'>
-                        Main Content
-                    </h1>
-                    <p>
-                        Your main content goes here. The sidebar will be
-                        collapsible on mobile devices and always visible on
-                        larger screens.
-                    </p>
-                </main>
             </div>
         </>
     );
