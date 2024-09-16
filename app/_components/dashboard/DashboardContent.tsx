@@ -1,20 +1,17 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Plus } from 'lucide-react';
 import { FC } from 'react';
 import Header from '../shared/Header';
 import { useSession } from 'next-auth/react';
 import {format} from "date-fns";
-import AllTeamMembers from '../teams/AllTeamMembers';
+import DashboardTeams from './DashboardTeams';
+import DashboardActivities from './DashboardActivites';
 
 const DashboardContent: FC = () => {
     const { data: session } = useSession();
@@ -22,7 +19,6 @@ const DashboardContent: FC = () => {
     const actualDate = format(new Date(), 'yyyy-MM-dd');
     return (
         <div>
-            {/* Main content */}
             <main className='flex-1 overflow-auto p-8'>
                 <div className='mx-auto max-w-4xl'>
                     <Header text={`Welcome ${session?.user.name}`} />
@@ -31,7 +27,6 @@ const DashboardContent: FC = () => {
                         Actual time: {actualDate}
                     </span>
 
-                    {/* Project Overview */}
                     <Card className='mb-6 mt-4'>
                         <CardHeader>
                             <CardTitle>Project Overview</CardTitle>
@@ -60,86 +55,8 @@ const DashboardContent: FC = () => {
                         </CardContent>
                     </Card>
 
-                    {/* Recent Activities */}
-                    <Card className='mb-6'>
-                        <CardHeader>
-                            <CardTitle>Recent Activities</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className='space-y-4'>
-                                <li className='flex items-center'>
-                                    <Avatar className='h-9 w-9'>
-                                        <AvatarImage
-                                            src='/placeholder.svg?height=36&width=36'
-                                            alt='Avatar'
-                                        />
-                                        <AvatarFallback>JD</AvatarFallback>
-                                    </Avatar>
-                                    <div className='ml-4'>
-                                        <p className='text-sm font-medium'>
-                                            John Doe updated the project status
-                                        </p>
-                                        <p className='text-sm text-muted-foreground'>
-                                            2 hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <li className='flex items-center'>
-                                    <Avatar className='h-9 w-9'>
-                                        <AvatarImage
-                                            src='/placeholder.svg?height=36&width=36'
-                                            alt='Avatar'
-                                        />
-                                        <AvatarFallback>AS</AvatarFallback>
-                                    </Avatar>
-                                    <div className='ml-4'>
-                                        <p className='text-sm font-medium'>
-                                            Alice Smith added a new task
-                                        </p>
-                                        <p className='text-sm text-muted-foreground'>
-                                            5 hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <li className='flex items-center'>
-                                    <Avatar className='h-9 w-9'>
-                                        <AvatarImage
-                                            src='/placeholder.svg?height=36&width=36'
-                                            alt='Avatar'
-                                        />
-                                        <AvatarFallback>RJ</AvatarFallback>
-                                    </Avatar>
-                                    <div className='ml-4'>
-                                        <p className='text-sm font-medium'>
-                                            Robert Johnson commented on a
-                                            document
-                                        </p>
-                                        <p className='text-sm text-muted-foreground'>
-                                            Yesterday
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </CardContent>
-                    </Card>
-
-                    {/* Team Members */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Team Members</CardTitle>
-                            <CardDescription>
-                                Your project collaborators
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <div className='flex flex-wrap gap-4'>
-                                <AllTeamMembers />
-                                <Button size='icon' variant='outline'>
-                                    <Plus className='h-4 w-4' />
-                                </Button>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <DashboardActivities />
+                    <DashboardTeams />
                 </div>
             </main>
         </div>
