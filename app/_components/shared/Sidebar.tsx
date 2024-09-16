@@ -8,14 +8,12 @@ import {
     MenuIcon,
     HomeIcon,
     SettingsIcon,
-    UserIcon,
     FileTextIcon,
 } from 'lucide-react';
 
 const navItems = [
     { icon: HomeIcon, label: 'Home', href: '/dashboard' },
     { icon: FileTextIcon, label: 'Workspaces', href: '/workspaces' },
-    { icon: UserIcon, label: 'Teams', href: '/teams' },
     { icon: SettingsIcon, label: 'Settings', href: '/settings' },
 ];
 
