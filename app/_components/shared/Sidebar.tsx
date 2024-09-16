@@ -39,7 +39,7 @@ const Sidebar: FC = () => {
                     <SheetContent side='left' className='w-[240px] p-0'>
                         <div className='h-full py-6'>
                             <div className='mb-4 px-4'>
-                                <h2 className='text-primary text-lg font-semibold'>
+                                <h2 className='text-lg font-semibold text-primary'>
                                     Docu Nest
                                 </h2>
                             </div>
@@ -64,7 +64,9 @@ const Sidebar: FC = () => {
                 <aside className='hidden w-[240px] border-r lg:block'>
                     <div className='h-full py-6'>
                         <div className='mb-4 px-4'>
-                            <h2 className='text-primary text-xl font-semibold'>Docu Nest</h2>
+                            <h2 className='text-xl font-semibold text-primary'>
+                                Docu Nest
+                            </h2>
                         </div>
                         <ScrollArea className='h-[calc(100vh-5rem)] px-2'>
                             <nav className='space-y-1'>
