@@ -26,7 +26,11 @@ const Sidebar: FC = () => {
 
     const { data: session } = useSession();
 
-    const { data: workspaces, isLoading, error } = useDisplayLatestsWorkspaces();
+    const {
+        data: workspaces,
+        isLoading,
+        error,
+    } = useDisplayLatestsWorkspaces();
 
     const storageUsed = 3;
     const maxStorage = 6;
@@ -44,32 +48,32 @@ const Sidebar: FC = () => {
 
     return (
         <motion.div
-            className="flex h-screen w-full max-w-[18rem] flex-col bg-zinc-100 p-4 shadow-lg dark:bg-stone-900 md:w-auto"
+            className='flex h-screen w-full max-w-[18rem] flex-col bg-zinc-100 p-4 shadow-lg dark:bg-stone-900 md:w-auto'
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             variants={sidebarVariants}
         >
             {/* Top Section */}
-            <div className="mb-6 flex items-center justify-between">
+            <div className='mb-6 flex items-center justify-between'>
                 {isOpen && (
-                    <span className="prose font-bold dark:text-white">
+                    <span className='prose font-bold dark:text-white'>
                         {session?.user?.email}
                     </span>
                 )}
                 <button onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? (
-                        <X className="h-6 w-6 text-gray-700 dark:text-white" />
+                        <X className='h-6 w-6 text-gray-700 dark:text-white' />
                     ) : (
-                        <Menu className="h-6 w-6 text-gray-700 dark:text-white" />
+                        <Menu className='h-6 w-6 text-gray-700 dark:text-white' />
                     )}
                 </button>
             </div>
 
             {/* Workspaces */}
             {isOpen && (
-                <div className="mb-6">
-                    <div className="mb-4 flex items-center justify-between">
-                        <h2 className="text-lg font-semibold dark:text-white">
+                <div className='mb-6'>
+                    <div className='mb-4 flex items-center justify-between'>
+                        <h2 className='text-lg font-semibold dark:text-white'>
                             Create new workspace
                         </h2>
                         <CreateNewWorkspaceModal />
@@ -77,23 +81,31 @@ const Sidebar: FC = () => {
                 </div>
             )}
 
-            <div className="space-y-4">
-                {isLoading && <Loader2 className="w-8 h-8 animate-spin" />}
-                {error && <p className="text-lg font-bold text-red-500">Error loading workspaces</p>}
-                {workspaces?.workspaces?.length === 0 && <p className="text-lg font-bold text-red-500">No workspaces found</p>}
+            <div className='space-y-4'>
+                {isLoading && <Loader2 className='h-8 w-8 animate-spin' />}
+                {error && (
+                    <p className='text-lg font-bold text-red-500'>
+                        Error loading workspaces
+                    </p>
+                )}
+                {workspaces?.workspaces?.length === 0 && (
+                    <p className='text-lg font-bold text-red-500'>
+                        No workspaces found
+                    </p>
+                )}
 
                 {workspaces?.workspaces?.map((workspace: Workspace) => (
                     <TooltipProvider key={workspace.id}>
                         <Tooltip>
                             <TooltipTrigger>
                                 <div
-                                    className="flex items-center justify-between p-2 rounded-md cursor-pointer"
+                                    className='flex cursor-pointer items-center justify-between rounded-md p-2'
                                     data-testid={`workspace-${workspace.id}`}
                                 >
-                                    <div className="flex items-center space-x-2">
-                                        <FileText className="w-5 h-5 text-blue-500" />
+                                    <div className='flex items-center space-x-2'>
+                                        <FileText className='h-5 w-5 text-blue-500' />
                                         {isOpen && (
-                                            <span className="text-sm dark:text-white">
+                                            <span className='text-sm dark:text-white'>
                                                 {workspace.name}
                                             </span>
                                         )}
@@ -103,14 +115,22 @@ const Sidebar: FC = () => {
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <button>
-                                                    <MoreVertical className="w-4 h-4 ml-4 text-gray-500" />
+                                                    <MoreVertical className='ml-4 h-4 w-4 text-gray-500' />
                                                 </button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent sideOffset={5}>
-                                                <DropdownMenuItem onSelect={() => alert('Rename clicked')}>
+                                                <DropdownMenuItem
+                                                    onSelect={() =>
+                                                        alert('Rename clicked')
+                                                    }
+                                                >
                                                     Rename
                                                 </DropdownMenuItem>
-                                                <DropdownMenuItem onSelect={() => alert('Delete clicked')}>
+                                                <DropdownMenuItem
+                                                    onSelect={() =>
+                                                        alert('Delete clicked')
+                                                    }
+                                                >
                                                     Delete
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
@@ -119,7 +139,7 @@ const Sidebar: FC = () => {
                                 </div>
                             </TooltipTrigger>
                             {!isOpen && (
-                                <TooltipContent className="dark:text-white">
+                                <TooltipContent className='dark:text-white'>
                                     {workspace.name}
                                 </TooltipContent>
                             )}
@@ -130,14 +150,16 @@ const Sidebar: FC = () => {
 
             {/* Storage Info */}
             {isOpen && (
-                <div className="mt-auto">
-                    <div className="mb-2 h-2 rounded-full bg-gray-200">
+                <div className='mt-auto'>
+                    <div className='mb-2 h-2 rounded-full bg-gray-200'>
                         <div
-                            className="h-2 bg-blue-500 rounded-full"
-                            style={{ width: `${(storageUsed / maxStorage) * 100}%` }}
+                            className='h-2 rounded-full bg-blue-500'
+                            style={{
+                                width: `${(storageUsed / maxStorage) * 100}%`,
+                            }}
                         />
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className='text-xs text-gray-500'>
                         {`${storageUsed} out of ${maxStorage} files used`}
                     </p>
                 </div>

@@ -4,10 +4,7 @@ import { fetchAllPaginatedWorkspaces } from '@/app/_store/queries/workspaceQueri
 import { PaginatedWorkspace } from '@/app/_types/workspaceTypes';
 import { useQuery } from '@tanstack/react-query';
 
-const usePaginatedWorkspaces = ({
-    query,
-    page,
-}: PaginatedWorkspace) => {
+const usePaginatedWorkspaces = ({ query, page }: PaginatedWorkspace) => {
     return useQuery({
         queryKey: ['myPaginatedWorkspaces', query, page],
         queryFn: () => fetchAllPaginatedWorkspaces({ query, page }),

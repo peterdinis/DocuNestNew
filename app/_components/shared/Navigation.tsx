@@ -103,7 +103,7 @@ const Navigation: FC = () => {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align='end'>
                                     <DropdownMenuLabel>
-                                       {session?.user.name}
+                                        {session?.user.name}
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
@@ -136,30 +136,30 @@ const Navigation: FC = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
                 <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
                     <Link
                         href='/dashboard'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Dashboard
                     </Link>
                     <Link
                         href='/projects'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Projects
                     </Link>
                     <Link
                         href='/tasks'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Tasks
                     </Link>
                     <Link
                         href='/team'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-sky-50 hover:text-primary'
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
                         Team
                     </Link>
@@ -170,10 +170,10 @@ const Navigation: FC = () => {
                             <User className='h-10 w-10 rounded-full' />
                         </div>
                         <div className='ml-3'>
-                            <div className='text-base font-medium dark:text-sky-50 text-gray-800'>
+                            <div className='text-base font-medium text-gray-800 dark:text-sky-50'>
                                 {session?.user.name}
                             </div>
-                            <div className='text-sm font-medium dark:text-sky-50 text-gray-500'>
+                            <div className='text-sm font-medium text-gray-500 dark:text-sky-50'>
                                 {session?.user.email}
                             </div>
                         </div>
@@ -181,16 +181,14 @@ const Navigation: FC = () => {
                     <div className='mt-3 space-y-1 px-2'>
                         <Button
                             variant='ghost'
-                            className='block w-full dark:text-sky-50 rounded-md px-3 py-2 text-left text-base font-medium text-gray-600  hover:text-primary'
+                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                         >
-                            <Link href="/dashboard">
-                                Dashboard
-                            </Link>
+                            <Link href='/dashboard'>Dashboard</Link>
                         </Button>
                         <Button
                             variant='ghost'
                             onClick={logoutUser}
-                            className='block w-full dark:text-sky-50 rounded-md px-3 py-2 text-left text-base font-medium text-gray-600  hover:text-primary'
+                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                         >
                             Sign out
                         </Button>
