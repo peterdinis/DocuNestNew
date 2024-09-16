@@ -40,15 +40,15 @@ model Session {
 }
 
 model User {
-  id        String      @id @default(uuid())
-  email     String      @unique
-  name      String
-  password  String
-  accounts  Account[]
-  sessions  Session[]
+  id         String      @id @default(uuid())
+  email      String      @unique
+  name       String
+  password   String
+  accounts   Account[]
+  sessions   Session[]
   workspaces Workspace[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 }
 
 model Workspace {
@@ -56,8 +56,19 @@ model Workspace {
   name           String
   workspaceEmoji String
   description    String
-  userId         String 
+  userId         String
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  workspaceDocuments WorkspaceDocument[]
+}
+
+model WorkspaceDocument {
+  id          String    @id @default(uuid())
+  name        String
+  content     String
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
