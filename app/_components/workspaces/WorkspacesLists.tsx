@@ -6,7 +6,7 @@ const WorkspacesLists: FC = () => {
         <>
             <Card className='mb-6 mt-4'>
                 <CardHeader>
-                    <CardTitle>Project Overview</CardTitle>
+                    <CardTitle className='prose prose-h2: font-bold text-xl'>My all Workspaces</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className='grid grid-cols-3 gap-4 text-center'>
