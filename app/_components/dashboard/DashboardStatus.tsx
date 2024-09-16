@@ -13,26 +13,26 @@ const DashboardStatus: FC = () => {
 
             <Card className='mb-6 mt-4'>
                 <CardHeader>
-                    <CardTitle>Project Overview</CardTitle>
+                    <CardTitle>Project Status</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className='grid grid-cols-3 gap-4 text-center'>
                         <div>
-                            <p className='text-2xl font-bold'>12</p>
+                            <p className='text-2xl font-bold'>4</p>
                             <p className='text-muted-foreground'>
-                                Active Projects
+                                Workspaces
                             </p>
                         </div>
                         <div>
-                            <p className='text-2xl font-bold'>34</p>
+                            <p className='text-2xl font-bold'>20</p>
                             <p className='text-muted-foreground'>
-                                Team Members
+                                Workspace documents created
                             </p>
                         </div>
                         <div>
-                            <p className='text-2xl font-bold'>56</p>
+                            <p className='text-2xl font-bold'>6</p>
                             <p className='text-muted-foreground'>
-                                Tasks Completed
+                                Workspaces Members 
                             </p>
                         </div>
                     </div>

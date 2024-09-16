@@ -21,3 +21,5 @@ export type WorkspacePaginationType = {
     id: number;
     createdAt: string | Date;
 } & WorkspaceType;
+
+export type WorkspaceDetailType = Pick<WorkspacePaginationType, 'id'>;
