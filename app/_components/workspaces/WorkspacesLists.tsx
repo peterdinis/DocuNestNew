@@ -62,14 +62,14 @@ const WorkspacesLists: FC = () => {
               workspaces.map((workspace: any) => (
                 <div
                   key={workspace.id}
-                  className='p-4 border rounded-lg bg-white shadow-md hover:shadow-lg transition'
+                  className='p-4 border rounded-lg bg-white dark:bg-zinc-800 shadow-md hover:shadow-lg transition'
                 >
                   <p className='text-2xl'>{workspace.workspaceEmoji}</p>
-                  <p className='font-bold text-lg'>{workspace.name}</p>
-                  <p className='text-sm text-gray-600'>
+                  <p className='font-bold text-lg prose prose-p: dark:text-white'>{workspace.name}</p>
+                  <p className='text-sm text-gray-600 dark:text-white prose prose-p:'>
                     {workspace.description || 'No description'}
                   </p>
-                  <p className='text-xs text-gray-400'>
+                  <p className='text-xs text-gray-400 dark:text-white'>
                     Created at: {new Date(workspace.createdAt).toLocaleDateString()}
                   </p>
                 </div>

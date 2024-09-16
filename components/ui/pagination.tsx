@@ -34,29 +34,29 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-  disabled?: boolean; // Added disabled prop
+  disabled?: boolean;
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">;
 
 const PaginationLink = ({
   className,
   isActive,
-  disabled, // Handle disabled prop
+  disabled,
   size = "icon",
   ...props
 }: PaginationLinkProps) => (
   <a
     aria-current={isActive ? "page" : undefined}
-    aria-disabled={disabled} // Set aria-disabled for accessibility
+    aria-disabled={disabled}
     className={cn(
       buttonVariants({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      disabled && "cursor-not-allowed opacity-50", // Add styles when disabled
+      disabled && "cursor-not-allowed opacity-50",
       className
     )}
-    {...(disabled ? { tabIndex: -1 } : {})} // Prevent interaction when disabled
+    {...(disabled ? { tabIndex: -1 } : {})}
     {...props}
   />
 );
@@ -64,14 +64,14 @@ PaginationLink.displayName = "PaginationLink";
 
 const PaginationPrevious = ({
   className,
-  disabled, // Added disabled prop
+  disabled,
   ...props
 }: React.ComponentProps<typeof PaginationLink> & { disabled?: boolean }) => (
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
     className={cn("gap-1 pl-2.5", className)}
-    disabled={disabled} // Pass disabled state
+    disabled={disabled}
     {...props}
   >
     <ChevronLeftIcon className="h-4 w-4" />
@@ -82,14 +82,14 @@ PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({
   className,
-  disabled, // Added disabled prop
+  disabled,
   ...props
 }: React.ComponentProps<typeof PaginationLink> & { disabled?: boolean }) => (
   <PaginationLink
     aria-label="Go to next page"
     size="default"
     className={cn("gap-1 pr-2.5", className)}
-    disabled={disabled} // Pass disabled state
+    disabled={disabled}
     {...props}
   >
     <span>Next</span>
