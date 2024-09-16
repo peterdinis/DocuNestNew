@@ -1,170 +1,103 @@
-// Sidebar.tsx
 'use client';
 
 import { FC, useState } from 'react';
-import { motion } from 'framer-motion';
-import { FileText, MoreVertical, Menu, X, Loader2 } from 'lucide-react';
-import { useSession } from 'next-auth/react';
-import CreateNewWorkspaceModal from '../workspaces/CreateNewWorkspaceModal';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
-import {
-    DropdownMenu,
-    DropdownMenuTrigger,
-    DropdownMenuContent,
-    DropdownMenuItem,
-} from '@/components/ui/dropdown-menu';
-import useDisplayLatestsWorkspaces from '@/app/_hooks/workspaces/useDisplayLatestsWorkspaces';
-import { Workspace } from '@prisma/client';
+    MenuIcon,
+    HomeIcon,
+    SettingsIcon,
+    UserIcon,
+    FileTextIcon,
+} from 'lucide-react';
+
+const navItems = [
+    { icon: HomeIcon, label: 'Home', href: '#' },
+    { icon: FileTextIcon, label: 'Documents', href: '#' },
+    { icon: UserIcon, label: 'Users', href: '#' },
+    { icon: SettingsIcon, label: 'Settings', href: '#' },
+];
 
 const Sidebar: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const { data: session } = useSession();
-
-    const {
-        data: workspaces,
-        isLoading,
-        error,
-    } = useDisplayLatestsWorkspaces();
-
-    const storageUsed = 3;
-    const maxStorage = 6;
-
-    const sidebarVariants = {
-        open: {
-            width: '18rem',
-            transition: { type: 'tween', duration: 0.3, ease: 'easeOut' },
-        },
-        closed: {
-            width: '4rem',
-            transition: { type: 'tween', duration: 0.3, ease: 'easeOut' },
-        },
-    };
-
     return (
-        <motion.div
-            className='flex h-screen w-full max-w-[18rem] flex-col bg-zinc-100 p-4 shadow-lg dark:bg-stone-900 md:w-auto'
-            initial={false}
-            animate={isOpen ? 'open' : 'closed'}
-            variants={sidebarVariants}
-        >
-            {/* Top Section */}
-            <div className='mb-6 flex items-center justify-between'>
-                {isOpen && (
-                    <span className='prose font-bold dark:text-white'>
-                        {session?.user?.email}
-                    </span>
-                )}
-                <button onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? (
-                        <X className='h-6 w-6 text-gray-700 dark:text-white' />
-                    ) : (
-                        <Menu className='h-6 w-6 text-gray-700 dark:text-white' />
-                    )}
-                </button>
-            </div>
+        <>
+            <div className='flex h-screen'>
+                {/* Mobile sidebar */}
+                <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    <SheetTrigger asChild>
+                        <Button
+                            variant='outline'
+                            size='icon'
+                            className='fixed left-4 top-4 z-40 lg:hidden'
+                        >
+                            <MenuIcon className='h-4 w-4' />
+                            <span className='sr-only'>Toggle Sidebar</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side='left' className='w-[240px] p-0'>
+                        <div className='h-full py-6'>
+                            <div className='mb-4 px-4'>
+                                <h2 className='text-lg font-semibold'>
+                                    My App
+                                </h2>
+                            </div>
+                            <ScrollArea className='h-[calc(100vh-5rem)] px-2'>
+                                <nav className='space-y-1'>
+                                    {navItems.map((item, index) => (
+                                        <a
+                                            key={index}
+                                            href={item.href}
+                                            className='flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
+                                        >
+                                            <item.icon className='h-4 w-4' />
+                                            {item.label}
+                                        </a>
+                                    ))}
+                                </nav>
+                            </ScrollArea>
+                        </div>
+                    </SheetContent>
+                </Sheet>
 
-            {/* Workspaces */}
-            {isOpen && (
-                <div className='mb-6'>
-                    <div className='mb-4 flex items-center justify-between'>
-                        <h2 className='text-lg font-semibold dark:text-white'>
-                            Create new workspace
-                        </h2>
-                        <CreateNewWorkspaceModal />
+                {/* Desktop sidebar */}
+                <aside className='hidden w-[240px] border-r lg:block'>
+                    <div className='h-full py-6'>
+                        <div className='mb-4 px-4'>
+                            <h2 className='text-lg font-semibold'>My App</h2>
+                        </div>
+                        <ScrollArea className='h-[calc(100vh-5rem)] px-2'>
+                            <nav className='space-y-1'>
+                                {navItems.map((item, index) => (
+                                    <a
+                                        key={index}
+                                        href={item.href}
+                                        className='flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
+                                    >
+                                        <item.icon className='h-4 w-4' />
+                                        {item.label}
+                                    </a>
+                                ))}
+                            </nav>
+                        </ScrollArea>
                     </div>
-                </div>
-            )}
+                </aside>
 
-            <div className='space-y-4'>
-                {isLoading && <Loader2 className='h-8 w-8 animate-spin' />}
-                {error && (
-                    <p className='text-lg font-bold text-red-500'>
-                        Error loading workspaces
+                {/* Main content */}
+                <main className='flex-1 p-6'>
+                    <h1 className='mb-4 text-2xl font-semibold'>
+                        Main Content
+                    </h1>
+                    <p>
+                        Your main content goes here. The sidebar will be
+                        collapsible on mobile devices and always visible on
+                        larger screens.
                     </p>
-                )}
-                {workspaces?.workspaces?.length === 0 && (
-                    <p className='text-lg font-bold text-red-500'>
-                        No workspaces found
-                    </p>
-                )}
-
-                {workspaces?.workspaces?.map((workspace: Workspace) => (
-                    <TooltipProvider key={workspace.id}>
-                        <Tooltip>
-                            <TooltipTrigger>
-                                <div
-                                    className='flex cursor-pointer items-center justify-between rounded-md p-2'
-                                    data-testid={`workspace-${workspace.id}`}
-                                >
-                                    <div className='flex items-center space-x-2'>
-                                        <FileText className='h-5 w-5 text-blue-500' />
-                                        {isOpen && (
-                                            <span className='text-sm dark:text-white'>
-                                                {workspace.name}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    {isOpen && (
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <button>
-                                                    <MoreVertical className='ml-4 h-4 w-4 text-gray-500' />
-                                                </button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent sideOffset={5}>
-                                                <DropdownMenuItem
-                                                    onSelect={() =>
-                                                        alert('Rename clicked')
-                                                    }
-                                                >
-                                                    Rename
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem
-                                                    onSelect={() =>
-                                                        alert('Delete clicked')
-                                                    }
-                                                >
-                                                    Delete
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    )}
-                                </div>
-                            </TooltipTrigger>
-                            {!isOpen && (
-                                <TooltipContent className='dark:text-white'>
-                                    {workspace.name}
-                                </TooltipContent>
-                            )}
-                        </Tooltip>
-                    </TooltipProvider>
-                ))}
+                </main>
             </div>
-
-            {/* Storage Info */}
-            {isOpen && (
-                <div className='mt-auto'>
-                    <div className='mb-2 h-2 rounded-full bg-gray-200'>
-                        <div
-                            className='h-2 rounded-full bg-blue-500'
-                            style={{
-                                width: `${(storageUsed / maxStorage) * 100}%`,
-                            }}
-                        />
-                    </div>
-                    <p className='text-xs text-gray-500'>
-                        {`${storageUsed} out of ${maxStorage} files used`}
-                    </p>
-                </div>
-            )}
-        </motion.div>
+        </>
     );
 };
 
