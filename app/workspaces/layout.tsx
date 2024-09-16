@@ -1,3 +1,4 @@
+import Navigation from '../_components/shared/Navigation';
 import Sidebar from '../_components/shared/Sidebar';
 
 export default function WorkspacesLayout({
@@ -8,6 +9,7 @@ export default function WorkspacesLayout({
     return (
         <html lang='en'>
             <body className={`antialiased`}>
+                
                 <div className='dark:bg-dark dark:text-light flex min-h-screen'>
                     <Sidebar />
                     <div className='flex-1 overflow-auto'>{children}</div>
