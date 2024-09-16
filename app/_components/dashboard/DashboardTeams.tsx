@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
     Card,
     CardHeader,
@@ -6,7 +5,6 @@ import {
     CardDescription,
     CardContent,
 } from '@/components/ui/card';
-import { Plus } from 'lucide-react';
 import { FC } from 'react';
 import AllTeamMembers from '../teams/AllTeamMembers';
 import AddNewMemberToWorkspaceModal from '../workspaces/AddNewMemberToWorkspaceModal';
