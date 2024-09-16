@@ -28,7 +28,6 @@ const WorkspacesLists: FC = () => {
                                 Tasks Completed
                             </p>
                         </div>
-                        
                     </div>
                 </CardContent>
             </Card>
