@@ -1,8 +1,8 @@
-import WorkspaceDetail from "@/app/_components/workspaces/WorkspaceDetail";
-import { NextPage } from "next";
+import WorkspaceDetail from '@/app/_components/workspaces/WorkspaceDetail';
+import { NextPage } from 'next';
 
 const WorkspaceDetailPage: NextPage = () => {
-    return <WorkspaceDetail />
-}
+    return <WorkspaceDetail />;
+};
 
 export default WorkspaceDetailPage;

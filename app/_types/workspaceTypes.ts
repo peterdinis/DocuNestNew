@@ -17,7 +17,6 @@ export type PaginatedWorkspace = Pick<
     'page' | 'query'
 >;
 
-
 export type WorkspacePaginationType = {
     id: number;
     createdAt: string | Date;

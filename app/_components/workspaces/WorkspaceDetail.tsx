@@ -1,11 +1,7 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 const WorkspaceDetail: FC = () => {
-    return (
-        <>
-            TODO: Later
-        </>
-    )
-}
+    return <>TODO: Later</>;
+};
 
-export default WorkspaceDetail
+export default WorkspaceDetail;
