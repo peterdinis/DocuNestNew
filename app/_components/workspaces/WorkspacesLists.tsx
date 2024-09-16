@@ -16,6 +16,7 @@ import {
 import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
+import { motion } from 'framer-motion';
 
 const WorkspacesLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -72,9 +73,11 @@ const WorkspacesLists: FC = () => {
                         {workspaces.length > 0 ? (
                             workspaces.map(
                                 (workspace: WorkspacePaginationType) => (
-                                    <div
+                                    <motion.div
                                         key={workspace.id}
                                         className='rounded-lg border bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-zinc-800'
+                                        whileHover={{ scale: 1.05 }} // Zoom effect on hover
+                                        whileTap={{ scale: 0.95 }} // Scale down on tap
                                     >
                                         <Link
                                             href={`/workspaces/${workspace.id}`}
@@ -96,7 +99,7 @@ const WorkspacesLists: FC = () => {
                                                 ).toLocaleDateString()}
                                             </p>
                                         </Link>
-                                    </div>
+                                    </motion.div>
                                 ),
                             )
                         ) : (
