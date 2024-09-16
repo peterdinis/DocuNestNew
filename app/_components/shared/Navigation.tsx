@@ -114,7 +114,6 @@ const Navigation: FC = () => {
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
-                            {/* Move ThemeButton here */}
                             <div className='ml-5'>
                                 <ThemeButton />
                             </div>
