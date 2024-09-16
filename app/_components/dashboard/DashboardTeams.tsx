@@ -9,13 +9,14 @@ import {
 import { Plus } from 'lucide-react';
 import { FC } from 'react';
 import AllTeamMembers from '../teams/AllTeamMembers';
+import AddNewMemberToWorkspaceModal from '../workspaces/AddNewMemberToWorkspaceModal';
 
 const DashboardTeams: FC = () => {
     return (
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>Team Members</CardTitle>
+                    <CardTitle>Workspace Members</CardTitle>
                     <CardDescription>
                         Your project collaborators
                     </CardDescription>
@@ -23,9 +24,7 @@ const DashboardTeams: FC = () => {
                 <CardContent>
                     <div className='flex flex-wrap gap-4'>
                         <AllTeamMembers />
-                        <Button size='icon' variant='outline'>
-                            <Plus className='h-4 w-4' />
-                        </Button>
+                        <AddNewMemberToWorkspaceModal />
                     </div>
                 </CardContent>
             </Card>
