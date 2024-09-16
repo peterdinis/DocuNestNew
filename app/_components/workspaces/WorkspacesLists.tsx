@@ -14,6 +14,7 @@ import {
   PaginationEllipsis,
   PaginationLink
 } from '@/components/ui/pagination';
+import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 
 const WorkspacesLists: FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -48,7 +49,7 @@ const WorkspacesLists: FC = () => {
     <>
       <Card className='mb-6 mt-4'>
         <CardHeader>
-          <CardTitle className='prose-h2: prose text-xl font-bold'>
+          <CardTitle className='prose-h2: prose text-xl font-bold dark:text-white'>
             My All Workspaces
           </CardTitle>
         </CardHeader>
@@ -59,7 +60,7 @@ const WorkspacesLists: FC = () => {
         <CardContent>
           <div className='grid grid-cols-3 gap-4'>
             {workspaces.length > 0 ? (
-              workspaces.map((workspace: any) => (
+              workspaces.map((workspace: WorkspacePaginationType) => (
                 <div
                   key={workspace.id}
                   className='p-4 border rounded-lg bg-white dark:bg-zinc-800 shadow-md hover:shadow-lg transition'
