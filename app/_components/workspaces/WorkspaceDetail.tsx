@@ -6,11 +6,17 @@ import Header from '../shared/Header';
 import { useParams } from 'next/navigation';
 import MembersTable from './MembersTable';
 import DocumentsTable from './DocumentsTable';
-import UpdateWorkspaceModal from './UpdateWorkspaceModal';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
 import { Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
+import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -45,7 +51,16 @@ const WorkspaceDetail: FC = () => {
                             {format(data.createdAt, 'yyyy-MM-dd')}
                         </div>
                         <div className='flex justify-end'>
-                            <UpdateWorkspaceModal />
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <AddNewMemberToWorkspaceModal />
+                                        <TooltipContent>
+                                            Add new meber to workspace
+                                        </TooltipContent>
+                                    </TooltipTrigger>
+                                </Tooltip>
+                            </TooltipProvider>
                         </div>
                     </div>
                     <div className='mt-5'>
@@ -53,7 +68,16 @@ const WorkspaceDetail: FC = () => {
                     </div>
                     <div className='mt-10'>
                         <div className='flex justify-end'>
-                            <UploadDocumentToWorkspaceModal />
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <UploadDocumentToWorkspaceModal />
+                                        <TooltipContent>
+                                            Upload document to workspace
+                                        </TooltipContent>
+                                    </TooltipTrigger>
+                                </Tooltip>
+                            </TooltipProvider>
                         </div>
                         <DocumentsTable />
                     </div>
