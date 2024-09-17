@@ -10,6 +10,7 @@ import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
 import { Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
+import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -52,7 +53,7 @@ const WorkspaceDetail: FC = () => {
                     </div>
                     <div className='mt-10'>
                         <div className='flex justify-end'>
-                            <UpdateWorkspaceModal />
+                            <UploadDocumentToWorkspaceModal />
                         </div>
                         <DocumentsTable />
                     </div>
