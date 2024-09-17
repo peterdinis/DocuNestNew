@@ -6,10 +6,19 @@ import Header from '../shared/Header';
 import { useParams } from 'next/navigation';
 import MembersTable from './MembersTable';
 import DocumentsTable from './DocumentsTable';
-import UpdateWorkspaceModal from './UpdateWorkspaceModal';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
 import { format } from 'date-fns';
+import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -44,15 +53,38 @@ const WorkspaceDetail: FC = () => {
                             {format(data.createdAt, 'yyyy-MM-dd')}
                         </div>
                         <div className='flex justify-end'>
-                            <UpdateWorkspaceModal />
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <AddNewMemberToWorkspaceModal />
+                                        <TooltipContent>
+                                            Add new member to workspace
+                                        </TooltipContent>
+                                    </TooltipTrigger>
+                                </Tooltip>
+                            </TooltipProvider>
                         </div>
                     </div>
                     <div className='mt-5'>
                         <MembersTable />
                     </div>
                     <div className='mt-10'>
-                        <div className='flex justify-end'>
-                            <UpdateWorkspaceModal />
+                        <div className='flex items-center justify-end space-x-4'>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <UploadDocumentToWorkspaceModal />
+                                        <TooltipContent>
+                                            Upload document to workspace
+                                        </TooltipContent>
+                                    </TooltipTrigger>
+                                </Tooltip>
+                            </TooltipProvider>
+                            <Button className='flex items-center'>
+                                <Link href={`/document/create`} className='flex items-center'>
+                                    <Plus className='mr-2' /> Create document
+                                </Link>
+                            </Button>
                         </div>
                         <DocumentsTable />
                     </div>

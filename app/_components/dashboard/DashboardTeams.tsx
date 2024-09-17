@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card';
 import { FC } from 'react';
 import AllTeamMembers from '../teams/AllTeamMembers';
-import AddNewMemberToWorkspaceModal from '../workspaces/AddNewMemberToWorkspaceModal';
+import AddNewMemberToWorkspaceModal from '../workspaces/members/AddNewMemberToWorkspaceModal';
 
 const DashboardTeams: FC = () => {
     return (
