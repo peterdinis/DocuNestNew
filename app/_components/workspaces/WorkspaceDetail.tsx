@@ -20,6 +20,8 @@ const WorkspaceDetail: FC = () => {
 
     const { data, isLoading, isError } = useWorkspaceDetail({ id });
 
+    console.log(data);
+
     if (isLoading) return <Loader2 className='animate-spin w-8 h-8' />;
 
     if (isError) {

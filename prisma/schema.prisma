@@ -54,6 +54,7 @@ model User {
 model Workspace {
   id             String   @id @default(uuid())
   name           String
+  image          String?  @default("https://picsum.photos/200/300")
   workspaceEmoji String
   description    String
   userId         String
