@@ -1,9 +1,20 @@
 import { FC } from 'react';
 import { format } from 'date-fns';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
+import { Loader2 } from 'lucide-react';
 
 const DashboardStatus: FC = () => {
+    const {data, isLoading, isError} = useDisplayAllWorkspaces();
     const actualDate = format(new Date(), 'yyyy-MM-dd');
+
+    if(isLoading) return <Loader2 className='animate-spin w-8 h-8' />
+
+    if(isError) {
+        return <p className='prose prose-p: font-bold text-red-800 text-2xl'>Something went wrong</p>
+    }
+
+    console.log("D", data);
 
     return (
         <>
@@ -18,7 +29,7 @@ const DashboardStatus: FC = () => {
                 <CardContent>
                     <div className='grid grid-cols-3 gap-4 text-center'>
                         <div>
-                            <p className='text-2xl font-bold'>4</p>
+                            <p className='text-2xl font-bold'>{data?.totalCount}</p>
                             <p className='text-muted-foreground'>Workspaces</p>
                         </div>
                         <div>
