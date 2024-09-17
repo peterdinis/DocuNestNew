@@ -1,3 +1,5 @@
+"use client"
+
 import { FC } from 'react';
 import { format } from 'date-fns';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -13,8 +15,6 @@ const DashboardStatus: FC = () => {
     if(isError) {
         return <p className='prose prose-p: font-bold text-red-800 text-2xl'>Something went wrong</p>
     }
-
-    console.log("D", data);
 
     return (
         <>
@@ -32,6 +32,7 @@ const DashboardStatus: FC = () => {
                             <p className='text-2xl font-bold'>{data?.totalCount}</p>
                             <p className='text-muted-foreground'>Workspaces</p>
                         </div>
+                        {/* TODO: Later add simular things for workspace-documents and members */}
                         <div>
                             <p className='text-2xl font-bold'>20</p>
                             <p className='text-muted-foreground'>
