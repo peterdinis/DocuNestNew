@@ -29,6 +29,12 @@ export const fetchLatestsWorkspaces = async () => {
     return request.data;
 };
 
-export const fetchWorkspaceDetail = async (id: number) => {
+export const fetchWorkspaceDetail = async (id: string) => {
     const request = await axios.get(`/api/workspaces/${id}`);
+    if(!id) {
+        throw new Error("Workspace with this id not found");
+    }
+
+    return request.data;
 };
+

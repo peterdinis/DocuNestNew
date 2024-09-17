@@ -7,6 +7,8 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
 
+    console.log("ID", id);
+
     if (!id) {
         return NextResponse.json(
             { error: 'Missing id parameter' },
@@ -31,7 +33,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!findOneWorkspace) {
-        throw new Error('Document not found');
+        throw new Error('Workspace not found');
     }
 
     return NextResponse.json(findOneWorkspace);

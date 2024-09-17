@@ -18,7 +18,7 @@ export type PaginatedWorkspace = Pick<
 >;
 
 export type WorkspacePaginationType = {
-    id: number;
+    id: any;
     createdAt: string | Date;
 } & WorkspaceType;
 
