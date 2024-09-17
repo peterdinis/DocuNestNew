@@ -13,10 +13,12 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
 import { format } from 'date-fns';
-import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -56,7 +58,7 @@ const WorkspaceDetail: FC = () => {
                                     <TooltipTrigger>
                                         <AddNewMemberToWorkspaceModal />
                                         <TooltipContent>
-                                            Add new meber to workspace
+                                            Add new member to workspace
                                         </TooltipContent>
                                     </TooltipTrigger>
                                 </Tooltip>
@@ -67,7 +69,7 @@ const WorkspaceDetail: FC = () => {
                         <MembersTable />
                     </div>
                     <div className='mt-10'>
-                        <div className='flex justify-end'>
+                        <div className='flex items-center justify-end space-x-4'>
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger>
@@ -78,6 +80,11 @@ const WorkspaceDetail: FC = () => {
                                     </TooltipTrigger>
                                 </Tooltip>
                             </TooltipProvider>
+                            <Button className='flex items-center'>
+                                <Link href="/document/create" className='flex items-center'>
+                                    <Plus className='mr-2' /> Create document
+                                </Link>
+                            </Button>
                         </div>
                         <DocumentsTable />
                     </div>
