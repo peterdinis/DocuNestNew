@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { FC } from 'react';
 import GlobalLayout from '../shared/GlobalLayout';
@@ -9,7 +9,7 @@ import DocumentsTable from './DocumentsTable';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
 import { Loader2 } from 'lucide-react';
-import {format} from "date-fns"
+import { format } from 'date-fns';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -20,10 +20,12 @@ const WorkspaceDetail: FC = () => {
 
     const { data, isLoading, isError } = useWorkspaceDetail({ id });
 
-    if (isLoading) return <Loader2 className='animate-spin w-8 h-8' />;
+    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
     if (isError) {
-        return <p className='prose font-bold text-red-800'>Something went wrong</p>;
+        return (
+            <p className='prose font-bold text-red-800'>Something went wrong</p>
+        );
     }
 
     return (
@@ -34,9 +36,12 @@ const WorkspaceDetail: FC = () => {
                     <br />
                     <div className='mt-5'>
                         <span className='text-3xl'>{data.workspaceEmoji}</span>
-                        <h2 className='text-2xl prose prose-h2: dark:text-sky-50'>{data.name}</h2>
-                        <div className='pt-5 prose prose-p: dark:text-sky-50'>
-                            Workspace was created at: {format(data.createdAt, 'yyyy-MM-dd')}
+                        <h2 className='prose-h2: prose text-2xl dark:text-sky-50'>
+                            {data.name}
+                        </h2>
+                        <div className='prose-p: prose pt-5 dark:text-sky-50'>
+                            Workspace was created at:{' '}
+                            {format(data.createdAt, 'yyyy-MM-dd')}
                         </div>
                         <div className='flex justify-end'>
                             <UpdateWorkspaceModal />
@@ -46,6 +51,9 @@ const WorkspaceDetail: FC = () => {
                         <MembersTable />
                     </div>
                     <div className='mt-10'>
+                        <div className='flex justify-end'>
+                            <UpdateWorkspaceModal />
+                        </div>
                         <DocumentsTable />
                     </div>
                 </div>
