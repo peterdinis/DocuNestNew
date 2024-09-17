@@ -81,7 +81,7 @@ const WorkspaceDetail: FC = () => {
                                 </Tooltip>
                             </TooltipProvider>
                             <Button className='flex items-center'>
-                                <Link href="/document/create" className='flex items-center'>
+                                <Link href={`/document/create`} className='flex items-center'>
                                     <Plus className='mr-2' /> Create document
                                 </Link>
                             </Button>
