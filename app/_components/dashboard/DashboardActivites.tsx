@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import { FC, useState } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
+import { motion, AnimatePresence } from 'framer-motion';
 import AppPagination from '../shared/AppPagination';
 
 interface Activity {
@@ -43,34 +44,43 @@ const DashboardActivities: FC = () => {
                     <p className='text-center text-sm text-muted-foreground'>No messages found</p>
                 ) : (
                     <ul className='space-y-4'>
-                        {activities.map(activity => (
-                            <li key={activity.id} className='flex items-center justify-between'>
-                                <div className='flex items-center'>
-                                    <Avatar className='h-9 w-9'>
-                                        <AvatarImage
-                                            src='/placeholder.svg?height=36&width=36'
-                                            alt='Avatar'
-                                        />
-                                        <AvatarFallback>JD</AvatarFallback>
-                                    </Avatar>
-                                    <div className='ml-4'>
-                                        <p className='text-sm font-medium'>
-                                            {activity.name}
-                                        </p>
-                                        <p className='text-sm text-muted-foreground'>
-                                            {activity.timeAgo}
-                                        </p>
-                                    </div>
-                                </div>
-                                <button
-                                    onClick={() => handleDelete(activity.id)}
-                                    className='text-red-500 hover:text-red-700'
-                                    aria-label='Delete activity'
+                        <AnimatePresence>
+                            {activities.map(activity => (
+                                <motion.li
+                                    key={activity.id}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.3 }}
+                                    className='flex items-center justify-between'
                                 >
-                                    <TrashIcon className='h-5 w-5' />
-                                </button>
-                            </li>
-                        ))}
+                                    <div className='flex items-center'>
+                                        <Avatar className='h-9 w-9'>
+                                            <AvatarImage
+                                                src='/placeholder.svg?height=36&width=36'
+                                                alt='Avatar'
+                                            />
+                                            <AvatarFallback>JD</AvatarFallback>
+                                        </Avatar>
+                                        <div className='ml-4'>
+                                            <p className='text-sm font-medium'>
+                                                {activity.name}
+                                            </p>
+                                            <p className='text-sm text-muted-foreground'>
+                                                {activity.timeAgo}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => handleDelete(activity.id)}
+                                        className='text-red-500 hover:text-red-700'
+                                        aria-label='Delete activity'
+                                    >
+                                        <TrashIcon className='h-5 w-5' />
+                                    </button>
+                                </motion.li>
+                            ))}
+                        </AnimatePresence>
                     </ul>
                 )}
             </CardContent>
