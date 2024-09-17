@@ -9,6 +9,7 @@ import DocumentsTable from './DocumentsTable';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
 import { Loader2 } from 'lucide-react';
+import {format} from "date-fns"
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -32,7 +33,11 @@ const WorkspaceDetail: FC = () => {
                     <Header text={`Workspace Detail`} />
                     <br />
                     <div className='mt-5'>
-                        DETAIL
+                        <span className='text-3xl'>{data.workspaceEmoji}</span>
+                        <h2 className='text-2xl prose prose-h2: dark:text-sky-50'>{data.name}</h2>
+                        <div className='pt-5 prose prose-p: dark:text-sky-50'>
+                            Workspace was created at: {format(data.createdAt, 'yyyy-MM-dd')}
+                        </div>
                         <div className='flex justify-end'>
                             <UpdateWorkspaceModal />
                         </div>
