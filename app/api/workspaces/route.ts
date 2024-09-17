@@ -18,7 +18,10 @@ export async function GET() {
         },
     });
 
+    const allCountedWorkspaces = await db.workspace.count();
+
     return NextResponse.json({
         workspaces: allWorkspaces,
+        totalCount: allCountedWorkspaces
     });
 }
