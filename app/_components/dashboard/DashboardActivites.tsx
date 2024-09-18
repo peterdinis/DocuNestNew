@@ -57,7 +57,8 @@ const DashboardActivities: FC = () => {
                                     <div className='flex items-center'>
                                         <Avatar className='h-9 w-9'>
                                             <AvatarImage
-                                                src='/placeholder.svg?height=36&width=36'
+                                                className='rounded-lg'
+                                                src='https://github.com/shadcn.png'
                                                 alt='Avatar'
                                             />
                                             <AvatarFallback>JD</AvatarFallback>
