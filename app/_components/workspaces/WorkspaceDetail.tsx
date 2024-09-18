@@ -19,6 +19,7 @@ import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
+import CreateDocumentModal from './documents/CreateDocumentModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -80,11 +81,9 @@ const WorkspaceDetail: FC = () => {
                                     </TooltipTrigger>
                                 </Tooltip>
                             </TooltipProvider>
-                            <Button className='flex items-center'>
-                                <Link href={`/document/create`} className='flex items-center'>
-                                    <Plus className='mr-2' /> Create document
-                                </Link>
-                            </Button>
+                            <div className='flex items-center'>
+                               <CreateDocumentModal />
+                            </div>
                         </div>
                         <DocumentsTable />
                     </div>
