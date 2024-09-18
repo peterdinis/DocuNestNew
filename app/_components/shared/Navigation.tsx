@@ -46,7 +46,7 @@ const Navigation: FC = () => {
                                 DocuNest
                             </span>
                         </Link>
-                        {!session?.user! && (
+                        {!session?.user && (
                             <div className='hidden md:block'>
                                 <div className='ml-10 flex items-baseline space-x-4'>
                                     <Link
@@ -89,34 +89,40 @@ const Navigation: FC = () => {
                     </div>
                     <div className='hidden md:block'>
                         <div className='ml-4 flex items-center md:ml-6'>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button
-                                        variant='ghost'
-                                        className='relative ml-3'
-                                    >
-                                        <span className='sr-only'>
-                                            Open user menu
-                                        </span>
-                                        <User className='h-5 w-5' />
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align='end'>
-                                    <DropdownMenuLabel>
-                                        {session?.user.name}
-                                    </DropdownMenuLabel>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <Link href='/dashboard'>Profile</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={logoutUser}>
-                                        Sign out
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                            <div className='ml-5'>
-                                <ThemeButton />
-                            </div>
+                            {session?.user && (
+                                <>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button
+                                                variant='ghost'
+                                                className='relative ml-3'
+                                            >
+                                                <span className='sr-only'>
+                                                    Open user menu
+                                                </span>
+                                                <User className='h-5 w-5' />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align='end'>
+                                            <DropdownMenuLabel>
+                                                {session?.user.name}
+                                            </DropdownMenuLabel>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>
+                                                <Link href='/dashboard'>
+                                                    Profile
+                                                </Link>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem onClick={logoutUser}>
+                                                Sign out
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                    <div className='ml-5'>
+                                        <ThemeButton />
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className='md:hidden'>
@@ -163,36 +169,38 @@ const Navigation: FC = () => {
                         Team
                     </Link>
                 </div>
-                <div className='border-t border-gray-200 pb-3 pt-4'>
-                    <div className='flex items-center px-5'>
-                        <div className='flex-shrink-0'>
-                            <User className='h-10 w-10 rounded-full' />
+                {session?.user && (
+                    <div className='border-t border-gray-200 pb-3 pt-4'>
+                        <div className='flex items-center px-5'>
+                            <div className='flex-shrink-0'>
+                                <User className='h-10 w-10 rounded-full' />
+                            </div>
+                            <div className='ml-3'>
+                                <div className='text-base font-medium text-gray-800 dark:text-sky-50'>
+                                    {session?.user.name}
+                                </div>
+                                <div className='text-sm font-medium text-gray-500 dark:text-sky-50'>
+                                    {session?.user.email}
+                                </div>
+                            </div>
                         </div>
-                        <div className='ml-3'>
-                            <div className='text-base font-medium text-gray-800 dark:text-sky-50'>
-                                {session?.user.name}
-                            </div>
-                            <div className='text-sm font-medium text-gray-500 dark:text-sky-50'>
-                                {session?.user.email}
-                            </div>
+                        <div className='mt-3 space-y-1 px-2'>
+                            <Button
+                                variant='ghost'
+                                className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                            >
+                                <Link href='/dashboard'>Dashboard</Link>
+                            </Button>
+                            <Button
+                                variant='ghost'
+                                onClick={logoutUser}
+                                className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                            >
+                                Sign out
+                            </Button>
                         </div>
                     </div>
-                    <div className='mt-3 space-y-1 px-2'>
-                        <Button
-                            variant='ghost'
-                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                        >
-                            <Link href='/dashboard'>Dashboard</Link>
-                        </Button>
-                        <Button
-                            variant='ghost'
-                            onClick={logoutUser}
-                            className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                        >
-                            Sign out
-                        </Button>
-                    </div>
-                </div>
+                )}
             </div>
         </nav>
     );
