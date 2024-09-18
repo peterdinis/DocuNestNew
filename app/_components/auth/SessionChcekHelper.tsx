@@ -1,5 +1,6 @@
 'use client';
 
+import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { FC, ReactNode, useEffect } from 'react';
@@ -24,7 +25,7 @@ const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({
     }, [session, status, router, pathname]);
 
     if (status === 'loading') {
-        return <Loading />;
+        return <Loader2 className='animate-spin w-8 h-8' />;
     }
 
     if (session || pathname === '/' || pathname === '/register') {
