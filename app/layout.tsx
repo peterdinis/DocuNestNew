@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import ScrollToTop from './_components/shared/ScrollToTop';
+import SessionCheckHelper from './_components/auth/SessionChcekHelper';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -37,10 +38,12 @@ export default function RootLayout({
                 <ThemeProvider>
                     <QueryProvider>
                         <SessionAppProvider>
-                            <Navigation />
+                           <SessionCheckHelper>
+                           <Navigation />
                             {children}
                             <ScrollToTop />
                             <Toaster />
+                           </SessionCheckHelper>
                         </SessionAppProvider>
                     </QueryProvider>
                 </ThemeProvider>
