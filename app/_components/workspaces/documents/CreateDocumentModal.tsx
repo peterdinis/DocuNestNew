@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -12,41 +12,9 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import Header from '../../shared/Header';
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Collaboration from "@tiptap/extension-collaboration";
-import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
-import * as Y from "yjs";
-import styles from "./Documents.module.css"
+import QuillEditor from './QuillEditor';
 
 const CreateDocumentModal: FC = () => {
-    const [doc, setDoc] = useState<Y.Doc>();
-  const [provider, setProvider] = useState<any>();
-
-    const editor = useEditor({
-        editorProps: {
-          attributes: {
-            // Add styles to editor element
-            class: styles.editor,
-          },
-        },
-        extensions: [
-          StarterKit.configure({
-            // The Collaboration extension comes with its own history handling
-            history: false,
-          }),
-          // Register the document with Tiptap
-          Collaboration.configure({
-            document: doc,
-          }),
-          // Attach provider and user info
-          CollaborationCursor.configure({
-            provider: provider,
-          }),
-        ],
-      });
-
-      
     return (
         <>
             <Dialog>
@@ -63,7 +31,10 @@ const CreateDocumentModal: FC = () => {
                         <Input placeholder='Title' />
                     </div>
                     <div className='mt-5'>
-                    <EditorContent editor={editor} />
+                       <QuillEditor value={''} readOnly={false} onChange={function (content: string): void {
+                throw new Error('Function not implemented.');
+              } }                       
+                       />
                     </div>
                     <DialogFooter>
                         <Button type='submit'>Save changes</Button>
