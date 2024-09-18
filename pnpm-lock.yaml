@@ -116,6 +116,9 @@ importers:
       quill-image-compress:
         specifier: ^2.0.2
         version: 2.0.2
+      quill-magic-url:
+        specifier: ^4.2.0
+        version: 4.2.0
       quill-paste-smart:
         specifier: ^2.0.0
         version: 2.0.0
@@ -1179,6 +1182,9 @@ packages:
   '@types/quill@1.3.10':
     resolution: {integrity: sha512-IhW3fPW+bkt9MLNlycw8u8fWb7oO7W5URC9MfZYHBlA24rex9rs23D5DETChu1zvgVdc5ka64ICjJOgQMr6Shw==}
 
+  '@types/quill@2.0.14':
+    resolution: {integrity: sha512-zvoXCRnc2Dl8g+7/9VSAmRWPN6oH+MVhTPizmCR+GJCITplZ5VRVzMs4+a/nOE3yzNwEZqylJJrMB07bwbM1/g==}
+
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
@@ -2010,6 +2016,9 @@ packages:
   fast-diff@1.1.2:
     resolution: {integrity: sha512-KaJUt+M9t1qaIteSvjc6P3RbMdXsNhK61GRftR6SNxqmhthcd9MGIi4T+o0jD8LUSpSnSKXE20nLtJ3fOHxQig==}
 
+  fast-diff@1.3.0:
+    resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
+
   fast-glob@3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
     engines: {node: '>=8.6.0'}
@@ -2744,6 +2753,9 @@ packages:
   lodash.castarray@4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
 
+  lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+
   lodash.escape@3.2.0:
     resolution: {integrity: sha512-n1PZMXgaaDWZDSvuNZ/8XOcYO2hOKDqZel5adtR30VKQAtoWs/5AOeFA0vPV8moiPzlqe7F4cP2tzpFewQyelQ==}
 
@@ -2752,6 +2764,9 @@ packages:
 
   lodash.isarray@3.0.4:
     resolution: {integrity: sha512-JwObCrNJuT0Nnbuecmqr5DgtuBppuCvGD9lxjFpAzwnVtdGoDQ1zig+5W8k5/6Gcn0gZ3936HDAlGd28i7sOGQ==}
+
+  lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
 
   lodash.isplainobject@3.2.0:
     resolution: {integrity: sha512-P4wZnho5curNqeEq/x292Pb57e1v+woR7DJ84DURelKB46lby8aDEGVobSaYtzHdQBWQrJSdxcCwjlGOvvdIyg==}
@@ -2960,6 +2975,10 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+
+  normalize-url@4.5.1:
+    resolution: {integrity: sha512-9UZCFRHQdNrfTpGg8+1INIg93B6zE0aXMVFkw1WFwvO4SlZywU6aLg5Of0Ap/PgcbSw4LNxvMWXMeugwMCX0AA==}
+    engines: {node: '>=8'}
 
   npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
@@ -3296,6 +3315,10 @@ packages:
     resolution: {integrity: sha512-wdIGBlcX13tCHOXGMVnnTVFtGRLoP0imqxM696fIPwIf5ODIYUHIvHbZcyvGlZFiFhK5XzDC2lpjbxRhnM05Tg==}
     engines: {node: '>=0.10'}
 
+  quill-delta@5.1.0:
+    resolution: {integrity: sha512-X74oCeRI4/p0ucjb5Ma8adTXd9Scumz367kkMK5V/IatcX6A0vlgLgKbzXWy5nZmCGeNJm2oQX0d2Eqj+ZIlCA==}
+    engines: {node: '>= 12.0.0'}
+
   quill-form@0.1.3:
     resolution: {integrity: sha512-3a0PeLlVSJtD/+fQ/N3NTb+572pj4clbahH5RKQ8AqreAa7PHy4LUnjiX7RjZCfLXNbTxiG6K2dWfE2ShzS2ww==}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
@@ -3306,6 +3329,9 @@ packages:
     resolution: {integrity: sha512-RibmhvfZUX62gvy76alVV8XXVYIwWwz+++GEmTKpukuh93WA5TTezloJLEKJPBHmOjFbO9lQ+HAGJ0tkGVaehg==}
     peerDependencies:
       quill: ^2.0.2
+
+  quill-magic-url@4.2.0:
+    resolution: {integrity: sha512-u1tHwsQjrTczhECNtXK5EUkWwAMb8raLpsU3llqiLu344kPlA9ldoenHvY3XW+yI+2IZ9WgKgRmcy+cKGN3gnQ==}
 
   quill-paste-smart@2.0.0:
     resolution: {integrity: sha512-oLhzV5p0xx1xYoMYtViAE92PBMclY4DQVCvpBwAm49sCk3M+Y9q8+DnJMmaROOUCkv78BaggzHCiimCRHyYZ9w==}
@@ -5086,6 +5112,11 @@ snapshots:
     dependencies:
       parchment: 1.1.4
 
+  '@types/quill@2.0.14':
+    dependencies:
+      parchment: 1.1.4
+      quill-delta: 5.1.0
+
   '@types/react-dom@18.3.0':
     dependencies:
       '@types/react': 18.3.5
@@ -6138,6 +6169,8 @@ snapshots:
 
   fast-diff@1.1.2: {}
 
+  fast-diff@1.3.0: {}
+
   fast-glob@3.3.2:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -7078,6 +7111,8 @@ snapshots:
 
   lodash.castarray@4.4.0: {}
 
+  lodash.clonedeep@4.5.0: {}
+
   lodash.escape@3.2.0:
     dependencies:
       lodash._root: 3.0.1
@@ -7085,6 +7120,8 @@ snapshots:
   lodash.isarguments@3.1.0: {}
 
   lodash.isarray@3.0.4: {}
+
+  lodash.isequal@4.5.0: {}
 
   lodash.isplainobject@3.2.0:
     dependencies:
@@ -7288,6 +7325,8 @@ snapshots:
       abbrev: 1.1.1
 
   normalize-path@3.0.0: {}
+
+  normalize-url@4.5.1: {}
 
   npm-run-path@4.0.1:
     dependencies:
@@ -7562,9 +7601,21 @@ snapshots:
       extend: 3.0.2
       fast-diff: 1.1.2
 
+  quill-delta@5.1.0:
+    dependencies:
+      fast-diff: 1.3.0
+      lodash.clonedeep: 4.5.0
+      lodash.isequal: 4.5.0
+
   quill-form@0.1.3: {}
 
   quill-image-compress@2.0.2: {}
+
+  quill-magic-url@4.2.0:
+    dependencies:
+      '@types/quill': 2.0.14
+      normalize-url: 4.5.1
+      quill-delta: 3.6.3
 
   quill-paste-smart@2.0.0:
     dependencies:

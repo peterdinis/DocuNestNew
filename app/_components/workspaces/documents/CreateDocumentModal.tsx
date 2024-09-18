@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import Header from '../../shared/Header';
+import QuillEditor from './QuillEditor';
 
 const CreateDocumentModal: FC = () => {
     return (
@@ -30,7 +31,10 @@ const CreateDocumentModal: FC = () => {
                         <Input placeholder='Title' />
                     </div>
                     <div className='mt-5'>
-                       QUILL REACT CODE
+                       <QuillEditor value={''} readOnly={false} onChange={function (content: string): void {
+                throw new Error('Function not implemented.');
+              } }                       
+                       />
                     </div>
                     <DialogFooter>
                         <Button type='submit'>Save changes</Button>
