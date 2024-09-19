@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { FC } from 'react';
 import { format } from 'date-fns';
@@ -7,13 +7,17 @@ import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorksp
 import { Loader2 } from 'lucide-react';
 
 const DashboardStatus: FC = () => {
-    const {data, isLoading, isError} = useDisplayAllWorkspaces();
+    const { data, isLoading, isError } = useDisplayAllWorkspaces();
     const actualDate = format(new Date(), 'yyyy-MM-dd');
 
-    if(isLoading) return <Loader2 className='animate-spin w-8 h-8' />
+    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
-    if(isError) {
-        return <p className='prose prose-p: font-bold text-red-800 text-2xl'>Something went wrong</p>
+    if (isError) {
+        return (
+            <p className='prose-p: prose text-2xl font-bold text-red-800'>
+                Something went wrong
+            </p>
+        );
     }
 
     return (
@@ -29,7 +33,9 @@ const DashboardStatus: FC = () => {
                 <CardContent>
                     <div className='grid grid-cols-3 gap-4 text-center'>
                         <div>
-                            <p className='text-2xl font-bold'>{data?.totalCount}</p>
+                            <p className='text-2xl font-bold'>
+                                {data?.totalCount}
+                            </p>
                             <p className='text-muted-foreground'>Workspaces</p>
                         </div>
                         {/* TODO: Later add simular things for workspace-documents and members */}

@@ -4,7 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 
 export type Member = {
     id: string;
-    name: string
+    name: string;
     email: string;
     role: string;
 };
@@ -14,7 +14,7 @@ export type Document = {
     name: string;
     createdAt: string | Date;
     lastUpdate: string | Date;
-}
+};
 
 export const documentColumns: ColumnDef<Document>[] = [
     {
@@ -31,10 +31,10 @@ export const documentColumns: ColumnDef<Document>[] = [
     },
 
     {
-        accessorKey: "lastUpdate",
-        header: "Last Update"
-    }
-]
+        accessorKey: 'lastUpdate',
+        header: 'Last Update',
+    },
+];
 
 export const columns: ColumnDef<Member>[] = [
     {

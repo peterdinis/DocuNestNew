@@ -14,11 +14,31 @@ interface Activity {
 }
 
 const initialActivities: Activity[] = [
-    { id: 1, name: 'John Doe updated the project status', timeAgo: '2 hours ago' },
-    { id: 2, name: 'John Doe updated the project status', timeAgo: '2 hours ago' },
-    { id: 3, name: 'John Doe updated the project status', timeAgo: '2 hours ago' },
-    { id: 4, name: 'John Doe updated the project status', timeAgo: '2 hours ago' },
-    { id: 5, name: 'John Doe updated the project status', timeAgo: '2 hours ago' },
+    {
+        id: 1,
+        name: 'John Doe updated the project status',
+        timeAgo: '2 hours ago',
+    },
+    {
+        id: 2,
+        name: 'John Doe updated the project status',
+        timeAgo: '2 hours ago',
+    },
+    {
+        id: 3,
+        name: 'John Doe updated the project status',
+        timeAgo: '2 hours ago',
+    },
+    {
+        id: 4,
+        name: 'John Doe updated the project status',
+        timeAgo: '2 hours ago',
+    },
+    {
+        id: 5,
+        name: 'John Doe updated the project status',
+        timeAgo: '2 hours ago',
+    },
 ];
 
 const DashboardActivities: FC = () => {
@@ -31,7 +51,9 @@ const DashboardActivities: FC = () => {
     };
 
     const handleDelete = (id: number) => {
-        setActivities(prevActivities => prevActivities.filter(activity => activity.id !== id));
+        setActivities((prevActivities) =>
+            prevActivities.filter((activity) => activity.id !== id),
+        );
     };
 
     return (
@@ -41,11 +63,13 @@ const DashboardActivities: FC = () => {
             </CardHeader>
             <CardContent>
                 {activities.length === 0 ? (
-                    <p className='text-center text-sm text-muted-foreground'>No messages found</p>
+                    <p className='text-center text-sm text-muted-foreground'>
+                        No messages found
+                    </p>
                 ) : (
                     <ul className='space-y-4'>
                         <AnimatePresence>
-                            {activities.map(activity => (
+                            {activities.map((activity) => (
                                 <motion.li
                                     key={activity.id}
                                     initial={{ opacity: 0, y: 10 }}
@@ -73,7 +97,9 @@ const DashboardActivities: FC = () => {
                                         </div>
                                     </div>
                                     <button
-                                        onClick={() => handleDelete(activity.id)}
+                                        onClick={() =>
+                                            handleDelete(activity.id)
+                                        }
                                         className='text-red-500 hover:text-red-700'
                                         aria-label='Delete activity'
                                     >

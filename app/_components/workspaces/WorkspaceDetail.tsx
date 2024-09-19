@@ -82,7 +82,7 @@ const WorkspaceDetail: FC = () => {
                                 </Tooltip>
                             </TooltipProvider>
                             <div className='flex items-center'>
-                               <CreateDocumentModal />
+                                <CreateDocumentModal />
                             </div>
                         </div>
                         <DocumentsTable />
