@@ -23,19 +23,19 @@ export async function GET(request: NextRequest) {
         );
     }
 
-    const workspaceDocument = await db.workspaceDocument.findMany({
+    const workspacesDocuments = await db.workspaceDocument.findMany({
         where: {
             workspaceId: id,
             userId: session.user.id,
         },
     });
 
-    if (!workspaceDocument) {
+    if (!workspacesDocuments ) {
         return NextResponse.json(
             { error: 'Workspace not found' },
             { status: 404 },
         );
     }
 
-    return NextResponse.json(workspaceDocument);
+    return NextResponse.json(workspacesDocuments );
 }
