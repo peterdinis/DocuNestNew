@@ -13,11 +13,9 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
-import { Loader2, Plus } from 'lucide-react';
+import { Loader2} from 'lucide-react';
 import { format } from 'date-fns';
 import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 import CreateDocumentModal from './documents/CreateDocumentModal';
 
@@ -82,7 +80,7 @@ const WorkspaceDetail: FC = () => {
                                 </Tooltip>
                             </TooltipProvider>
                             <div className='flex items-center'>
-                                <CreateDocumentModal />
+                                <CreateDocumentModal workspaceId={id} />
                             </div>
                         </div>
                         <DocumentsTable />

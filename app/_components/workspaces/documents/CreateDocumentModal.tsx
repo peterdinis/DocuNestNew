@@ -1,51 +1,94 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { Button } from '@/components/ui/button';
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import Header from '../../shared/Header';
-import QuillEditor from './QuillEditor';
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import Header from "../../shared/Header";
+import QuillEditor from "./QuillEditor";
+import { WorkspaceDocumentType } from "@/app/_types/workspaceDocumentTypes";
+import { Loader2 } from "lucide-react";
+import useCreateWorkspaceDocument from "@/app/_hooks/workspace-documents/useCreateWorkspaceDocument";
+import { useSession } from "next-auth/react";
 
-const CreateDocumentModal: FC = () => {
-    return (
-        <>
-            <Dialog>
-                <DialogTrigger asChild>
-                    <Button variant='outline'>Create new document</Button>
-                </DialogTrigger>
-                <DialogContent className='sm:max-w-[425px]'>
-                    <DialogHeader>
-                        <DialogTitle>
-                            <Header text='New Document' />
-                        </DialogTitle>
-                    </DialogHeader>
-                    <div className='mt-5'>
-                        <Input placeholder='Title' />
-                    </div>
-                    <div className='mt-5'>
-                        <QuillEditor
-                            value={''}
-                            readOnly={false}
-                            onChange={function (content: string): void {
-                                throw new Error('Function not implemented.');
-                            }}
-                        />
-                    </div>
-                    <DialogFooter>
-                        <Button type='submit'>Save changes</Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
-        </>
-    );
+interface ICreateDocumentModalProps {
+  workspaceId: string;
+}
+
+const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({ workspaceId }: ICreateDocumentModalProps) => {
+  const { mutate: createDocument, isPending } = useCreateWorkspaceDocument();
+  const {data: session} = useSession();
+  const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm<WorkspaceDocumentType>({
+    defaultValues: {
+      name: "",
+      content: "",
+    },
+  });
+
+  const content = watch("content");
+
+  const onSubmit = (data: WorkspaceDocumentType) => {
+    const documentData = { 
+        ...data, 
+        workspaceId: workspaceId[0],
+        userId: session?.user.id,
+    };
+    
+    createDocument(documentData);
+    reset();
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Create new document</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>
+            <Header text="New Document" />
+          </DialogTitle>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-5">
+            <Input
+              placeholder="Title"
+              {...register("name", { required: "Title is required" })}
+            />
+            {errors.name && (
+              <span className="text-red-600">{errors.name.message}</span>
+            )}
+          </div>
+
+          <div className="mt-5">
+            <QuillEditor
+              value={content}
+              readOnly={false}
+              onChange={(value) => setValue("content", value)}
+            />
+            {errors.content && (
+              <span className="text-red-600">Content is required</span>
+            )}
+          </div>
+
+          <DialogFooter>
+            <Button className="mt-5" type="submit" disabled={isPending}>
+              {isPending ? <Loader2 className="animate-spin w-8 h-8" /> : "Save changes"}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
 };
 
 export default CreateDocumentModal;
