@@ -83,7 +83,7 @@ const WorkspaceDetail: FC = () => {
                                 <CreateDocumentModal workspaceId={id} />
                             </div>
                         </div>
-                        <DocumentsTable />
+                        <DocumentsTable workspaceId={id} />
                     </div>
                 </div>
             </div>
