@@ -1,6 +1,6 @@
 'use client';
 
-import { FC} from 'react';
+import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -31,10 +31,13 @@ const CreateDocumentModal: FC = () => {
                         <Input placeholder='Title' />
                     </div>
                     <div className='mt-5'>
-                       <QuillEditor value={''} readOnly={false} onChange={function (content: string): void {
-                throw new Error('Function not implemented.');
-              } }                       
-                       />
+                        <QuillEditor
+                            value={''}
+                            readOnly={false}
+                            onChange={function (content: string): void {
+                                throw new Error('Function not implemented.');
+                            }}
+                        />
                     </div>
                     <DialogFooter>
                         <Button type='submit'>Save changes</Button>

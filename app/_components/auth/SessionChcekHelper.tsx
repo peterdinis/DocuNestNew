@@ -25,14 +25,14 @@ const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({
     }, [session, status, router, pathname]);
 
     if (status === 'loading') {
-        return <Loader2 className='animate-spin w-8 h-8' />;
+        return <Loader2 className='h-8 w-8 animate-spin' />;
     }
 
     if (session || pathname === '/' || pathname === '/register') {
         return <>{children}</>;
     }
-    
-    return children
+
+    return children;
 };
 
 export default SessionCheckHelper;

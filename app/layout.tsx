@@ -38,12 +38,12 @@ export default function RootLayout({
                 <ThemeProvider>
                     <QueryProvider>
                         <SessionAppProvider>
-                           <SessionCheckHelper>
-                           <Navigation />
-                            {children}
-                            <ScrollToTop />
-                            <Toaster />
-                           </SessionCheckHelper>
+                            <SessionCheckHelper>
+                                <Navigation />
+                                {children}
+                                <ScrollToTop />
+                                <Toaster />
+                            </SessionCheckHelper>
                         </SessionAppProvider>
                     </QueryProvider>
                 </ThemeProvider>
