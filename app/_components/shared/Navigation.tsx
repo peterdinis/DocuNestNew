@@ -113,7 +113,9 @@ const Navigation: FC = () => {
                                                     Profile
                                                 </Link>
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem onClick={logoutUser}>
+                                            <DropdownMenuItem
+                                                onClick={logoutUser}
+                                            >
                                                 Sign out
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>

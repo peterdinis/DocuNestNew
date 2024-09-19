@@ -22,7 +22,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        <Header text="Add new member to workspace" />
+                        <Header text='Add new member to workspace' />
                     </DialogTitle>
                     <DialogDescription>
                         This action cannot be undone. This will permanently
