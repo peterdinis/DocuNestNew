@@ -20,8 +20,9 @@ export async function POST(req: Request) {
         const createWorkspaceDocument = await db.workspaceDocument.create({
             data: {
                 name,
+                userId: session.user.id,
                 content,
-                workspaceId
+                workspaceId,
             },
         });
 
