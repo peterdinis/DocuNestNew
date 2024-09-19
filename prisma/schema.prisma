@@ -47,6 +47,7 @@ model User {
   accounts   Account[]
   sessions   Session[]
   workspaces Workspace[]
+  workspaceDocuments WorkspaceDocument[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -65,11 +66,13 @@ model Workspace {
 }
 
 model WorkspaceDocument {
-  id          String    @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   content     String
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
