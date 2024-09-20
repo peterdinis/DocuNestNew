@@ -3,16 +3,27 @@
 import useWorkspaceDocumentDetail from "@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail";
 import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import DocToolbar from "./DocToolbar";
+import { Input } from "@/components/ui/input";
+import QuillEditor from "../workspaces/documents/QuillEditor";
 
 const DocumentInfo: FC = () => {
     const {id} = useParams<{id: string}>();
     const [isEditMode, setIsEditMode] = useState(false);
+    const [name, setName] = useState('');
+    const [content, setContent] = useState('');
 
     const {data, isLoading, isError} = useWorkspaceDocumentDetail({
         id
     });
+
+    useEffect(() => {
+        if (data) {
+            setName(data.name);
+            setContent(data.content);
+        }
+    }, [data]);
 
     if(isLoading) return <Loader2 className="animate-spin w-8 h-8" />
 
@@ -30,6 +41,22 @@ const DocumentInfo: FC = () => {
                 Document Info
             </h2>
             <DocToolbar />
+
+            <div className="mt-4 ml-4">
+                <form>
+                    <Input 
+                        value={name}
+                    />
+
+                    <div className="mt-4">
+                    <QuillEditor
+                        value={content}
+                        readOnly={false}
+                        onChange={setContent}
+                    />
+                    </div>
+                </form>
+            </div>
         </>
     )
 }

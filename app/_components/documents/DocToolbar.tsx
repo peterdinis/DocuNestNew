@@ -5,7 +5,8 @@ import { FC } from "react";
 const DocToolbar: FC = () => {
     return (
         <div className="ml-8 mt-6 flex justify-center align-top">
-            <Button variant={"default"}>
+            TOOLBAR
+            {/* <Button variant={"default"}>
                 <Link href="/dashboard">Go back</Link>
             </Button>
             <Button variant={"default"}>
@@ -16,7 +17,7 @@ const DocToolbar: FC = () => {
             </Button>
             <Button variant={"default"}>
                 <Link href="/dashboard">Go back</Link>
-            </Button>
+            </Button> */}
         </div>
     )
 }
