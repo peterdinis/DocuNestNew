@@ -9,6 +9,11 @@ export const fetchAllWorkspaceDocumentsForWorkspace = async (id: string) => {
     return request.data;
 };
 
+export const fetchAllDocuments = async() => {
+    const request = await axios.get("/api/documents");
+    return request.data;
+}
+
 
 export const fetchWorkspaceDocument = async(id: string) => {
     const request = await axios.get(`/api/documents/${id}`);
