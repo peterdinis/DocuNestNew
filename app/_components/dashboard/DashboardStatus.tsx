@@ -5,14 +5,17 @@ import { format } from 'date-fns';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
 import { Loader2 } from 'lucide-react';
+import useAllCountedWorkspaceDocuments from '@/app/_hooks/workspace-documents/useCountWorkspaceDocuments';
 
 const DashboardStatus: FC = () => {
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
+    const {data: documentData, isLoading: documentLoading, isError: documentEror} = useAllCountedWorkspaceDocuments();
+    
     const actualDate = format(new Date(), 'yyyy-MM-dd');
 
-    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
+    if (isLoading || documentLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
-    if (isError) {
+    if (isError || documentEror) {
         return (
             <p className='prose-p: prose text-2xl font-bold text-red-800'>
                 Something went wrong
@@ -38,9 +41,9 @@ const DashboardStatus: FC = () => {
                             </p>
                             <p className='text-muted-foreground'>Workspaces</p>
                         </div>
-                        {/* TODO: Later add simular things for workspace-documents and members */}
+                        {/* TODO: Later add simular things for members */}
                         <div>
-                            <p className='text-2xl font-bold'>20</p>
+                            <p className='text-2xl font-bold'>{documentData?.totalCount}</p>
                             <p className='text-muted-foreground'>
                                 Workspace documents created
                             </p>
