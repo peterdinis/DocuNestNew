@@ -5,7 +5,9 @@ import authOptions from '@/app/api/auth/authOptions';
 
 export async function GET(request: NextRequest) {
     const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
+    const id = url.pathname.split('/')[3];
+
+    console.log("III", id)
 
     if (!id) {
         return NextResponse.json(
@@ -23,11 +25,14 @@ export async function GET(request: NextRequest) {
         );
     }
 
-    const workspacesDocuments = await db.workspaceDocument.findMany({
+    const workspacesDocuments = await db.workspace.findMany({
         where: {
-            workspaceId: id,
             userId: session.user.id,
+            id
         },
+        include: {
+            workspaceDocuments: true
+        }
     });
 
     if (!workspacesDocuments ) {
