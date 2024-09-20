@@ -12,8 +12,7 @@ const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
     const { data, isLoading, isError } = useAllWorkspaceDocuments({
         id: workspaceId,
     });
-
-    // Safely access data and ensure workspaceDocuments exists
+    
     const workspaceDocumentData = data?.[0]?.workspaceDocuments ?? [];
 
     if (isLoading) return <Loader2 className="animate-spin w-8 h-8" />;
