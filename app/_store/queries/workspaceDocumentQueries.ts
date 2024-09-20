@@ -8,3 +8,13 @@ export const fetchAllWorkspaceDocumentsForWorkspace = async (id: string) => {
 
     return request.data;
 };
+
+
+export const fetchWorkspaceDocument = async(id: string) => {
+    const request = await axios.get(`/api/documents/${id}`);
+    if (!id) {
+        throw new Error('Workspace document with this id not found');
+    }
+
+    return request.data;
+}
