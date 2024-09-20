@@ -1,21 +1,21 @@
-"use client"
+'use client';
 
-import useWorkspaceDocumentDetail from "@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail";
-import { Loader2 } from "lucide-react";
-import { useParams } from "next/navigation";
-import { FC, useState, useEffect } from "react";
-import DocToolbar from "./DocToolbar";
-import { Input } from "@/components/ui/input";
-import QuillEditor from "../workspaces/documents/QuillEditor";
+import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
+import { Loader2 } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { FC, useState, useEffect } from 'react';
+import DocToolbar from './DocToolbar';
+import { Input } from '@/components/ui/input';
+import QuillEditor from '../workspaces/documents/QuillEditor';
 
 const DocumentInfo: FC = () => {
-    const {id} = useParams<{id: string}>();
+    const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
 
-    const {data, isLoading, isError} = useWorkspaceDocumentDetail({
-        id
+    const { data, isLoading, isError } = useWorkspaceDocumentDetail({
+        id,
     });
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const DocumentInfo: FC = () => {
         }
     }, [data]);
 
-    if(isLoading) return <Loader2 className="animate-spin w-8 h-8" />
+    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
     if (isError) {
         return (
@@ -42,23 +42,21 @@ const DocumentInfo: FC = () => {
             </h2>
             <DocToolbar />
 
-            <div className="mt-4 ml-4">
+            <div className='ml-4 mt-4'>
                 <form>
-                    <Input 
-                        value={name}
-                    />
+                    <Input value={name} />
 
-                    <div className="mt-4">
-                    <QuillEditor
-                        value={content}
-                        readOnly={false}
-                        onChange={setContent}
-                    />
+                    <div className='mt-4'>
+                        <QuillEditor
+                            value={content}
+                            readOnly={false}
+                            onChange={setContent}
+                        />
                     </div>
                 </form>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default DocumentInfo;

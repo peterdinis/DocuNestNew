@@ -20,25 +20,23 @@ export const documentColumns: ColumnDef<Document>[] = [
     {
         accessorKey: 'id',
         header: 'Id',
-        cell: info => info.getValue(),
+        cell: (info) => info.getValue(),
     },
     {
         accessorKey: 'name',
         header: 'Name',
         cell: ({ row }) => {
             const documentId = row.original.id;
-            const documentName = row.original.name; 
+            const documentName = row.original.name;
             return (
-                <Link href={`/documents/${documentId}`}>
-                    {documentName}
-                </Link>
+                <Link href={`/documents/${documentId}`}>{documentName}</Link>
             );
         },
     },
     {
         accessorKey: 'createdAt',
         header: 'Created',
-        cell: info => new Date(info.getValue() as any).toLocaleDateString(),
+        cell: (info) => new Date(info.getValue() as any).toLocaleDateString(),
     },
 ];
 

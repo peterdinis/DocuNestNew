@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { newDocumentWorkspace } from "@/app/_store/mutations/workspaceDocumentMutations";
-import { queryClient } from "@/app/_store/queryClient";
-import { WorkspaceDocumentType } from "@/app/_types/workspaceDocumentTypes";
-import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query"
+import { newDocumentWorkspace } from '@/app/_store/mutations/workspaceDocumentMutations';
+import { queryClient } from '@/app/_store/queryClient';
+import { WorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
+import { useToast } from '@/hooks/use-toast';
+import { useMutation } from '@tanstack/react-query';
 
 const useCreateWorkspaceDocument = () => {
     const { toast } = useToast();
@@ -20,8 +20,8 @@ const useCreateWorkspaceDocument = () => {
                 className: 'bg-green-800 text-white font-bold',
             });
             queryClient.invalidateQueries({
-                queryKey: ["workspaceDetail"]
-            })
+                queryKey: ['workspaceDetail'],
+            });
         },
 
         onError: () => {

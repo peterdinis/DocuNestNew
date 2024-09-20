@@ -12,20 +12,13 @@ export async function GET() {
         );
     }
 
-    const allWorkspaces = await db.workspace.findMany({
-        where: {
-            userId: session.user.id,
-        },
-    });
-
-    const allCountedWorkspaces = await db.workspace.count({
+    const allCountedMyWorkspaceDocuments = await db.workspace.count({
         where: {
             userId: session.user.id,
         },
     });
 
     return NextResponse.json({
-        workspaces: allWorkspaces,
-        totalCount: allCountedWorkspaces,
+        totalCount: allCountedMyWorkspaceDocuments,
     });
 }
