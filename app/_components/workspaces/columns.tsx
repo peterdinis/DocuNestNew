@@ -1,6 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
+import Link from 'next/link';
 
 export type Member = {
     id: string;
@@ -13,7 +14,6 @@ export type Document = {
     id: number;
     name: string;
     createdAt: string | Date;
-    lastUpdate: string | Date;
 };
 
 export const documentColumns: ColumnDef<Document>[] = [
@@ -21,22 +21,23 @@ export const documentColumns: ColumnDef<Document>[] = [
         accessorKey: 'id',
         header: 'Id',
         cell: info => info.getValue(),
-        
     },
     {
         accessorKey: 'name',
         header: 'Name',
-        cell: info => info.getValue(),
+        cell: ({ row }) => {
+            const documentId = row.original.id;
+            const documentName = row.original.name; 
+            return (
+                <Link href={`/documents/${documentId}`}>
+                    {documentName}
+                </Link>
+            );
+        },
     },
     {
         accessorKey: 'createdAt',
         header: 'Created',
-        cell: info => new Date(info.getValue() as any).toLocaleDateString(),
-    },
-
-    {
-        accessorKey: 'lastUpdate',
-        header: 'Last Update',
         cell: info => new Date(info.getValue() as any).toLocaleDateString(),
     },
 ];
