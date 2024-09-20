@@ -17,4 +17,4 @@ const useWorkspaceDocumentDetail = ({ id }: WorkspaceDetailType) => {
     });
 };
 
-export default useWorkspaceDocumentDetail
+export default useWorkspaceDocumentDetail;

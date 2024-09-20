@@ -9,11 +9,16 @@ import useAllCountedWorkspaceDocuments from '@/app/_hooks/workspace-documents/us
 
 const DashboardStatus: FC = () => {
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
-    const {data: documentData, isLoading: documentLoading, isError: documentEror} = useAllCountedWorkspaceDocuments();
-    
+    const {
+        data: documentData,
+        isLoading: documentLoading,
+        isError: documentEror,
+    } = useAllCountedWorkspaceDocuments();
+
     const actualDate = format(new Date(), 'yyyy-MM-dd');
 
-    if (isLoading || documentLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
+    if (isLoading || documentLoading)
+        return <Loader2 className='h-8 w-8 animate-spin' />;
 
     if (isError || documentEror) {
         return (
@@ -43,7 +48,9 @@ const DashboardStatus: FC = () => {
                         </div>
                         {/* TODO: Later add simular things for members */}
                         <div>
-                            <p className='text-2xl font-bold'>{documentData?.totalCount}</p>
+                            <p className='text-2xl font-bold'>
+                                {documentData?.totalCount}
+                            </p>
                             <p className='text-muted-foreground'>
                                 Workspace documents created
                             </p>

@@ -20,8 +20,8 @@ export async function GET() {
 
     const allCountedWorkspaces = await db.workspace.count({
         where: {
-            userId: session.user.id
-        }
+            userId: session.user.id,
+        },
     });
 
     return NextResponse.json({

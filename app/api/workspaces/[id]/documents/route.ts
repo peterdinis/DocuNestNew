@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/')[3];
 
-    console.log("III", id)
+    console.log('III', id);
 
     if (!id) {
         return NextResponse.json(
@@ -28,19 +28,19 @@ export async function GET(request: NextRequest) {
     const workspacesDocuments = await db.workspace.findMany({
         where: {
             userId: session.user.id,
-            id
+            id,
         },
         include: {
-            workspaceDocuments: true
-        }
+            workspaceDocuments: true,
+        },
     });
 
-    if (!workspacesDocuments ) {
+    if (!workspacesDocuments) {
         return NextResponse.json(
             { error: 'Workspace not found' },
             { status: 404 },
         );
     }
 
-    return NextResponse.json(workspacesDocuments );
+    return NextResponse.json(workspacesDocuments);
 }
