@@ -5,13 +5,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { ChevronDown, Plus, Trash, X, Text, MoveLeft } from 'lucide-react';
+import { ChevronDown, Plus, Trash, X, Text} from 'lucide-react';
 import { FC } from 'react';
 import {
     AlertDialog,
@@ -26,7 +20,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { FaRegFilePdf } from 'react-icons/fa6';
 import { FaFileWord } from 'react-icons/fa';
-import Link from 'next/link';
+import TooltipWrapper from '../shared/TooltipWrapper';
 
 interface DocToolbarProps {
     isEditMode: boolean;
@@ -46,14 +40,9 @@ const DocToolbar: FC<DocToolbarProps> = ({
     return (
         <div className='flex items-center justify-between border-b bg-background p-4'>
             <div className='flex items-center space-x-2'>
-                <Button variant='outline' size='icon'>
-                    <Link href='/todo'>
-                        <MoveLeft />
-                    </Link>
-                </Button>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger>
+                <TooltipWrapper
+                    triggerChildren={
+                        <>
                             <Button
                                 onClick={handleEditToggle}
                                 variant='outline'
@@ -65,16 +54,14 @@ const DocToolbar: FC<DocToolbarProps> = ({
                                     <X className='h-4 w-4' />
                                 )}
                             </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            Enable / Disable edit mode
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger>
-                            <AlertDialog>
+                        </>
+                    }
+                    contentText='Enable / Disable edit mode'
+                />
+                <TooltipWrapper 
+                    triggerChildren={
+                        <>
+                        <AlertDialog>
                                 <AlertDialogTrigger>
                                     <Button variant='outline' size='icon'>
                                         <Trash className='h-4 w-4' />
@@ -102,10 +89,10 @@ const DocToolbar: FC<DocToolbarProps> = ({
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>
-                        </TooltipTrigger>
-                        <TooltipContent>Delete file</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                        </>
+                    }
+                    contentText='Delete file'
+                />
             </div>
             <div className='flex items-center space-x-2'>
                 <DropdownMenu>
