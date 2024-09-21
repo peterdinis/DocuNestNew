@@ -34,15 +34,16 @@ const DocumentInfo: FC = () => {
     const handleEditToggle = () => {
         setIsEditMode(!isEditMode);
     };
-
+    
     const handleDownload = () => {
         // Create a temporary HTML element to handle the content
         const tempElement = document.createElement('div');
         tempElement.innerHTML = content;
-    
+
         // Extract only the plain text content (removes all HTML tags)
-        const plainTextContent = tempElement.textContent || tempElement.innerText || '';
-    
+        const plainTextContent =
+            tempElement.textContent || tempElement.innerText || '';
+
         // Create a Blob and trigger the download
         const blob = new Blob([plainTextContent], {
             type: 'text/plain;charset=utf-8',

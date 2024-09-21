@@ -21,9 +21,7 @@ const TooltipWrapper: FC<ITooltipWrapperProps> = ({
         <>
             <TooltipProvider>
                 <Tooltip>
-                    <TooltipTrigger>
-                        {triggerChildren}
-                    </TooltipTrigger>
+                    <TooltipTrigger>{triggerChildren}</TooltipTrigger>
                     <TooltipContent>{contentText}</TooltipContent>
                 </Tooltip>
             </TooltipProvider>
