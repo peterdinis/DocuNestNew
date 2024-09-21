@@ -9,12 +9,10 @@ import { Input } from '@/components/ui/input';
 import QuillEditor from '../workspaces/documents/QuillEditor';
 import htmlToPdfmake from 'html-to-pdfmake';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-{
-    /* @ts-ignore */
-}
+/* @ts-ignore */
 import htmlDocx from 'html-docx-js/dist/html-docx';
 import { saveAs } from 'file-saver';
+import { Button } from '@/components/ui/button';
 
 const DocumentInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -33,6 +31,10 @@ const DocumentInfo: FC = () => {
         }
     }, [data]);
 
+    const handleEditToggle = () => {
+        setIsEditMode(!isEditMode);
+    };
+
     const handleDownload = useCallback(() => {
         const blob = new Blob([content], {
             type: 'text/plain;charset=utf-8',
@@ -40,7 +42,7 @@ const DocumentInfo: FC = () => {
         saveAs(blob, `${name}.txt`);
     }, []);
 
-    const handleExportToPdf = useCallback(() => {
+    const handleExportPDF = useCallback(() => {
         if (content) {
             const pdfContent = htmlToPdfmake(content);
             const documentDefinition = { content: pdfContent };
@@ -68,16 +70,30 @@ const DocumentInfo: FC = () => {
             <h2 className='mt-5 flex justify-center align-top text-3xl dark:text-blue-50'>
                 Document Info
             </h2>
-            <DocToolbar />
+            <DocToolbar
+                isEditMode={isEditMode}
+                handleEditToggle={handleEditToggle}
+                handleDownload={handleDownload}
+                handleExportPDF={handleExportPDF}
+                handleDocxDownload={handleDocxDownload}
+            />
 
             <div className='ml-4 mt-4'>
                 <form>
-                    <Input value={name} />
-
+                    <Input
+                        value={name}
+                        disabled={!isEditMode}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    {isEditMode && (
+                        <Button variant={'default'} className='mt-4'>
+                            Save document
+                        </Button>
+                    )}
                     <div className='mt-4'>
                         <QuillEditor
                             value={content}
-                            readOnly={false}
+                            readOnly={!isEditMode}
                             onChange={setContent}
                         />
                     </div>
