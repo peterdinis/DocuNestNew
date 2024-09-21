@@ -3,7 +3,7 @@
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useEffect } from 'react';
 import DocToolbar from './DocToolbar';
 import { Input } from '@/components/ui/input';
 import QuillEditor from '../workspaces/documents/QuillEditor';
@@ -35,25 +35,25 @@ const DocumentInfo: FC = () => {
         setIsEditMode(!isEditMode);
     };
 
-    const handleDownload = useCallback(() => {
+    const handleDownload = () => {
         const blob = new Blob([content], {
             type: 'text/plain;charset=utf-8',
         });
         saveAs(blob, `${name}.txt`);
-    }, []);
+    };
 
-    const handleExportPDF = useCallback(() => {
+    const handleExportPDF = () => {
         if (content) {
             const pdfContent = htmlToPdfmake(content);
             const documentDefinition = { content: pdfContent };
             pdfMake.createPdf(documentDefinition).download(`${name}.pdf`);
         }
-    }, []);
+    };
 
-    const handleDocxDownload = useCallback(() => {
+    const handleDocxDownload = () => {
         const converted = htmlDocx.asBlob(content);
         saveAs(converted, `${name}.docx`);
-    }, []);
+    };
 
     if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
