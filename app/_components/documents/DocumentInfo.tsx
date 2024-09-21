@@ -86,6 +86,7 @@ const DocumentInfo: FC = () => {
                 handleDownload={handleDownload}
                 handleExportPDF={handleExportPDF}
                 handleDocxDownload={handleDocxDownload}
+                documentId={id}
             />
 
             <div className='ml-4 mt-4'>

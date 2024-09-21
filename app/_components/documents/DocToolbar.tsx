@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -24,6 +26,7 @@ import TooltipWrapper from '../shared/TooltipWrapper';
 
 interface DocToolbarProps {
     isEditMode: boolean;
+    documentId: string;
     handleEditToggle: () => void;
     handleDownload: () => void;
     handleExportPDF: () => void;
@@ -32,6 +35,7 @@ interface DocToolbarProps {
 
 const DocToolbar: FC<DocToolbarProps> = ({
     isEditMode,
+    documentId,
     handleEditToggle,
     handleDocxDownload,
     handleDownload,

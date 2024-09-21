@@ -2,18 +2,33 @@
 
 import { deleteWorkspaceDocument } from '@/app/_store/mutations/workspaceDocumentMutations';
 import { WorkspaceDetailType } from '@/app/_types/workspaceTypes';
-import { useQuery } from '@tanstack/react-query';
+import { useToast } from '@/hooks/use-toast';
+import { useMutation } from '@tanstack/react-query';
 
 const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
-    return useQuery({
-        queryKey: ['deleteWorkspaceDocument', id],
-        queryFn: async () => {
+    const {toast} = useToast();
+    return useMutation({
+        mutationKey: ['deleteWorkspaceDocument', id],
+        mutationFn: async () => {
             if (!id) throw new Error('Invalid workspace ID');
             return deleteWorkspaceDocument(id);
         },
-        staleTime: Infinity,
-        refetchOnWindowFocus: true,
-        refetchOnMount: true,
+
+        onSuccess: ()=> {
+            toast({
+                title: "Document was deleted",
+                duration: 2000,
+                className: "bg-green-800 text-white font-bold"
+            })
+        },
+
+        onError: () => {
+            toast({
+                title: "Document was not deleted",
+                duration: 2000,
+                className: "bg-red-800 text-white font-bold"
+            })
+        }
     });
 };
 
