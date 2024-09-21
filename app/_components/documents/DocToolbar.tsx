@@ -5,7 +5,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, Plus, Trash, X, Text} from 'lucide-react';
+import { ChevronDown, Plus, Trash, X, Text } from 'lucide-react';
 import { FC } from 'react';
 import {
     AlertDialog,
@@ -58,10 +58,10 @@ const DocToolbar: FC<DocToolbarProps> = ({
                     }
                     contentText='Enable / Disable edit mode'
                 />
-                <TooltipWrapper 
+                <TooltipWrapper
                     triggerChildren={
                         <>
-                        <AlertDialog>
+                            <AlertDialog>
                                 <AlertDialogTrigger>
                                     <Button variant='outline' size='icon'>
                                         <Trash className='h-4 w-4' />

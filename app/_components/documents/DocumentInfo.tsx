@@ -13,6 +13,9 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import htmlDocx from 'html-docx-js/dist/html-docx';
 import { saveAs } from 'file-saver';
 import { Button } from '@/components/ui/button';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const DocumentInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -36,18 +39,25 @@ const DocumentInfo: FC = () => {
     };
 
     const handleDownload = () => {
-        const blob = new Blob([content], {
+        // Create a temporary HTML element to handle the content
+        const tempElement = document.createElement('div');
+        tempElement.innerHTML = content;
+
+        // Extract only the plain text content (removes all HTML tags)
+        const plainTextContent =
+            tempElement.textContent || tempElement.innerText || '';
+
+        // Create a Blob and trigger the download
+        const blob = new Blob([plainTextContent], {
             type: 'text/plain;charset=utf-8',
         });
         saveAs(blob, `${name}.txt`);
     };
 
     const handleExportPDF = () => {
-        if (content) {
-            const pdfContent = htmlToPdfmake(content);
-            const documentDefinition = { content: pdfContent };
-            pdfMake.createPdf(documentDefinition).download(`${name}.pdf`);
-        }
+        const pdfContent = htmlToPdfmake(content);
+        const documentDefinition = { content: pdfContent };
+        pdfMake.createPdf(documentDefinition).download(`${name}.pdf`);
     };
 
     const handleDocxDownload = () => {
