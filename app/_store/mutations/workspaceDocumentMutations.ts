@@ -5,7 +5,6 @@ export const newDocumentWorkspace = async (data: WorkspaceDocumentType) => {
     return await axios.post('/api/documents/create', data);
 };
 
-
 export const deleteWorkspaceDocument = async(id: string) => {
     const request = await axios.get(`/api/documents/${id}`);
     if (!id) {
