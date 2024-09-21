@@ -26,11 +26,9 @@ import {
 } from '@/components/ui/alert-dialog';
 import { FaRegFilePdf } from 'react-icons/fa6';
 import { FaFileWord } from 'react-icons/fa';
-import Link from 'next/link';
 
 interface DocToolbarProps {
     isEditMode: boolean;
-    workspaceId: string;
     handleEditToggle: () => void;
     handleDownload: () => void;
     handleExportPDF: () => void;
@@ -39,7 +37,6 @@ interface DocToolbarProps {
 
 const DocToolbar: FC<DocToolbarProps> = ({
     isEditMode,
-    workspaceId,
     handleEditToggle,
     handleDocxDownload,
     handleDownload,
@@ -48,11 +45,6 @@ const DocToolbar: FC<DocToolbarProps> = ({
     return (
         <div className='flex items-center justify-between border-b bg-background p-4'>
             <div className='flex items-center space-x-2'>
-                <Button variant='outline' size='icon'>
-                    <Link href={`/workspaces/${workspaceId}`}>
-                        <MoveLeft />
-                    </Link>
-                </Button>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
