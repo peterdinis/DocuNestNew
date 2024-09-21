@@ -58,9 +58,6 @@ importers:
             axios:
                 specifier: ^1.7.7
                 version: 1.7.7
-            bcrpyt:
-                specifier: ^2.0.0
-                version: 2.0.0
             bcrypt:
                 specifier: ^5.1.1
                 version: 5.1.1
@@ -2274,13 +2271,6 @@ packages:
             {
                 integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==,
             }
-
-    bcrpyt@2.0.0:
-        resolution:
-            {
-                integrity: sha512-2dLzspsuyGKoUfV16yEOMflPsKOjUhFPiSjqeBr1Y0ZZceEcjayGlsUrIcOz9I6f+IwjBDuPSXnsjGAqIZcPPA==,
-            }
-        deprecated: Package abandoned, contact support@npmjs.com for more info.
 
     bcrypt@5.1.1:
         resolution:
@@ -8276,8 +8266,6 @@ snapshots:
     base64-js@1.3.1: {}
 
     base64-js@1.5.1: {}
-
-    bcrpyt@2.0.0: {}
 
     bcrypt@5.1.1:
         dependencies:

@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -21,9 +23,11 @@ import {
 import { FaRegFilePdf } from 'react-icons/fa6';
 import { FaFileWord } from 'react-icons/fa';
 import TooltipWrapper from '../shared/TooltipWrapper';
+import useDeleteWorkspaceDocument from '@/app/_hooks/workspace-documents/useDeleteWorkspaceDocument';
 
 interface DocToolbarProps {
     isEditMode: boolean;
+    documentId: string;
     handleEditToggle: () => void;
     handleDownload: () => void;
     handleExportPDF: () => void;
@@ -32,64 +36,67 @@ interface DocToolbarProps {
 
 const DocToolbar: FC<DocToolbarProps> = ({
     isEditMode,
+    documentId,
     handleEditToggle,
     handleDocxDownload,
     handleDownload,
     handleExportPDF,
 }: DocToolbarProps) => {
+    const deleteDocumentMutation = useDeleteWorkspaceDocument({
+        id: documentId,
+    });
+
+    const handleDelete = () => {
+        deleteDocumentMutation.mutate();
+    };
+
     return (
         <div className='flex items-center justify-between border-b bg-background p-4'>
             <div className='flex items-center space-x-2'>
                 <TooltipWrapper
                     triggerChildren={
-                        <>
-                            <Button
-                                onClick={handleEditToggle}
-                                variant='outline'
-                                size='icon'
-                            >
-                                {isEditMode ? (
-                                    <Plus className='h-4 w-4' />
-                                ) : (
-                                    <X className='h-4 w-4' />
-                                )}
-                            </Button>
-                        </>
+                        <Button
+                            onClick={handleEditToggle}
+                            variant='outline'
+                            size='icon'
+                        >
+                            {isEditMode ? (
+                                <Plus className='h-4 w-4' />
+                            ) : (
+                                <X className='h-4 w-4' />
+                            )}
+                        </Button>
                     }
                     contentText='Enable / Disable edit mode'
                 />
                 <TooltipWrapper
                     triggerChildren={
-                        <>
-                            <AlertDialog>
-                                <AlertDialogTrigger>
-                                    <Button variant='outline' size='icon'>
-                                        <Trash className='h-4 w-4' />
-                                    </Button>
-                                </AlertDialogTrigger>
-                                <AlertDialogContent>
-                                    <AlertDialogHeader>
-                                        <AlertDialogTitle>
-                                            Are you absolutely sure?
-                                        </AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            This action cannot be undone. This
-                                            will permanently delete your account
-                                            and remove your data from our
-                                            servers.
-                                        </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
-                                        <AlertDialogCancel>
-                                            Cancel
-                                        </AlertDialogCancel>
-                                        <AlertDialogAction>
-                                            Continue
-                                        </AlertDialogAction>
-                                    </AlertDialogFooter>
-                                </AlertDialogContent>
-                            </AlertDialog>
-                        </>
+                        <AlertDialog>
+                            <AlertDialogTrigger>
+                                <Button variant='outline' size='icon'>
+                                    <Trash className='h-4 w-4' />
+                                </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        Are you absolutely sure?
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This action cannot be undone. This will
+                                        permanently delete this document.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>
+                                        Cancel
+                                    </AlertDialogCancel>
+                                    <AlertDialogAction onClick={handleDelete}>
+                                        Delete
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     }
                     contentText='Delete file'
                 />
