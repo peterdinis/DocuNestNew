@@ -71,6 +71,7 @@ const DocumentInfo: FC = () => {
                 Document Info
             </h2>
             <DocToolbar
+                workspaceId={id}
                 isEditMode={isEditMode}
                 handleEditToggle={handleEditToggle}
                 handleDownload={handleDownload}

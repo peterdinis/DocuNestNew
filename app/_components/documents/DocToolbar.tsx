@@ -30,6 +30,7 @@ import Link from 'next/link';
 
 interface DocToolbarProps {
     isEditMode: boolean;
+    workspaceId: string;
     handleEditToggle: () => void;
     handleDownload: () => void;
     handleExportPDF: () => void;
@@ -38,6 +39,7 @@ interface DocToolbarProps {
 
 const DocToolbar: FC<DocToolbarProps> = ({
     isEditMode,
+    workspaceId,
     handleEditToggle,
     handleDocxDownload,
     handleDownload,
@@ -47,7 +49,7 @@ const DocToolbar: FC<DocToolbarProps> = ({
         <div className='flex items-center justify-between border-b bg-background p-4'>
             <div className='flex items-center space-x-2'>
                 <Button variant='outline' size='icon'>
-                    <Link href='/todo'>
+                    <Link href={`/workspaces/${workspaceId}`}>
                         <MoveLeft />
                     </Link>
                 </Button>
