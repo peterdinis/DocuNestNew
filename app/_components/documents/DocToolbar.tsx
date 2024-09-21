@@ -11,7 +11,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { ChevronDown, Plus, Trash, X, Text } from 'lucide-react';
+import { ChevronDown, Plus, Trash, X, Text, MoveLeft } from 'lucide-react';
 import { FC } from 'react';
 import {
     AlertDialog,
@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { FaRegFilePdf } from 'react-icons/fa6';
 import { FaFileWord } from 'react-icons/fa';
+import Link from 'next/link';
 
 interface DocToolbarProps {
     isEditMode: boolean;
@@ -45,6 +46,11 @@ const DocToolbar: FC<DocToolbarProps> = ({
     return (
         <div className='flex items-center justify-between border-b bg-background p-4'>
             <div className='flex items-center space-x-2'>
+                <Button variant='outline' size='icon'>
+                    <Link href='/todo'>
+                        <MoveLeft />
+                    </Link>
+                </Button>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
