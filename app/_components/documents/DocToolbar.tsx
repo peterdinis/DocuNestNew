@@ -42,7 +42,9 @@ const DocToolbar: FC<DocToolbarProps> = ({
     handleDownload,
     handleExportPDF,
 }: DocToolbarProps) => {
-    const deleteDocumentMutation = useDeleteWorkspaceDocument({ id: documentId });
+    const deleteDocumentMutation = useDeleteWorkspaceDocument({
+        id: documentId,
+    });
 
     const handleDelete = () => {
         deleteDocumentMutation.mutate();
@@ -81,11 +83,14 @@ const DocToolbar: FC<DocToolbarProps> = ({
                                         Are you absolutely sure?
                                     </AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        This action cannot be undone. This will permanently delete this document.
+                                        This action cannot be undone. This will
+                                        permanently delete this document.
                                     </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogCancel>
+                                        Cancel
+                                    </AlertDialogCancel>
                                     <AlertDialogAction onClick={handleDelete}>
                                         Delete
                                     </AlertDialogAction>

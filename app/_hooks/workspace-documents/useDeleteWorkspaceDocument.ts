@@ -7,7 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/app/_store/queryClient';
 
 const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
-    const {toast} = useToast();
+    const { toast } = useToast();
     return useMutation({
         mutationKey: ['deleteWorkspaceDocument', id],
         mutationFn: async () => {
@@ -15,24 +15,24 @@ const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
             return deleteWorkspaceDocument(id);
         },
 
-        onSuccess: ()=> {
+        onSuccess: () => {
             toast({
-                title: "Document was deleted",
+                title: 'Document was deleted',
                 duration: 2000,
-                className: "bg-green-800 text-white font-bold"
-            })
+                className: 'bg-green-800 text-white font-bold',
+            });
             queryClient.invalidateQueries({
-            queryKey: ['workspaceDocuments']
-            })
+                queryKey: ['workspaceDocuments'],
+            });
         },
 
         onError: () => {
             toast({
-                title: "Document was not deleted",
+                title: 'Document was not deleted',
                 duration: 2000,
-                className: "bg-red-800 text-white font-bold"
-            })
-        }
+                className: 'bg-red-800 text-white font-bold',
+            });
+        },
     });
 };
 

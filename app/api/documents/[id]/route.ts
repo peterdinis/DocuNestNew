@@ -37,7 +37,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(findOneWorkspaceDocument);
 }
 
-
 export async function DELETE(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
@@ -72,14 +71,13 @@ export async function DELETE(request: NextRequest) {
     const deleteOneSpecificDocument = await db.workspaceDocument.delete({
         where: {
             id: findOneWorkspaceDocument.id,
-            userid: session.user.id
-        }
+            userid: session.user.id,
+        },
     });
 
-    if(!deleteOneSpecificDocument) {
-        throw new Error("Failed to delete workspace document");
+    if (!deleteOneSpecificDocument) {
+        throw new Error('Failed to delete workspace document');
     }
 
     return deleteOneSpecificDocument;
-
 }
