@@ -3,10 +3,18 @@
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import DocToolbar from './DocToolbar';
 import { Input } from '@/components/ui/input';
 import QuillEditor from '../workspaces/documents/QuillEditor';
+import htmlToPdfmake from 'html-to-pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+{
+    /* @ts-ignore */
+}
+import htmlDocx from 'html-docx-js/dist/html-docx';
+import { saveAs } from 'file-saver';
 
 const DocumentInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -24,6 +32,26 @@ const DocumentInfo: FC = () => {
             setContent(data.content);
         }
     }, [data]);
+
+    const handleDownload = useCallback(() => {
+        const blob = new Blob([content], {
+            type: 'text/plain;charset=utf-8',
+        });
+        saveAs(blob, `${name}.txt`);
+    }, []);
+
+    const handleExportToPdf = useCallback(() => {
+        if (content) {
+            const pdfContent = htmlToPdfmake(content);
+            const documentDefinition = { content: pdfContent };
+            pdfMake.createPdf(documentDefinition).download(`${name}.pdf`);
+        }
+    }, []);
+
+    const handleDocxDownload = useCallback(() => {
+        const converted = htmlDocx.asBlob(content);
+        saveAs(converted, `${name}.docx`);
+    }, []);
 
     if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
