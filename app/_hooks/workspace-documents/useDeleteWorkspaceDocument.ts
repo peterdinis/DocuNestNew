@@ -4,6 +4,7 @@ import { deleteWorkspaceDocument } from '@/app/_store/mutations/workspaceDocumen
 import { WorkspaceDetailType } from '@/app/_types/workspaceTypes';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '@/app/_store/queryClient';
 
 const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
     const {toast} = useToast();
@@ -19,6 +20,9 @@ const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
                 title: "Document was deleted",
                 duration: 2000,
                 className: "bg-green-800 text-white font-bold"
+            })
+            queryClient.invalidateQueries({
+            queryKey: ['workspaceDocuments']
             })
         },
 
