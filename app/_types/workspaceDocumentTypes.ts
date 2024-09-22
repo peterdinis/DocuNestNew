@@ -3,3 +3,5 @@ export type WorkspaceDocumentType = {
     content: string;
     workspaceId: string;
 };
+
+export type UpdateWorkspaceDocumentType = Partial<WorkspaceDocumentType>;

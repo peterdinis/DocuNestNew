@@ -37,6 +37,57 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(findOneWorkspaceDocument);
 }
 
+export async function PUT(request: NextRequest) {
+    const url = new URL(request.url);
+    const id = url.pathname.split('/').pop();
+
+    if (!id) {
+        return NextResponse.json(
+            { error: 'Missing id parameter' },
+            { status: 400 },
+        );
+    }
+
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+        return NextResponse.json(
+            { error: 'Not authenticated' },
+            { status: 401 },
+        );
+    }
+
+    const {name, content} = await request.json();
+
+    const findOneWorkspaceDocument = await db.workspaceDocument.findUnique({
+        where: {
+            id,
+            userId: session.user.id,
+        },
+    });
+
+    if (!findOneWorkspaceDocument) {
+        throw new Error('Workspace document not found');
+    }
+
+    const updateDocument = await db.workspaceDocument.update({
+        where: {
+            id: findOneWorkspaceDocument.id
+        },
+
+        data: {
+            name,
+            content
+        }
+    });
+
+    if(!updateDocument) {
+        throw new Error("Failed to update workspace document");
+    }
+
+    return NextResponse.json(updateDocument);
+}
+
 export async function DELETE(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();

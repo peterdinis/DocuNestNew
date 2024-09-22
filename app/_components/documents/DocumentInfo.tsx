@@ -1,19 +1,20 @@
 'use client';
 
-import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
-import { Loader2 } from 'lucide-react';
-import { useParams } from 'next/navigation';
 import { FC, useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 import DocToolbar from './DocToolbar';
 import { Input } from '@/components/ui/input';
 import QuillEditor from '../workspaces/documents/QuillEditor';
 import htmlToPdfmake from 'html-to-pdfmake';
 import pdfMake from 'pdfmake/build/pdfmake';
+import { saveAs } from 'file-saver';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 /* @ts-ignore */
 import htmlDocx from 'html-docx-js/dist/html-docx';
-import { saveAs } from 'file-saver';
 import { Button } from '@/components/ui/button';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
+import useUpdateWorkspaceDocument from '@/app/_hooks/workspace-documents/useUpdateWorkspaceDocument';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -23,9 +24,8 @@ const DocumentInfo: FC = () => {
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
 
-    const { data, isLoading, isError } = useWorkspaceDocumentDetail({
-        id,
-    });
+    const { data, isLoading, isError } = useWorkspaceDocumentDetail({ id });
+    const { mutate: updateDocument } = useUpdateWorkspaceDocument({ id }); // Use the update hook
 
     useEffect(() => {
         if (data) {
@@ -38,19 +38,24 @@ const DocumentInfo: FC = () => {
         setIsEditMode(!isEditMode);
     };
 
+    const handleSave = () => {
+        if (isEditMode) {
+            // Call the update mutation
+            updateDocument({ name, content });
+            setIsEditMode(false); // Exit edit mode after saving
+        }
+    };
+
     const handleDownload = () => {
-        // Create a temporary HTML element to handle the content
         const tempElement = document.createElement('div');
         tempElement.innerHTML = content;
 
-        // Extract only the plain text content (removes all HTML tags)
-        const plainTextContent =
-            tempElement.textContent || tempElement.innerText || '';
+        const plainTextContent = tempElement.textContent || tempElement.innerText || '';
 
-        // Create a Blob and trigger the download
         const blob = new Blob([plainTextContent], {
             type: 'text/plain;charset=utf-8',
         });
+
         saveAs(blob, `${name}.txt`);
     };
 
@@ -90,14 +95,18 @@ const DocumentInfo: FC = () => {
             />
 
             <div className='ml-4 mt-4'>
-                <form>
+                <form onSubmit={(e) => e.preventDefault()}>
                     <Input
                         value={name}
                         disabled={!isEditMode}
                         onChange={(e) => setName(e.target.value)}
                     />
                     {isEditMode && (
-                        <Button variant={'default'} className='mt-4'>
+                        <Button
+                            variant={'default'}
+                            className='mt-4'
+                            onClick={handleSave} // Call handleSave on click
+                        >
                             Save document
                         </Button>
                     )}
