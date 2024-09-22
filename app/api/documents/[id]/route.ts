@@ -79,5 +79,5 @@ export async function DELETE(request: NextRequest) {
         throw new Error('Failed to delete workspace document');
     }
 
-    return deleteOneSpecificDocument;
+    return NextResponse.json(deleteOneSpecificDocument)
 }
