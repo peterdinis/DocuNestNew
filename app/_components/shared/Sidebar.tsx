@@ -22,8 +22,8 @@ const Sidebar: FC = () => {
                     <SheetTrigger asChild>
                         <Button
                             size='icon'
-                            variant={"ghost"}
-                             className='bg-transparent fixed z-40 lg:hidden'
+                            variant={'ghost'}
+                            className='fixed z-40 bg-transparent lg:hidden'
                         >
                             <MenuIcon className='h-4 w-4' />
                             <span className='sr-only'>Toggle Sidebar</span>

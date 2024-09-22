@@ -22,7 +22,7 @@ import CreateDocumentModal from './documents/CreateDocumentModal';
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
 
-    sessionStorage.setItem("WorkspaceId", id);
+    sessionStorage.setItem('WorkspaceId', id);
 
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
@@ -46,7 +46,7 @@ const WorkspaceDetail: FC = () => {
                     <br />
                     <div className='mt-5'>
                         <span className='text-3xl'>{data.workspaceEmoji}</span>
-                        <h2 className='prose-h2: prose text-2xl dark:text-sky-50'>
+                        <h2 className='break-all text-left text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
                             {data.name}
                         </h2>
                         <div className='prose-p: prose pt-5 dark:text-sky-50'>
