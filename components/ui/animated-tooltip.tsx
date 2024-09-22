@@ -32,7 +32,7 @@ export const AnimatedTooltip = ({
         useTransform(x, [-100, 100], [-50, 50]),
         springConfig,
     );
-    
+
     const handleMouseMove = (event: React.MouseEvent<HTMLImageElement>) => {
         const target = event.currentTarget as HTMLImageElement; // Cast to HTMLImageElement
         const halfWidth = target.offsetWidth / 2;

@@ -40,18 +40,10 @@ const RegisterForm: FC = () => {
                 onSuccess: () => {
                     reset();
                 },
-                onError: (error: any) => {
-                    // Handle known error cases here
-                    if (error.response?.status === 400) {
+                onError: (error: Error) => {
+                    if (error instanceof Error) {
                         toast({
-                            title: 'Please check the information you provided and try again.',
-                            duration: 2000,
-                            className:
-                                'bg-red-800 text-white font-bold text-xl',
-                        });
-                    } else if (error.response?.status === 500) {
-                        toast({
-                            title: 'Server is currently unavailable. Please try again later',
+                            title: 'An unexpected error occurred. Please try again later.',
                             duration: 2000,
                             className:
                                 'bg-red-800 text-white font-bold text-xl',
