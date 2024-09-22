@@ -20,7 +20,7 @@ const useCreateWorkspaceDocument = () => {
                 className: 'bg-green-800 text-white font-bold',
             });
             queryClient.invalidateQueries({
-                queryKey: ['workspaceDetail'],
+                queryKey: ['workspaceDocuments'],
             });
         },
 
