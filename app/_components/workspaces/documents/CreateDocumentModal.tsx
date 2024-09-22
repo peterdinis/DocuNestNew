@@ -60,7 +60,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
             <DialogTrigger asChild>
                 <Button variant='outline'>Create new document</Button>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-[425px]'>
+            <DialogContent className='sm:max-w-[1000px] max-h-[90vh] overflow-y-auto'>
                 <DialogHeader>
                     <DialogTitle>
                         <Header text='New Document' />
@@ -70,9 +70,9 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='mt-5'>
                         <Input
-                            placeholder='Title'
+                            placeholder='Document name'
                             {...register('name', {
-                                required: 'Title is required',
+                                required: 'Document name is required',
                             })}
                         />
                         {errors.name && (
@@ -82,7 +82,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                         )}
                     </div>
 
-                    <div className='mt-5'>
+                    <div className='mt-5 h-[300px] overflow-y-auto break-words'>
                         <QuillEditor
                             value={content}
                             readOnly={false}
@@ -96,11 +96,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                     </div>
 
                     <DialogFooter>
-                        <Button
-                            className='mt-5'
-                            type='submit'
-                            disabled={isPending}
-                        >
+                        <Button className='mt-5' type='submit' disabled={isPending}>
                             {isPending ? (
                                 <Loader2 className='h-8 w-8 animate-spin' />
                             ) : (
