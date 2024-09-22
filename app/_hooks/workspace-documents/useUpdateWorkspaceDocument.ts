@@ -1,6 +1,5 @@
 'use client';
 
-
 import { updateDocumentWorkspace } from '@/app/_store/mutations/workspaceDocumentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { UpdateWorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
@@ -8,7 +7,7 @@ import { WorkspaceDetailType } from '@/app/_types/workspaceTypes';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 
-const useUpdateWorkspaceDocument = ({id}: WorkspaceDetailType) => {
+const useUpdateWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
     const { toast } = useToast();
     return useMutation({
         mutationKey: ['updateWorkspaceDocument', id],

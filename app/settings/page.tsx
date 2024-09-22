@@ -1,8 +1,8 @@
-import { NextPage } from "next";
-import SettingsWrapper from "../_components/settings/SettingsWrapper";
+import { NextPage } from 'next';
+import SettingsWrapper from '../_components/settings/SettingsWrapper';
 
 const SettingsPage: NextPage = () => {
-    return <SettingsWrapper />
-}
+    return <SettingsWrapper />;
+};
 
-export default SettingsPage
+export default SettingsPage;

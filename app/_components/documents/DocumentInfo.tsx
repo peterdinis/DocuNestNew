@@ -50,7 +50,8 @@ const DocumentInfo: FC = () => {
         const tempElement = document.createElement('div');
         tempElement.innerHTML = content;
 
-        const plainTextContent = tempElement.textContent || tempElement.innerText || '';
+        const plainTextContent =
+            tempElement.textContent || tempElement.innerText || '';
 
         const blob = new Blob([plainTextContent], {
             type: 'text/plain;charset=utf-8',
