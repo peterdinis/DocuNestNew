@@ -57,7 +57,7 @@ export async function PUT(request: NextRequest) {
         );
     }
 
-    const {name, content} = await request.json();
+    const { name, content } = await request.json();
 
     const findOneWorkspaceDocument = await db.workspaceDocument.findUnique({
         where: {
@@ -72,17 +72,17 @@ export async function PUT(request: NextRequest) {
 
     const updateDocument = await db.workspaceDocument.update({
         where: {
-            id: findOneWorkspaceDocument.id
+            id: findOneWorkspaceDocument.id,
         },
 
         data: {
             name,
-            content
-        }
+            content,
+        },
     });
 
-    if(!updateDocument) {
-        throw new Error("Failed to update workspace document");
+    if (!updateDocument) {
+        throw new Error('Failed to update workspace document');
     }
 
     return NextResponse.json(updateDocument);
@@ -130,5 +130,5 @@ export async function DELETE(request: NextRequest) {
         throw new Error('Failed to delete workspace document');
     }
 
-    return NextResponse.json(deleteOneSpecificDocument)
+    return NextResponse.json(deleteOneSpecificDocument);
 }

@@ -60,7 +60,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
             <DialogTrigger asChild>
                 <Button variant='outline'>Create new document</Button>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-[1000px] max-h-[90vh] overflow-y-auto'>
+            <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-[1000px]'>
                 <DialogHeader>
                     <DialogTitle>
                         <Header text='New Document' />
@@ -96,7 +96,11 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                     </div>
 
                     <DialogFooter>
-                        <Button className='mt-5' type='submit' disabled={isPending}>
+                        <Button
+                            className='mt-5'
+                            type='submit'
+                            disabled={isPending}
+                        >
                             {isPending ? (
                                 <Loader2 className='h-8 w-8 animate-spin' />
                             ) : (
