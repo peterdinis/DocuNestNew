@@ -19,16 +19,23 @@ const authOptions: AuthOptions = {
                 email: { label: 'Email', type: 'text', placeholder: 'jsmith' },
                 password: { label: 'Password', type: 'password' },
             },
-            async authorize(credentials: any) {
+            async authorize(credentials) {
+                // Handle the case when credentials are undefined
+                if (!credentials) {
+                    throw new Error('No credentials provided');
+                }
+
+                const { email, password } = credentials;
+
                 // check to see if email and password is there
-                if (!credentials.email || !credentials.password) {
+                if (!email || !password) {
                     throw new Error('Please enter an email and password');
                 }
 
                 // check to see if user exists
                 const user = await db.user.findUnique({
                     where: {
-                        email: credentials.email,
+                        email: email,
                     },
                 });
 
@@ -39,7 +46,7 @@ const authOptions: AuthOptions = {
 
                 // check to see if password matches
                 const passwordMatch = await bcrypt.compare(
-                    credentials.password,
+                    password,
                     user.password,
                 );
 
@@ -59,7 +66,7 @@ const authOptions: AuthOptions = {
             }
             return token;
         },
-        async session({ session, token }: any) {
+        async session({ session, token }) {
             if (token && session.user) {
                 session.user.id = token.id;
             }

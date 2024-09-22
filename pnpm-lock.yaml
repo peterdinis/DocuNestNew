@@ -185,6 +185,9 @@ importers:
             '@testing-library/react':
                 specifier: ^16.0.1
                 version: 16.0.1(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+            '@types/bcrypt':
+                specifier: ^5.0.2
+                version: 5.0.2
             '@types/file-saver':
                 specifier: ^2.0.7
                 version: 2.0.7
@@ -1727,6 +1730,12 @@ packages:
         resolution:
             {
                 integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==,
+            }
+
+    '@types/bcrypt@5.0.2':
+        resolution:
+            {
+                integrity: sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ==,
             }
 
     '@types/file-saver@2.0.7':
@@ -7915,6 +7924,10 @@ snapshots:
     '@types/babel__traverse@7.20.6':
         dependencies:
             '@babel/types': 7.25.6
+
+    '@types/bcrypt@5.0.2':
+        dependencies:
+            '@types/node': 20.16.5
 
     '@types/file-saver@2.0.7': {}
 

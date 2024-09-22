@@ -10,7 +10,7 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import pdfMake from 'pdfmake/build/pdfmake';
 import { saveAs } from 'file-saver';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-/* @ts-ignore */
+// @ts-expect-error: This import may not have TypeScript definitions available.
 import htmlDocx from 'html-docx-js/dist/html-docx';
 import { Button } from '@/components/ui/button';
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';

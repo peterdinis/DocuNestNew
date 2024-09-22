@@ -4,7 +4,7 @@ export type WorkspaceType = {
     description: string;
 };
 
-export type WorkspaceFormData = {} & WorkspaceType;
+export type WorkspaceFormData = WorkspaceType;
 
 export type BasePaginatedWorkspaces = {
     page: number;
@@ -18,7 +18,7 @@ export type PaginatedWorkspace = Pick<
 >;
 
 export type WorkspacePaginationType = {
-    id: any;
+    id: string;
     createdAt: string | Date;
 } & WorkspaceType;
 
