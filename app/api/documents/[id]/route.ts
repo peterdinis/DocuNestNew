@@ -71,7 +71,7 @@ export async function DELETE(request: NextRequest) {
     const deleteOneSpecificDocument = await db.workspaceDocument.delete({
         where: {
             id: findOneWorkspaceDocument.id,
-            userid: session.user.id,
+            userId: session.user.id,
         },
     });
 
