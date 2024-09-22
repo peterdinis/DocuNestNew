@@ -12,7 +12,7 @@ export async function GET() {
         );
     }
 
-    const allCountedMyWorkspaceDocuments = await db.workspace.count({
+    const allCountedMyWorkspaceDocuments = await db.workspaceDocument.count({
         where: {
             userId: session.user.id,
         },
