@@ -71,7 +71,7 @@ export async function DELETE(request: NextRequest) {
     const deleteOneSpecificDocument = await db.workspaceDocument.delete({
         where: {
             id: findOneWorkspaceDocument.id,
-            userid: session.user.id,
+            userId: session.user.id,
         },
     });
 
@@ -79,5 +79,5 @@ export async function DELETE(request: NextRequest) {
         throw new Error('Failed to delete workspace document');
     }
 
-    return deleteOneSpecificDocument;
+    return NextResponse.json(deleteOneSpecificDocument)
 }

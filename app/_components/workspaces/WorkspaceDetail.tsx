@@ -22,6 +22,8 @@ import CreateDocumentModal from './documents/CreateDocumentModal';
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
 
+    sessionStorage.setItem("WorkspaceId", id);
+
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
