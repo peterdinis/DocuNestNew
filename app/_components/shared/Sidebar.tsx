@@ -21,9 +21,9 @@ const Sidebar: FC = () => {
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
                         <Button
-                            variant='outline'
                             size='icon'
-                            className='fixed left-4 top-4 z-40 lg:hidden'
+                            variant={"ghost"}
+                             className='bg-transparent fixed z-40 lg:hidden'
                         >
                             <MenuIcon className='h-4 w-4' />
                             <span className='sr-only'>Toggle Sidebar</span>
