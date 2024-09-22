@@ -36,7 +36,10 @@ export const documentColumns: ColumnDef<Document>[] = [
     {
         accessorKey: 'createdAt',
         header: 'Created',
-        cell: (info) => new Date(info.getValue() as any).toLocaleDateString(),
+        cell: (info) => {
+            const dateValue = info.getValue() as string | Date;
+            return new Date(dateValue).toLocaleDateString();
+        },
     },
 ];
 

@@ -24,11 +24,11 @@ const WorkspaceDetail: FC = () => {
 
     sessionStorage.setItem('WorkspaceId', id);
 
+    const { data, isLoading, isError } = useWorkspaceDetail({ id });
+
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
-
-    const { data, isLoading, isError } = useWorkspaceDetail({ id });
 
     if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
