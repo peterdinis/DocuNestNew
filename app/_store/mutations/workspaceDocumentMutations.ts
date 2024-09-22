@@ -6,7 +6,7 @@ export const newDocumentWorkspace = async (data: WorkspaceDocumentType) => {
 };
 
 export const deleteWorkspaceDocument = async (id: string) => {
-    const request = await axios.get(`/api/documents/${id}`);
+    const request = await axios.delete(`/api/documents/${id}`);
     if (!id) {
         throw new Error('Workspace document with this id not found');
     }

@@ -7,8 +7,6 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/')[3];
 
-    console.log('III', id);
-
     if (!id) {
         return NextResponse.json(
             { error: 'Missing id parameter' },
