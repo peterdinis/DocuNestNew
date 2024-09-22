@@ -11,6 +11,8 @@ const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
     const { toast } = useToast();
     const router = useRouter();
 
+    const workspaceDetailId = sessionStorage.getItem("WorkspaceId");
+
     return useMutation({
         mutationKey: ['deleteWorkspaceDocument', id],
         mutationFn: async () => {
@@ -28,7 +30,7 @@ const useDeleteWorkspaceDocument = ({ id }: WorkspaceDetailType) => {
                 queryKey: ['workspaceDocuments'],
             });
 
-            router.push("/workspaces");
+            router.push(`/workspaces/${workspaceDetailId}`);
         },
 
         onError: () => {
