@@ -60,7 +60,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
             <DialogTrigger asChild>
                 <Button variant='outline'>Create new document</Button>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-[825px] max-h-[90vh] overflow-y-auto'>
+            <DialogContent className='sm:max-w-[1000px] max-h-[90vh] overflow-y-auto'>
                 <DialogHeader>
                     <DialogTitle>
                         <Header text='New Document' />
@@ -70,9 +70,9 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='mt-5'>
                         <Input
-                            placeholder='Title'
+                            placeholder='Document name'
                             {...register('name', {
-                                required: 'Title is required',
+                                required: 'Document name is required',
                             })}
                         />
                         {errors.name && (
