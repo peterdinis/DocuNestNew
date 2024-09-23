@@ -10,6 +10,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import Header from '../../shared/Header';
+import { Input } from '@/components/ui/input';
+import { ConfettiButton } from '@/components/ui/confetti-button';
+import WorkspacesSelect from '../WorkspacesSelect';
 
 const AddNewMemberToWorkspaceModal: FC = () => {
     return (
@@ -25,9 +28,18 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                         <Header text='Add new member to workspace' />
                     </DialogTitle>
                     <DialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your account and remove your data from our
-                        servers.
+                        <form className='mt-5'>
+                            <Input type='email' placeholder='User Email' />
+                            <WorkspacesSelect />
+                            <Input
+                                className='mt-5'
+                                type='text'
+                                placeholder='Workspace Role'
+                            />
+                            <ConfettiButton className='mt-5 bg-blue-600 hover:bg-blue-800 text-white font-bold'>
+                                Add new member to workspace
+                            </ConfettiButton>
+                        </form>
                     </DialogDescription>
                 </DialogHeader>
             </DialogContent>
