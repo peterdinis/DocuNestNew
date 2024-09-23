@@ -28,4 +28,4 @@ export type WorkspaceMemberType = {
     email: string;
     workspaceId: string;
     role: string;
-}
+};
