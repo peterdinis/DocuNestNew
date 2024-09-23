@@ -23,3 +23,9 @@ export type WorkspacePaginationType = {
 } & WorkspaceType;
 
 export type WorkspaceDetailType = Pick<WorkspacePaginationType, 'id'>;
+
+export type WorkspaceMemberType = {
+    email: string;
+    workspaceId: string;
+    role: string;
+}
