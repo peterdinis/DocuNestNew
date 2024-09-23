@@ -12,6 +12,7 @@ import { Plus } from 'lucide-react';
 import Header from '../../shared/Header';
 import { Input } from '@/components/ui/input';
 import { ConfettiButton } from '@/components/ui/confetti-button';
+import WorkspacesSelect from '../WorkspacesSelect';
 
 const AddNewMemberToWorkspaceModal: FC = () => {
     return (
@@ -29,11 +30,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                     <DialogDescription>
                         <form className='mt-5'>
                             <Input type='email' placeholder='User Email' />
-                            <Input
-                                className='mt-5'
-                                type='text'
-                                placeholder='Workspace Name'
-                            />
+                            <WorkspacesSelect />
                             <Input
                                 className='mt-5'
                                 type='text'
