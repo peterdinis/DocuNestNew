@@ -8,7 +8,6 @@ import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import SessionCheckHelper from './_components/auth/SessionChcekHelper';
-import { SubmittedProvider } from './_context/SubmittedContext';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -40,12 +39,10 @@ export default function RootLayout({
                     <QueryProvider>
                         <SessionAppProvider>
                             <SessionCheckHelper>
-                                <SubmittedProvider>
-                                    <Navigation />
-                                    {children}
-                                    <ScrollToTop />
-                                    <Toaster />
-                                </SubmittedProvider>
+                                <Navigation />
+                                {children}
+                                <ScrollToTop />
+                                <Toaster />
                             </SessionCheckHelper>
                         </SessionAppProvider>
                     </QueryProvider>
