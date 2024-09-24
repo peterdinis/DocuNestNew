@@ -11,6 +11,7 @@ const useDisplayAllWorkspaces = () => {
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: true,
         refetchOnMount: true,
+        refetchOnReconnect: true
     });
 };
 
