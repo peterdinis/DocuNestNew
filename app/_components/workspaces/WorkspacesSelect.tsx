@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { FC, useMemo } from 'react';
 import {
@@ -12,16 +12,21 @@ import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorksp
 import { Loader2 } from 'lucide-react';
 
 const WorkspacesSelect: FC = () => {
-    const {data, isLoading, isError} = useDisplayAllWorkspaces();
+    const { data, isLoading, isError } = useDisplayAllWorkspaces();
 
-    if(isLoading) return <Loader2 className='animate-spin w-8 h-8' />;
+    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
-    if(isError) return <p className="text-red-800 text-xl font-bold prose prose-p:">Something went wrong</p>
-    
+    if (isError)
+        return (
+            <p className='prose-p: prose text-xl font-bold text-red-800'>
+                Something went wrong
+            </p>
+        );
+
     const allWorkspaces = useMemo(() => {
         return data?.workspaces;
     }, [data?.workspaces]);
-    
+
     return (
         <>
             <Select>
@@ -29,13 +34,16 @@ const WorkspacesSelect: FC = () => {
                     <SelectValue placeholder='Select Workspace' />
                 </SelectTrigger>
                 <SelectContent>
-                    {allWorkspaces && allWorkspaces.map((item:{id: string, name: string}) => {
-                        return (
-                            <SelectItem value={item.id}>
-                                {item.name}
-                            </SelectItem>
-                        )
-                    })}
+                    {allWorkspaces &&
+                        allWorkspaces.map(
+                            (item: { id: string; name: string }) => {
+                                return (
+                                    <SelectItem value={item.id}>
+                                        {item.name}
+                                    </SelectItem>
+                                );
+                            },
+                        )}
                 </SelectContent>
             </Select>
         </>

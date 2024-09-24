@@ -33,7 +33,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                             <Input type='email' placeholder='User Email' />
                             <WorkspacesSelect />
                             <WorkspaceSelectRoles />
-                            <ConfettiButton className='mt-5 bg-blue-600 hover:bg-blue-800 text-white font-bold'>
+                            <ConfettiButton className='mt-5 bg-blue-600 font-bold text-white hover:bg-blue-800'>
                                 Add new member to workspace
                             </ConfettiButton>
                         </form>

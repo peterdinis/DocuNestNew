@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 
 const useAllCountedWorkspaceDocuments = () => {
-    const {status} = useSession();
+    const { status } = useSession();
     return useQuery({
         queryKey: ['workspaceCountedDocuments'],
         queryFn: async () => {
@@ -17,9 +17,8 @@ const useAllCountedWorkspaceDocuments = () => {
         refetchOnWindowFocus: true,
         refetchOnMount: true,
         refetchOnReconnect: true,
-        enabled: status === "loading" ? true : false
+        enabled: status === 'loading' ? true : false,
     });
 };
 
 export default useAllCountedWorkspaceDocuments;
- 
