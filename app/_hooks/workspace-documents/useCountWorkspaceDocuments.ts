@@ -10,8 +10,10 @@ const useAllCountedWorkspaceDocuments = () => {
             return await fetchAllDocuments();
         },
         staleTime: Infinity,
+        refetchIntervalInBackground: true,
         refetchOnWindowFocus: true,
         refetchOnMount: true,
+        refetchOnReconnect: true
     });
 };
 
