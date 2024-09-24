@@ -17,7 +17,9 @@ const DashboardContent: FC = () => {
                     <Header text={`Welcome ${session?.user.name}`} />
                     <br />
                     <DashboardStatus />
-                    <DashboardActivities />
+                    <div className='mt-3'>
+                        <DashboardActivities />
+                    </div>
                     <DashboardTeams />
                 </div>
             </main>
