@@ -8,11 +8,13 @@ const transporter = nodemailer.createTransport({
         user: process.env.MAILTRAP_USER,
         pass: process.env.MAILTRAP_PASS,
     },
+    debug: true,
+    logger: true
 });
 
 export async function sendInvitationEmail(email: string, workspaceId: string) {
     const mailOptions = {
-        from: '"Workspace Invite" <no-reply@yourapp.com>',
+        from: '"Workspace Invite" <no-reply@docunest.com>',
         to: email,
         subject: 'You have been invited to a workspace',
         html: `<p>You have been invited to join a workspace. <a href="${process.env.NEXT_PUBLIC_APP_URL}/workspaces/${workspaceId}">Click here</a> to access the workspace.</p>`,
