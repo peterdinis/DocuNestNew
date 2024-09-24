@@ -15,7 +15,7 @@ const DashboardStatus: FC = () => {
         isError: documentEror,
     } = useAllCountedWorkspaceDocuments();
 
-    const actualDate = format(new Date(), 'yyyy-MM-dd');
+    const actualDateTime = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
     if (isLoading || documentLoading)
         return <Loader2 className='h-8 w-8 animate-spin' />;
@@ -31,7 +31,7 @@ const DashboardStatus: FC = () => {
     return (
         <>
             <span className='prose-p: prose pt-4 dark:text-sky-50'>
-                Actual time: {actualDate}
+                Actual date and time: {actualDateTime}
             </span>
 
             <Card className='mb-6 mt-4'>
