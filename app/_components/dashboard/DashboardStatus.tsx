@@ -9,10 +9,11 @@ import { Loader2 } from 'lucide-react';
 import useAllCountedWorkspaceDocuments from '@/app/_hooks/workspace-documents/useCountWorkspaceDocuments';
 
 const DashboardStatus: FC = () => {
-    const { data: session, status } = useSession(); // Fetch session data
+    const { status } = useSession();
 
     // If the session is still loading, show a loading indicator
     if (status === 'loading') {
+        window.location.reload();
         return <Loader2 className='h-8 w-8 animate-spin' />;
     }
 
