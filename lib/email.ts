@@ -19,7 +19,8 @@ export async function sendInvitationEmail(email: string, workspaceId: string) {
     };
 
     try {
-        await transporter.sendMail(mailOptions);
+        const foo = await transporter.sendMail(mailOptions);
+        console.log("F", foo);
         console.log(`Invitation email sent to ${email}`);
     } catch (error) {
         console.error('Error sending invitation email:', error);

@@ -11,8 +11,10 @@ import {
 import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
 import { Loader2 } from 'lucide-react';
 
-const WorkspacesSelect: FC = () => {
+const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
+
+    const allWorkspaces = useMemo(() => data?.workspaces, [data?.workspaces]);
 
     if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
@@ -23,30 +25,19 @@ const WorkspacesSelect: FC = () => {
             </p>
         );
 
-    const allWorkspaces = useMemo(() => {
-        return data?.workspaces;
-    }, [data?.workspaces]);
-
     return (
-        <>
-            <Select>
-                <SelectTrigger className='mt-5 w-[470px]'>
-                    <SelectValue placeholder='Select Workspace' />
-                </SelectTrigger>
-                <SelectContent>
-                    {allWorkspaces &&
-                        allWorkspaces.map(
-                            (item: { id: string; name: string }) => {
-                                return (
-                                    <SelectItem value={item.id}>
-                                        {item.name}
-                                    </SelectItem>
-                                );
-                            },
-                        )}
-                </SelectContent>
-            </Select>
-        </>
+        <Select onValueChange={onChange}>
+            <SelectTrigger className='mt-5 w-[470px]'>
+                <SelectValue placeholder='Select Workspace' />
+            </SelectTrigger>
+            <SelectContent>
+                {allWorkspaces?.map((item: any) => (
+                    <SelectItem key={item.id} value={item.id}>
+                        {item.name}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
     );
 };
 
