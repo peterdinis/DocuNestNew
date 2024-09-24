@@ -15,7 +15,7 @@ export async function sendInvitationEmail(email: string, workspaceId: string) {
         from: '"Workspace Invite" <no-reply@yourapp.com>',
         to: email,
         subject: 'You have been invited to a workspace',
-        html: `<p>You have been invited to join a workspace. <a href="${process.env.NEXT_PUBLIC_APP_URL}/workspace/${workspaceId}">Click here</a> to access the workspace.</p>`,
+        html: `<p>You have been invited to join a workspace. <a href="${process.env.NEXT_PUBLIC_APP_URL}/workspaces/${workspaceId}">Click here</a> to access the workspace.</p>`,
     };
 
     try {

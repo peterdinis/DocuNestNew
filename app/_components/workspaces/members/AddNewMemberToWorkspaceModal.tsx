@@ -13,6 +13,7 @@ import Header from '../../shared/Header';
 import { Input } from '@/components/ui/input';
 import { ConfettiButton } from '@/components/ui/confetti-button';
 import WorkspacesSelect from '../WorkspacesSelect';
+import WorkspaceSelectRoles from '../roles/WorkspaceSelectRoles';
 
 const AddNewMemberToWorkspaceModal: FC = () => {
     return (
@@ -31,11 +32,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                         <form className='mt-5'>
                             <Input type='email' placeholder='User Email' />
                             <WorkspacesSelect />
-                            <Input
-                                className='mt-5'
-                                type='text'
-                                placeholder='Workspace Role'
-                            />
+                            <WorkspaceSelectRoles />
                             <ConfettiButton className='mt-5 bg-blue-600 hover:bg-blue-800 text-white font-bold'>
                                 Add new member to workspace
                             </ConfettiButton>

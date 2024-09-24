@@ -1,9 +1,10 @@
 import { db } from '@/app/_utils/db';
+import { sendInvitationEmail } from '@/lib/email';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
     try {
-        const { email, workspaceId, role = 'member' } = await req.json();
+        const { email, workspaceId, role } = await req.json();
 
         // Find user by email
         const user = await db.user.findUnique({ where: { email } });
@@ -41,7 +42,7 @@ export async function POST(req: Request) {
         });
 
         // Send email notification
-        // await sendInvitationEmail(email, workspaceId);
+        await sendInvitationEmail(email, workspaceId);
 
         return NextResponse.json({ success: true });
     } catch (error) {
