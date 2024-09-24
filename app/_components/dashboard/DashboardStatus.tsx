@@ -1,6 +1,7 @@
 'use client';
 
 import { FC } from 'react';
+import { useSession } from 'next-auth/react'; // Import the session hook
 import { format } from 'date-fns';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
@@ -8,6 +9,14 @@ import { Loader2 } from 'lucide-react';
 import useAllCountedWorkspaceDocuments from '@/app/_hooks/workspace-documents/useCountWorkspaceDocuments';
 
 const DashboardStatus: FC = () => {
+    const { data: session, status } = useSession(); // Fetch session data
+
+    // If the session is still loading, show a loading indicator
+    if (status === 'loading') {
+        return <Loader2 className='h-8 w-8 animate-spin' />;
+    }
+
+    // Fetch data based on the logged-in user ID
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
     const {
         data: documentData,
@@ -46,7 +55,6 @@ const DashboardStatus: FC = () => {
                             </p>
                             <p className='text-muted-foreground'>Workspaces</p>
                         </div>
-                        {/* TODO: Later add simular things for members */}
                         <div>
                             <p className='text-2xl font-bold'>
                                 {documentData?.totalCount}
