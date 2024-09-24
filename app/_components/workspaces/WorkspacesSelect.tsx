@@ -14,6 +14,10 @@ import { Loader2 } from 'lucide-react';
 const WorkspacesSelect: FC = () => {
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
 
+    const allWorkspaces = useMemo(() => {
+        return data?.workspaces;
+    }, [data?.workspaces]);
+
     if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
 
     if (isError)
@@ -22,10 +26,6 @@ const WorkspacesSelect: FC = () => {
                 Something went wrong
             </p>
         );
-
-    const allWorkspaces = useMemo(() => {
-        return data?.workspaces;
-    }, [data?.workspaces]);
 
     return (
         <>
