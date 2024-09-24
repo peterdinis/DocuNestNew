@@ -7,9 +7,9 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 
-const WorkspaceSelectRoles: FC = () => {
+const WorkspaceSelectRoles: FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
     return (
-        <Select>
+        <Select onValueChange={onChange}>
             <SelectTrigger className='mt-5 w-[470px]'>
                 <SelectValue placeholder='Select role' />
             </SelectTrigger>

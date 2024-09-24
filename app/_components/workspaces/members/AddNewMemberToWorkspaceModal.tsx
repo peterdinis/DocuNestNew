@@ -1,4 +1,6 @@
-import { FC } from 'react';
+"use client"
+
+import { FC, useState } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -8,14 +10,36 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
 import Header from '../../shared/Header';
 import { Input } from '@/components/ui/input';
 import { ConfettiButton } from '@/components/ui/confetti-button';
 import WorkspacesSelect from '../WorkspacesSelect';
 import WorkspaceSelectRoles from '../roles/WorkspaceSelectRoles';
+import useAddNewWorkspaceMember from '@/app/_hooks/workspace-mebers/useAddNewWorkspaceMember';
 
 const AddNewMemberToWorkspaceModal: FC = () => {
+    const [email, setEmail] = useState('');
+    const [workspaceId, setWorkspaceId] = useState('');
+    const [role, setRole] = useState('');
+
+    const { mutate: addMember, isPending } = useAddNewWorkspaceMember();
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!email || !workspaceId || !role) {
+            // Handle form validation
+            return;
+        }
+
+        addMember({
+            email,
+            workspaceId,
+            role,
+        });
+    };
+
     return (
         <Dialog>
             <DialogTrigger>
@@ -29,12 +53,28 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                         <Header text='Add new member to workspace' />
                     </DialogTitle>
                     <DialogDescription>
-                        <form className='mt-5'>
-                            <Input type='email' placeholder='User Email' />
-                            <WorkspacesSelect />
-                            <WorkspaceSelectRoles />
-                            <ConfettiButton className='mt-5 bg-blue-600 font-bold text-white hover:bg-blue-800'>
-                                Add new member to workspace
+                        <form onSubmit={handleSubmit} className='mt-5'>
+                            <Input
+                                type='email'
+                                placeholder='User Email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <WorkspacesSelect
+                                onChange={(value) => setWorkspaceId(value)}
+                            />
+                            <WorkspaceSelectRoles
+                                onChange={(value) => setRole(value)}
+                            />
+                            <ConfettiButton
+                                type='submit'
+                                className='mt-5 bg-blue-600 font-bold text-white hover:bg-blue-800'
+                                disabled={isPending}
+                            >
+                                {isPending
+                                    ? <Loader2 className="animate-spin w-8 h-8" />
+                                    : 'Add new member to workspace'}
                             </ConfettiButton>
                         </form>
                     </DialogDescription>
