@@ -14,7 +14,7 @@ const useDisplayAllWorkspaces = () => {
         refetchOnWindowFocus: true,
         refetchOnMount: true,
         refetchOnReconnect: true,
-        enabled: status === "loading" ? true : false
+        enabled: status === "loading"  ? true : false
     });
 };
 
