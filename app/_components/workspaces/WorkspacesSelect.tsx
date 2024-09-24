@@ -31,7 +31,7 @@ const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({ onChange 
                 <SelectValue placeholder='Select Workspace' />
             </SelectTrigger>
             <SelectContent>
-                {allWorkspaces?.map((item: any) => (
+                {allWorkspaces?.map((item: {id: string, name: string}) => (
                     <SelectItem key={item.id} value={item.id}>
                         {item.name}
                     </SelectItem>
