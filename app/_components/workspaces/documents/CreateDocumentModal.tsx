@@ -101,11 +101,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                             type='submit'
                             disabled={isPending}
                         >
-                            {isPending ? (
-                                <Loading />
-                            ) : (
-                                'Save changes'
-                            )}
+                            {isPending ? <Loading /> : 'Save changes'}
                         </Button>
                     </DialogFooter>
                 </form>

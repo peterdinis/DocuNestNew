@@ -11,7 +11,9 @@ import {
 import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
 import Loading from '../shared/Loading';
 
-const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
+const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({
+    onChange,
+}) => {
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
 
     const allWorkspaces = useMemo(() => data?.workspaces, [data?.workspaces]);
@@ -31,7 +33,7 @@ const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({ onChange 
                 <SelectValue placeholder='Select Workspace' />
             </SelectTrigger>
             <SelectContent>
-                {allWorkspaces?.map((item: {id: string, name: string}) => (
+                {allWorkspaces?.map((item: { id: string; name: string }) => (
                     <SelectItem key={item.id} value={item.id}>
                         {item.name}
                     </SelectItem>

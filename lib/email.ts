@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     },
     secure: false,
     debug: true,
-    logger: true
+    logger: true,
 });
 
 export async function sendInvitationEmail(email: string, workspaceId: string) {
@@ -23,7 +23,7 @@ export async function sendInvitationEmail(email: string, workspaceId: string) {
 
     try {
         const foo = await transporter.sendMail(mailOptions);
-        console.log("F", foo);
+        console.log('F', foo);
         console.log(`Invitation email sent to ${email}`);
     } catch (error) {
         console.error('Error sending invitation email:', error);
