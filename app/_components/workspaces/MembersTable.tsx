@@ -8,6 +8,14 @@ interface IMemberTableProps {
     workspaceId: string;
 }
 
+type Member = {
+    user: {
+        name: string;
+        email: string;
+    },
+    role: string;
+}
+
 const MembersTable: FC<IMemberTableProps> = ({
     workspaceId,
 }: IMemberTableProps) => {
@@ -17,7 +25,7 @@ const MembersTable: FC<IMemberTableProps> = ({
 
     const membersData = useMemo(() => {
         return (
-            data?.[0]?.members?.map((member: any) => ({
+            data?.[0]?.members?.map((member: Member) => ({
                 name: member.user.name,
                 email: member.user.email,
                 role: member.role,
