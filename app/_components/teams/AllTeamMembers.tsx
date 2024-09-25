@@ -73,8 +73,8 @@ const AllTeamMembers: FC = () => {
                 <br />
             </div>
             <AppPagination
+                hasNextPage={currentPage < totalPages}
                 currentPage={currentPage}
-                totalPages={totalPages}
                 onPageChange={handlePageChange}
             />
         </>

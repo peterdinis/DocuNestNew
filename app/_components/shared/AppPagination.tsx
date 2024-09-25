@@ -11,11 +11,13 @@ import { FC } from 'react';
 interface AppPaginationProps {
     currentPage: number;
     onPageChange: (page: number) => void;
+    hasNextPage: boolean; // New prop to control the next button state
 }
 
 const AppPagination: FC<AppPaginationProps> = ({
     currentPage,
     onPageChange,
+    hasNextPage,
 }) => {
     const handlePrevious = () => {
         if (currentPage > 1) {
@@ -24,7 +26,9 @@ const AppPagination: FC<AppPaginationProps> = ({
     };
 
     const handleNext = () => {
-        onPageChange(currentPage + 1);
+        if (hasNextPage) {
+            onPageChange(currentPage + 1);
+        }
     };
 
     return (
@@ -39,7 +43,7 @@ const AppPagination: FC<AppPaginationProps> = ({
                     <PaginationLink isActive>{currentPage}</PaginationLink>
                 </PaginationItem>
 
-                <PaginationNext onClick={handleNext} disabled={false} />
+                <PaginationNext onClick={handleNext} disabled={!hasNextPage} />
             </PaginationContent>
         </Pagination>
     );

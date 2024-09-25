@@ -37,7 +37,9 @@ const WorkspacesLists: FC = () => {
             </p>
         );
     }
-    
+
+    const totalPages = 8;
+
     const workspaces = data?.workspaces || [];
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +109,7 @@ const WorkspacesLists: FC = () => {
                     </div>
                     <div className='mt-6 flex justify-center'>
                         <AppPagination
+                            hasNextPage={currentPage < totalPages}
                             currentPage={currentPage}
                             onPageChange={handlePageChange}
                         />
