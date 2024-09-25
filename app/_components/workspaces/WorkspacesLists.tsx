@@ -38,7 +38,8 @@ const WorkspacesLists: FC = () => {
         );
     }
 
-    const totalPages = data?.totalPages;
+    const totalPages = 8;
+
     const workspaces = data?.workspaces || [];
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +52,7 @@ const WorkspacesLists: FC = () => {
 
     return (
         <>
-            <Card className='mb-6 mt-4 '>
+            <Card className='mb-6 mt-4'>
                 <Input
                     placeholder='Search...'
                     value={searchQuery}
@@ -108,8 +109,8 @@ const WorkspacesLists: FC = () => {
                     </div>
                     <div className='mt-6 flex justify-center'>
                         <AppPagination
+                            hasNextPage={currentPage < totalPages}
                             currentPage={currentPage}
-                            totalPages={totalPages}
                             onPageChange={handlePageChange}
                         />
                     </div>

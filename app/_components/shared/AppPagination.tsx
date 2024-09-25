@@ -5,20 +5,19 @@ import {
     PaginationLink,
     PaginationPrevious,
     PaginationNext,
-    PaginationEllipsis,
 } from '@/components/ui/pagination';
 import { FC } from 'react';
 
 interface AppPaginationProps {
     currentPage: number;
-    totalPages: number;
     onPageChange: (page: number) => void;
+    hasNextPage: boolean; // New prop to control the next button state
 }
 
 const AppPagination: FC<AppPaginationProps> = ({
     currentPage,
-    totalPages,
     onPageChange,
+    hasNextPage,
 }) => {
     const handlePrevious = () => {
         if (currentPage > 1) {
@@ -27,7 +26,7 @@ const AppPagination: FC<AppPaginationProps> = ({
     };
 
     const handleNext = () => {
-        if (currentPage < totalPages) {
+        if (hasNextPage) {
             onPageChange(currentPage + 1);
         }
     };
@@ -39,27 +38,12 @@ const AppPagination: FC<AppPaginationProps> = ({
                     onClick={handlePrevious}
                     disabled={currentPage === 1}
                 />
+
                 <PaginationItem>
-                    <PaginationLink
-                        isActive={currentPage === 1}
-                        onClick={() => onPageChange(1)}
-                    >
-                        1
-                    </PaginationLink>
+                    <PaginationLink isActive>{currentPage}</PaginationLink>
                 </PaginationItem>
-                {totalPages > 3 && <PaginationEllipsis />}
-                <PaginationItem>
-                    <PaginationLink
-                        isActive={currentPage === totalPages}
-                        onClick={() => onPageChange(totalPages)}
-                    >
-                        {totalPages}
-                    </PaginationLink>
-                </PaginationItem>
-                <PaginationNext
-                    onClick={handleNext}
-                    disabled={currentPage === totalPages}
-                />
+
+                <PaginationNext onClick={handleNext} disabled={!hasNextPage} />
             </PaginationContent>
         </Pagination>
     );

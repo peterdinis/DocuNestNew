@@ -25,8 +25,8 @@ const MemberWorkspaceLists: FC = () => {
     }
 
     const workspaces = data?.workspaces || [];
-    const totalPages = data?.totalPages || 1;
 
+    const totalPages = 8;
     return (
         <>
             <Card className='mb-6 mt-4'>
@@ -87,8 +87,8 @@ const MemberWorkspaceLists: FC = () => {
             </Card>
 
             <AppPagination
+                hasNextPage={currentPage < totalPages}
                 currentPage={currentPage}
-                totalPages={totalPages}
                 onPageChange={setCurrentPage}
             />
         </>
