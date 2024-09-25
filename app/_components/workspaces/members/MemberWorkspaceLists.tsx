@@ -1,18 +1,34 @@
 'use client';
 
-import useDisplayMyMemberWorkspaces from '@/app/_hooks/workspace-mebers/useDisplayMyMemberWorkspaces';
-import { FC } from 'react';
-import Loading from '../../shared/Loading';
+import { FC, ChangeEvent, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Loading from '../../shared/Loading';
 import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import AppPagination from '../../shared/AppPagination';
+import useDisplayMyMemberWorkspaces from '@/app/_hooks/workspace-mebers/useDisplayMyMemberWorkspaces';
+import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 
 const MemberWorkspaceLists: FC = () => {
-    const { data, isLoading, isError, currentPage, setCurrentPage } =
+    const [searchQuery, setSearchQuery] = useState('');
+    const debouncedSearchQuery = useDebounce(searchQuery, 300);
+    const { data, isLoading, isError, currentPage, setCurrentPage, refetch } =
         useDisplayMyMemberWorkspaces();
+
+    const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    // Refetch data when the search query changes
+    if (debouncedSearchQuery) {
+        refetch();
+    }
 
     if (isLoading) return <Loading />;
 
@@ -25,17 +41,17 @@ const MemberWorkspaceLists: FC = () => {
     }
 
     const workspaces = data?.workspaces || [];
+    const totalWorkspaces = data?.totalWorkspaces || 0;
+    const workspacesPerPage = 10;
+    const totalPages = Math.ceil(totalWorkspaces / workspacesPerPage);
 
-    const totalPages = 8;
     return (
         <>
             <Card className='mb-6 mt-4'>
                 <Input
                     placeholder='Search...'
-                    value={''}
-                    onChange={() => {
-                        console.log('Do nothing');
-                    }}
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
                 />
                 <CardHeader>
                     <CardTitle className='prose-h2: prose text-xl font-bold dark:text-white'>
@@ -86,11 +102,13 @@ const MemberWorkspaceLists: FC = () => {
                 </CardContent>
             </Card>
 
-            <AppPagination
-                hasNextPage={currentPage < totalPages}
-                currentPage={currentPage}
-                onPageChange={setCurrentPage}
-            />
+            <div className='mt-6 flex justify-center'>
+                <AppPagination
+                    hasNextPage={currentPage < totalPages}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                />
+            </div>
         </>
     );
 };
