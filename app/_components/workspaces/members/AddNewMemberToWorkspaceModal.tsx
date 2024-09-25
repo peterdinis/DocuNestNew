@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { FC, useState } from 'react';
 import {
@@ -73,9 +73,11 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                                 className='mt-5 bg-blue-600 font-bold text-white hover:bg-blue-800'
                                 disabled={isPending}
                             >
-                                {isPending
-                                    ? <Loading />
-                                    : 'Add new member to workspace'}
+                                {isPending ? (
+                                    <Loading />
+                                ) : (
+                                    'Add new member to workspace'
+                                )}
                             </ConfettiButton>
                         </form>
                     </DialogDescription>

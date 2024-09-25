@@ -106,11 +106,7 @@ const CreateNewWorkspaceModal: FC = () => {
                         </FormItem>
 
                         <Button type='submit' disabled={isPending}>
-                            {isPending ? (
-                                <Loading />
-                            ) : (
-                                'Create Workspace'
-                            )}
+                            {isPending ? <Loading /> : 'Create Workspace'}
                         </Button>
                     </form>
                 </Form>

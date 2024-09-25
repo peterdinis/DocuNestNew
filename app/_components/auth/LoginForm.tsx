@@ -125,11 +125,7 @@ const LoginForm: FC = () => {
                             className='w-full'
                             disabled={loading}
                         >
-                            {loading ? (
-                                <Loading />
-                            ) : (
-                                'Login'
-                            )}
+                            {loading ? <Loading /> : 'Login'}
                         </Button>
                     </CardFooter>
                 </form>

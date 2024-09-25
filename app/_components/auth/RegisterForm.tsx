@@ -141,11 +141,7 @@ const RegisterForm: FC = () => {
                             className='w-full'
                             disabled={isPending}
                         >
-                            {isPending ? (
-                                <Loading />
-                            ) : (
-                                'Register'
-                            )}
+                            {isPending ? <Loading /> : 'Register'}
                         </Button>
                     </CardFooter>
                 </form>
