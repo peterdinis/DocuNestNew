@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
 import { WorkspaceType } from '@/app/_types/workspaceTypes';
 import { createWorkspace } from '@/app/_store/mutations/workspaceMutations';
+import { queryClient } from '@/app/_store/queryClient';
 
 const useCreateWorkspace = () => {
     const { toast } = useToast();
@@ -17,6 +18,9 @@ const useCreateWorkspace = () => {
                 title: 'New workspace was created',
                 duration: 2000,
                 className: 'bg-green-800 text-white font-bold',
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['myPaginatedWorkspaces'],
             });
         },
 
