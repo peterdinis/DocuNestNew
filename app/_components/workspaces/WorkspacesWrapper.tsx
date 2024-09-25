@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Header from '../shared/Header';
 import WorkspacesLists from './WorkspacesLists';
 import GlobalLayout from '../shared/GlobalLayout';
+import MemberWorskapceLists from './members/MemberWorkspaceLists';
 
 const WorkspacesWrapper: FC = () => {
     return (
@@ -11,6 +12,8 @@ const WorkspacesWrapper: FC = () => {
                     <Header text={`Workspaces`} />
                     <br />
                     <WorkspacesLists />
+                    <br />
+                    <MemberWorskapceLists />
                 </div>
             </main>
         </GlobalLayout>
