@@ -34,7 +34,7 @@ const MemberWorkspaceLists: FC = () => {
 
     if (isError) {
         return (
-            <p className="text-xl font-bold text-red-700">
+            <p className='text-xl font-bold text-red-700'>
                 Something went wrong
             </p>
         );
@@ -47,54 +47,54 @@ const MemberWorkspaceLists: FC = () => {
 
     return (
         <>
-            <Card className="mb-6 mt-4">
+            <Card className='mb-6 mt-4'>
                 <Input
-                    placeholder="Search..."
+                    placeholder='Search...'
                     value={searchQuery}
                     onChange={handleSearchInputChange}
                 />
                 <CardHeader>
-                    <CardTitle className="prose-h2: prose text-xl font-bold dark:text-white">
+                    <CardTitle className='prose-h2: prose text-xl font-bold dark:text-white'>
                         My Members Workspaces
                     </CardTitle>
                 </CardHeader>
 
                 <CardContent>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className='grid grid-cols-3 gap-4'>
                         {workspaces.length > 0 ? (
                             workspaces.map(
                                 (workspace: WorkspacePaginationType) => (
                                     <motion.div
                                         key={workspace.id}
-                                        className="rounded-lg border bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-zinc-800"
+                                        className='rounded-lg border bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-zinc-800'
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         <Link
                                             href={`/workspaces/${workspace.id}`}
                                         >
-                                            <p className="text-2xl">
+                                            <p className='text-2xl'>
                                                 {workspace.workspaceEmoji}
                                             </p>
-                                            <p className="prose-p: prose text-lg font-bold dark:text-white">
+                                            <p className='prose-p: prose text-lg font-bold dark:text-white'>
                                                 {workspace.name}
                                             </p>
-                                            <p className="prose-p: prose text-sm text-gray-600 dark:text-white">
+                                            <p className='prose-p: prose text-sm text-gray-600 dark:text-white'>
                                                 {workspace.description ||
                                                     'No description'}
                                             </p>
-                                            <p className="text-xs text-gray-400 dark:text-white">
+                                            <p className='text-xs text-gray-400 dark:text-white'>
                                                 Created at:{' '}
                                                 {new Date(
-                                                    workspace.createdAt
+                                                    workspace.createdAt,
                                                 ).toLocaleDateString()}
                                             </p>
                                         </Link>
                                     </motion.div>
-                                )
+                                ),
                             )
                         ) : (
-                            <p className="col-span-3 text-center">
+                            <p className='col-span-3 text-center'>
                                 No workspaces found.
                             </p>
                         )}
@@ -102,7 +102,7 @@ const MemberWorkspaceLists: FC = () => {
                 </CardContent>
             </Card>
 
-            <div className="mt-6 flex justify-center">
+            <div className='mt-6 flex justify-center'>
                 <AppPagination
                     hasNextPage={currentPage < totalPages}
                     currentPage={currentPage}
