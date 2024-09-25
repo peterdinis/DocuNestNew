@@ -51,7 +51,7 @@ const WorkspacesLists: FC = () => {
 
     return (
         <>
-            <Card className='mb-6 mt-4 '>
+            <Card className='mb-6 mt-4'>
                 <Input
                     placeholder='Search...'
                     value={searchQuery}
