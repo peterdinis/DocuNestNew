@@ -15,6 +15,7 @@ import htmlDocx from 'html-docx-js/dist/html-docx';
 import { Button } from '@/components/ui/button';
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
 import useUpdateWorkspaceDocument from '@/app/_hooks/workspace-documents/useUpdateWorkspaceDocument';
+import Loading from '../shared/Loading';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -71,7 +72,7 @@ const DocumentInfo: FC = () => {
         saveAs(converted, `${name}.docx`);
     };
 
-    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
+    if (isLoading) return <Loading />;
 
     if (isError) {
         return (

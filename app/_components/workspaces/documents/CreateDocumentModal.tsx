@@ -18,6 +18,7 @@ import { WorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
 import { Loader2 } from 'lucide-react';
 import useCreateWorkspaceDocument from '@/app/_hooks/workspace-documents/useCreateWorkspaceDocument';
 import { useSession } from 'next-auth/react';
+import Loading from '../../shared/Loading';
 
 interface ICreateDocumentModalProps {
     workspaceId: string;
@@ -102,7 +103,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                             disabled={isPending}
                         >
                             {isPending ? (
-                                <Loader2 className='h-8 w-8 animate-spin' />
+                                <Loading />
                             ) : (
                                 'Save changes'
                             )}

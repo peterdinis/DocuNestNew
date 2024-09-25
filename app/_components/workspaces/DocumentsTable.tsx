@@ -3,6 +3,7 @@ import { GlobalTable } from '../shared/GlobalTable';
 import { documentColumns } from './columns';
 import useAllWorkspaceDocuments from '@/app/_hooks/workspace-documents/useAllWorkspaceDocuments';
 import { Loader2 } from 'lucide-react';
+import Loading from '../shared/Loading';
 
 interface IDocumentsTableProps {
     workspaceId: string;
@@ -15,7 +16,7 @@ const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
 
     const workspaceDocumentData = data?.[0]?.workspaceDocuments ?? [];
 
-    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
+    if (isLoading) return <Loading />;
 
     if (isError)
         return (
