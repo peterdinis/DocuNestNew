@@ -2,17 +2,25 @@
 
 import { allMyMemberWorkspaces } from '@/app/_store/queries/workspaeMemberQueries';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const useDisplayMyMemberWorkspaces = () => {
-    return useQuery({
-        queryKey: ['workspaceMembers'],
-        queryFn: async () => {
-            return await allMyMemberWorkspaces();
-        },
+    const [currentPage, setCurrentPage] = useState(1);
+    const [limit] = useState(10);
+
+    const query = useQuery({
+        queryKey: ['workspaceMembers', currentPage],
+        queryFn: () => allMyMemberWorkspaces(currentPage, limit),
         staleTime: Infinity,
         refetchOnWindowFocus: true,
         refetchOnMount: true,
     });
+
+    return {
+        ...query,
+        currentPage,
+        setCurrentPage,
+    };
 };
 
 export default useDisplayMyMemberWorkspaces;
