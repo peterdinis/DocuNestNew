@@ -6,7 +6,10 @@ import authOptions from '../../auth/authOptions';
 export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
-        return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+        return NextResponse.json(
+            { error: 'Not authenticated' },
+            { status: 401 },
+        );
     }
 
     const userId = session.user.id;
