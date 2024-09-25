@@ -85,19 +85,19 @@ const WorkspacesLists: FC = () => {
                                             <p className='text-2xl'>
                                                 {workspace.workspaceEmoji}
                                             </p>
-                                            <p className='prose-p: prose text-lg font-bold dark:text-white'>
+                                            <CardTitle className='prose-p: prose text-lg font-bold dark:text-white'>
                                                 {workspace.name}
-                                            </p>
-                                            <p className='prose-p: prose text-sm text-gray-600 dark:text-white'>
+                                            </CardTitle>
+                                            <CardTitle className='prose-p: prose text-sm text-gray-600 dark:text-white'>
                                                 {workspace.description ||
                                                     'No description'}
-                                            </p>
-                                            <p className='text-xs text-gray-400 dark:text-white'>
+                                            </CardTitle>
+                                            <CardTitle className='text-xs text-gray-400 dark:text-white'>
                                                 Created at:{' '}
                                                 {new Date(
                                                     workspace.createdAt,
                                                 ).toLocaleDateString()}
-                                            </p>
+                                            </CardTitle>
                                         </Link>
                                     </motion.div>
                                 ),
