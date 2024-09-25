@@ -15,6 +15,9 @@ import graphql from "highlight.js/lib/languages/graphql.js"
 import css from "highlight.js/lib/languages/css.js";
 import scss from "highlight.js/lib/languages/scss.js"
 import hljs from 'highlight.js';
+import 'highlight.js/styles/monokai.css'; 
+import java from "highlight.js/lib/languages/java.js";
+import go from "highlight.js/lib/languages/go.js";
 
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
@@ -28,6 +31,8 @@ hljs.registerLanguage("sql", sql);
 hljs.registerLanguage("css", css);
 hljs.registerLanguage("graphql", graphql);
 hljs.registerLanguage("scss", scss);
+hljs.registerLanguage("java", java);
+hljs.registerLanguage("go", go);
 
 // QuillEditor component
 interface QuillEditorProps {
