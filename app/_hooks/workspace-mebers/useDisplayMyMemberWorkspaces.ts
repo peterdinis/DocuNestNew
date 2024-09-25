@@ -9,7 +9,7 @@ const useDisplayMyMemberWorkspaces = () => {
     const [limit] = useState(10);
 
     const query = useQuery({
-        queryKey: ['workspaceMembers', currentPage],
+        queryKey: ['workspaceMembers', currentPage, limit],
         queryFn: () => allMyMemberWorkspaces(currentPage, limit),
         staleTime: Infinity,
         refetchOnWindowFocus: true,

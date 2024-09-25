@@ -37,8 +37,7 @@ const WorkspacesLists: FC = () => {
             </p>
         );
     }
-
-    const totalPages = data?.totalPages;
+    
     const workspaces = data?.workspaces || [];
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {

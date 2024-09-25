@@ -25,7 +25,6 @@ const MemberWorkspaceLists: FC = () => {
     }
 
     const workspaces = data?.workspaces || [];
-    const totalPages = data?.totalPages || 1;
 
     return (
         <>
