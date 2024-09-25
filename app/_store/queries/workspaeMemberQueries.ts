@@ -6,3 +6,12 @@ export const allMyMemberWorkspaces = async (page = 1, limit = 10) => {
     );
     return response.data;
 };
+
+export const fetchAllWorkspaceMembersForWorkspace = async (id: string) => {
+    const request = await axios.get(`/api/workspaces/${id}/members`);
+    if (!id) {
+        throw new Error('Workspace with this id not found');
+    }
+
+    return request.data;
+};

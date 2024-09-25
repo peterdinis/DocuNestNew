@@ -20,8 +20,8 @@ const useCreateWorkspace = () => {
                 className: 'bg-green-800 text-white font-bold',
             });
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedWorkspaces"]
-            })
+                queryKey: ['myPaginatedWorkspaces'],
+            });
         },
 
         onError: () => {
