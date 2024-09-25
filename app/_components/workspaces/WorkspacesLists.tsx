@@ -38,9 +38,10 @@ const WorkspacesLists: FC = () => {
         );
     }
 
-    const totalPages = 8;
-
     const workspaces = data?.workspaces || [];
+    const totalWorkspaces = data?.totalWorkspaces || 0;
+    const workspacesPerPage = 6; // Adjust based on your API response
+    const totalPages = Math.ceil(totalWorkspaces / workspacesPerPage);
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
