@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { GlobalTable } from '../shared/GlobalTable';
 import { columns } from './columns';
 import useDisplayWorkspaceMembers from '@/app/_hooks/workspace-mebers/useDisplayWorkspaceMembers';
@@ -15,9 +15,15 @@ const MembersTable: FC<IMemberTableProps> = ({
         id: workspaceId,
     });
 
-    const membersData = data?.[0]?.members ?? [];
-
-    console.log("MmMmm", membersData);
+    const membersData = useMemo(() => {
+        return (
+            data?.[0]?.members?.map((member: any) => ({
+                name: member.user.name,
+                email: member.user.email,
+                role: member.role,
+            })) ?? []
+        );
+    }, [data]);
 
     if (isLoading) return <Loading />;
 
