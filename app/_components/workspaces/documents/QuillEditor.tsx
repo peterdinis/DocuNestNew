@@ -21,6 +21,7 @@ import go from "highlight.js/lib/languages/go.js";
 import diff from "highlight.js/lib/languages/diff.js";
 import docker from "highlight.js/lib/languages/dockerfile.js";
 import rust from "highlight.js/lib/languages/rust.js";
+import excel from "highlight.js/lib/languages/excel.js";
 
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
@@ -39,6 +40,7 @@ hljs.registerLanguage("go", go);
 hljs.registerLanguage("diff", diff);
 hljs.registerLanguage("docker", docker);
 hljs.registerLanguage("rust", rust);
+hljs.registerLanguage("excel", excel);
 
 // QuillEditor component
 interface QuillEditorProps {
