@@ -6,10 +6,28 @@ import QuillCursors from 'quill-cursors';
 import 'react-quill/dist/quill.snow.css';
 import 'quill-paste-smart';
 import Loading from '../../shared/Loading';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import net from "highlight.js/lib/languages/csharp.js"
+import python from "highlight.js/lib/languages/python.js";
+import sql from "highlight.js/lib/languages/sql.js"
+import graphql from "highlight.js/lib/languages/graphql.js"
+import css from "highlight.js/lib/languages/css.js";
+import scss from "highlight.js/lib/languages/scss.js"
+import hljs from 'highlight.js';
 
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
 Quill.register('modules/cursors', QuillCursors);
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("csharp", net);
+hljs.registerLanguage("python", python);
+hljs.registerLanguage("sql", sql);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("graphql", graphql);
+hljs.registerLanguage("scss", scss);
 
 // QuillEditor component
 interface QuillEditorProps {
