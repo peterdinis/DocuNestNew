@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { db } from '@/app/_utils/db';
 import authOptions from '../../auth/authOptions';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
         return NextResponse.json(
@@ -14,13 +14,27 @@ export async function GET() {
 
     const userId = session.user.id;
 
-    // Get all workspaces where the user is a member
+    // Get pagination parameters
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page')!) || 1;
+    const limit = parseInt(searchParams.get('limit')!) || 10;
+    const offset = (page - 1) * limit;
+
+    // Get paginated workspaces where the user is a member
     const workspaces = await db.workspaceMember.findMany({
         where: { userId },
-        include: {
-            workspace: true,
-        },
+        include: { workspace: true },
+        skip: offset,
+        take: limit,
     });
 
-    return NextResponse.json(workspaces.map((wm) => wm.workspace));
+    const totalCount = await db.workspaceMember.count({
+        where: { userId },
+    });
+
+    return NextResponse.json({
+        workspaces: workspaces.map((wm) => wm.workspace),
+        totalPages: Math.ceil(totalCount / limit),
+        currentPage: page,
+    });
 }
