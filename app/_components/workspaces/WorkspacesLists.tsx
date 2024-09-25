@@ -17,6 +17,7 @@ import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
+import Loading from '../shared/Loading';
 
 const WorkspacesLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -33,7 +34,7 @@ const WorkspacesLists: FC = () => {
     }, [debouncedSearchQuery, currentPage, refetch]);
 
     if (isLoading) {
-        return <Loader2 className='h-8 w-8 animate-spin' />;
+        return <Loading />;
     }
 
     if (isError) {

@@ -10,13 +10,14 @@ import {
 } from '@/components/ui/select';
 import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
 import { Loader2 } from 'lucide-react';
+import Loading from '../shared/Loading';
 
 const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
     const { data, isLoading, isError } = useDisplayAllWorkspaces();
 
     const allWorkspaces = useMemo(() => data?.workspaces, [data?.workspaces]);
 
-    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
+    if (isLoading) return <Loading />;
 
     if (isError)
         return (

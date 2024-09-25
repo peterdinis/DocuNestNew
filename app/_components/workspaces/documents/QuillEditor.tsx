@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import 'quill-paste-smart';
 /* import 'quill-color-picker-enhance/dist/index.css'; */
 import { Loader2 } from 'lucide-react';
+import Loading from '../../shared/Loading';
 
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
@@ -24,7 +25,7 @@ const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange }) => {
         () =>
             dynamic(() => import('react-quill'), {
                 ssr: false, // Disable server-side rendering for Quill
-                loading: () => <Loader2 className='h-8 w-8 animate-spin' />,
+                loading: () => <Loading />,
             }),
         [],
     );
