@@ -95,20 +95,19 @@ const MemberWorkspaceLists: FC = () => {
                             )
                         ) : (
                             <p className='col-span-3 text-center'>
-                                No workspaces found.
+                                No Member workspaces found
                             </p>
                         )}
                     </div>
+                    <div className='mt-6 flex justify-center'>
+                        <AppPagination
+                            hasNextPage={currentPage < totalPages}
+                            currentPage={currentPage}
+                            onPageChange={handlePageChange}
+                        />
+                    </div>
                 </CardContent>
             </Card>
-
-            <div className='mt-6 flex justify-center'>
-                <AppPagination
-                    hasNextPage={currentPage < totalPages}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                />
-            </div>
         </>
     );
 };
