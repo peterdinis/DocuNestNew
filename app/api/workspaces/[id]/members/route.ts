@@ -29,7 +29,11 @@ export async function GET(request: NextRequest) {
             id,
         },
         include: {
-            members: true,
+            members: {
+                include: {
+                    user: true
+                }
+            }
         },
     });
 
