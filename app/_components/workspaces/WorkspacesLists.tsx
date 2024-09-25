@@ -1,23 +1,21 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardContent,
+} from '@/components/ui/card';
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import CreateNewWorkspaceModal from './CreateNewWorkspaceModal';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import usePaginatedWorkspaces from '@/app/_hooks/workspaces/usePaginatedWorkspaces';
-import { Loader2 } from 'lucide-react';
-import {
-    Pagination,
-    PaginationItem,
-    PaginationPrevious,
-    PaginationNext,
-    PaginationLink,
-} from '@/components/ui/pagination';
-import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
 import Loading from '../shared/Loading';
+import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
+import AppPagination from '../shared/AppPagination';
 
 const WorkspacesLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -45,11 +43,15 @@ const WorkspacesLists: FC = () => {
         );
     }
 
-    const totalPages = data?.totalPages || 1;
+    const totalPages = data?.totalPages;
     const workspaces = data?.workspaces || [];
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
     };
 
     return (
@@ -110,7 +112,11 @@ const WorkspacesLists: FC = () => {
                         )}
                     </div>
                     <div className='mt-6 flex justify-center'>
-                        FIX ME
+                        <AppPagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                        />
                     </div>
                 </CardContent>
             </Card>
