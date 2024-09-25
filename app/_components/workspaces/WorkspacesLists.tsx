@@ -110,36 +110,7 @@ const WorkspacesLists: FC = () => {
                         )}
                     </div>
                     <div className='mt-6 flex justify-center'>
-                        <Pagination>
-                            <PaginationPrevious
-                                onClick={() =>
-                                    currentPage > 1 &&
-                                    setCurrentPage(currentPage - 1)
-                                }
-                                disabled={currentPage === 1}
-                            />
-
-                            {[...Array(totalPages)].map((_, index) => (
-                                <PaginationItem key={index}>
-                                    <PaginationLink
-                                        isActive={index + 1 === currentPage}
-                                        onClick={() =>
-                                            setCurrentPage(index + 1)
-                                        }
-                                    >
-                                        {index + 1}
-                                    </PaginationLink>
-                                </PaginationItem>
-                            ))}
-
-                            <PaginationNext
-                                onClick={() =>
-                                    currentPage < totalPages &&
-                                    setCurrentPage(currentPage + 1)
-                                }
-                                disabled={currentPage === totalPages}
-                            />
-                        </Pagination>
+                        FIX ME
                     </div>
                 </CardContent>
             </Card>
