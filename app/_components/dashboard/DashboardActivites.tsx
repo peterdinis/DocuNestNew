@@ -113,8 +113,8 @@ const DashboardActivities: FC = () => {
             </CardContent>
             <AppPagination
                 currentPage={currentPage}
-                totalPages={totalPages}
                 onPageChange={handlePageChange}
+                hasNextPage={currentPage < totalPages}
             />
         </Card>
     );
