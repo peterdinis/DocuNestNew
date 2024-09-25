@@ -18,6 +18,9 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai.css'; 
 import java from "highlight.js/lib/languages/java.js";
 import go from "highlight.js/lib/languages/go.js";
+import diff from "highlight.js/lib/languages/diff.js";
+import docker from "highlight.js/lib/languages/dockerfile.js";
+import rust from "highlight.js/lib/languages/rust.js";
 
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
@@ -33,6 +36,9 @@ hljs.registerLanguage("graphql", graphql);
 hljs.registerLanguage("scss", scss);
 hljs.registerLanguage("java", java);
 hljs.registerLanguage("go", go);
+hljs.registerLanguage("diff", diff);
+hljs.registerLanguage("docker", docker);
+hljs.registerLanguage("rust", rust);
 
 // QuillEditor component
 interface QuillEditorProps {
