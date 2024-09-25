@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { FC, ReactNode, useEffect } from 'react';
+import Loading from '../shared/Loading';
 
 interface ISessionCheckHelperProps {
     children?: ReactNode;
@@ -25,7 +26,7 @@ const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({
     }, [session, status, router, pathname]);
 
     if (status === 'loading') {
-        return <Loader2 className='h-8 w-8 animate-spin' />;
+        return <Loading />;
     }
 
     if (session || pathname === '/' || pathname === '/register') {

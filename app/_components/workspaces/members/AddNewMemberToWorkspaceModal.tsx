@@ -17,6 +17,7 @@ import { ConfettiButton } from '@/components/ui/confetti-button';
 import WorkspacesSelect from '../WorkspacesSelect';
 import WorkspaceSelectRoles from '../roles/WorkspaceSelectRoles';
 import useAddNewWorkspaceMember from '@/app/_hooks/workspace-mebers/useAddNewWorkspaceMember';
+import Loading from '../../shared/Loading';
 
 const AddNewMemberToWorkspaceModal: FC = () => {
     const [email, setEmail] = useState('');
@@ -73,7 +74,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                                 disabled={isPending}
                             >
                                 {isPending
-                                    ? <Loader2 className="animate-spin w-8 h-8" />
+                                    ? <Loading />
                                     : 'Add new member to workspace'}
                             </ConfettiButton>
                         </form>

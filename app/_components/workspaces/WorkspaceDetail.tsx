@@ -18,6 +18,7 @@ import { format } from 'date-fns';
 import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal';
 import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 import CreateDocumentModal from './documents/CreateDocumentModal';
+import Loading from '../shared/Loading';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -30,7 +31,7 @@ const WorkspaceDetail: FC = () => {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
 
-    if (isLoading) return <Loader2 className='h-8 w-8 animate-spin' />;
+    if (isLoading) return <Loading />;
 
     if (isError) {
         return (

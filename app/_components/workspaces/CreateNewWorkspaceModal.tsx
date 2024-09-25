@@ -25,6 +25,7 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { Input } from '@/components/ui/input';
 import useCreateWorkspace from '@/app/_hooks/workspaces/useCreateWorkspace';
 import { WorkspaceFormData } from '@/app/_types/workspaceTypes';
+import Loading from '../shared/Loading';
 
 const CreateNewWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
@@ -106,7 +107,7 @@ const CreateNewWorkspaceModal: FC = () => {
 
                         <Button type='submit' disabled={isPending}>
                             {isPending ? (
-                                <Loader2 className='h-8 w-8 animate-spin' />
+                                <Loading />
                             ) : (
                                 'Create Workspace'
                             )}

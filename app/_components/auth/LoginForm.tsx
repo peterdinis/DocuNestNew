@@ -17,6 +17,7 @@ import {
     CardContent,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import Loading from '../shared/Loading';
 
 const LoginForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -125,7 +126,7 @@ const LoginForm: FC = () => {
                             disabled={loading}
                         >
                             {loading ? (
-                                <Loader2 className='h-8 w-8 animate-spin' />
+                                <Loading />
                             ) : (
                                 'Login'
                             )}

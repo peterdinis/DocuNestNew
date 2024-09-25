@@ -17,6 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { RegisterUser } from '@/app/_store/mutations/authMutations';
 import { useToast } from '@/hooks/use-toast';
+import Loading from '../shared/Loading';
 
 const RegisterForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -141,7 +142,7 @@ const RegisterForm: FC = () => {
                             disabled={isPending}
                         >
                             {isPending ? (
-                                <Loader2 className='h-8 w-8 animate-spin' />
+                                <Loading />
                             ) : (
                                 'Register'
                             )}
