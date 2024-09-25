@@ -74,8 +74,8 @@ const WorkspacesLists: FC = () => {
                                     <motion.div
                                         key={workspace.id}
                                         className='rounded-lg border bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-zinc-800'
-                                        whileHover={{ scale: 1.05 }} // Zoom effect on hover
-                                        whileTap={{ scale: 0.95 }} // Scale down on tap
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         <Link
                                             href={`/workspaces/${workspace.id}`}
