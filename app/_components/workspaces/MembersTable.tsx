@@ -17,6 +17,8 @@ const MembersTable: FC<IMemberTableProps> = ({
 
     const membersData = data?.[0]?.members ?? [];
 
+    console.log("MmMmm", membersData);
+
     if (isLoading) return <Loading />;
 
     if (isError)
