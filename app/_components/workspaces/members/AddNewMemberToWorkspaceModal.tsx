@@ -10,7 +10,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Loader2, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Header from '../../shared/Header';
 import { Input } from '@/components/ui/input';
 import { ConfettiButton } from '@/components/ui/confetti-button';

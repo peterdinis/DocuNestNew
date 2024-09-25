@@ -5,8 +5,7 @@ import MagicUrl from 'quill-magic-url';
 import QuillCursors from 'quill-cursors';
 import 'react-quill/dist/quill.snow.css';
 import 'quill-paste-smart';
-/* import 'quill-color-picker-enhance/dist/index.css'; */
-import { Loader2 } from 'lucide-react';
+import 'quill-color-picker-enhance/dist/index.css';
 import Loading from '../../shared/Loading';
 
 // Register Quill modules

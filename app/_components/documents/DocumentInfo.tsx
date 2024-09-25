@@ -2,7 +2,6 @@
 
 import { FC, useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
 import DocToolbar from './DocToolbar';
 import { Input } from '@/components/ui/input';
 import QuillEditor from '../workspaces/documents/QuillEditor';

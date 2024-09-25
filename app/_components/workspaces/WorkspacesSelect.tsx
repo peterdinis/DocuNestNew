@@ -9,7 +9,6 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import useDisplayAllWorkspaces from '@/app/_hooks/workspaces/useDisplayAllWorkspaces';
-import { Loader2 } from 'lucide-react';
 import Loading from '../shared/Loading';
 
 const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({
