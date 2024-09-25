@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { GlobalTable } from '../shared/GlobalTable';
 import { documentColumns } from './columns';
 import useAllWorkspaceDocuments from '@/app/_hooks/workspace-documents/useAllWorkspaceDocuments';
-import { Loader2 } from 'lucide-react';
 import Loading from '../shared/Loading';
 
 interface IDocumentsTableProps {

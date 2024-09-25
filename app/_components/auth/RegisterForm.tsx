@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import useRegisterUser from '@/app/_hooks/users/useRegisterUser';
 import { registerSchema } from './authSchema';
 import { Button } from '@/components/ui/button';
@@ -141,11 +141,7 @@ const RegisterForm: FC = () => {
                             className='w-full'
                             disabled={isPending}
                         >
-                            {isPending ? (
-                                <Loading />
-                            ) : (
-                                'Register'
-                            )}
+                            {isPending ? <Loading /> : 'Register'}
                         </Button>
                     </CardFooter>
                 </form>

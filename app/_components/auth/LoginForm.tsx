@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { loginSchema } from './authSchema';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -125,11 +125,7 @@ const LoginForm: FC = () => {
                             className='w-full'
                             disabled={loading}
                         >
-                            {loading ? (
-                                <Loading />
-                            ) : (
-                                'Login'
-                            )}
+                            {loading ? <Loading /> : 'Login'}
                         </Button>
                     </CardFooter>
                 </form>

@@ -15,7 +15,6 @@ import { Input } from '@/components/ui/input';
 import Header from '../../shared/Header';
 import QuillEditor from './QuillEditor';
 import { WorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
-import { Loader2 } from 'lucide-react';
 import useCreateWorkspaceDocument from '@/app/_hooks/workspace-documents/useCreateWorkspaceDocument';
 import { useSession } from 'next-auth/react';
 import Loading from '../../shared/Loading';
@@ -102,11 +101,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                             type='submit'
                             disabled={isPending}
                         >
-                            {isPending ? (
-                                <Loading />
-                            ) : (
-                                'Save changes'
-                            )}
+                            {isPending ? <Loading /> : 'Save changes'}
                         </Button>
                     </DialogFooter>
                 </form>

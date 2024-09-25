@@ -1,11 +1,6 @@
 'use client';
 
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    CardContent,
-} from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import CreateNewWorkspaceModal from './CreateNewWorkspaceModal';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';

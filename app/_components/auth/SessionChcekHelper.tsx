@@ -1,6 +1,5 @@
 'use client';
 
-import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { FC, ReactNode, useEffect } from 'react';
