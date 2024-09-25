@@ -109,7 +109,6 @@ const WorkspacesLists: FC = () => {
                     <div className='mt-6 flex justify-center'>
                         <AppPagination
                             currentPage={currentPage}
-                            totalPages={totalPages}
                             onPageChange={handlePageChange}
                         />
                     </div>

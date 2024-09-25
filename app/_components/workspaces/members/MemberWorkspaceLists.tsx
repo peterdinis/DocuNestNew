@@ -88,7 +88,6 @@ const MemberWorkspaceLists: FC = () => {
 
             <AppPagination
                 currentPage={currentPage}
-                totalPages={totalPages}
                 onPageChange={setCurrentPage}
             />
         </>
