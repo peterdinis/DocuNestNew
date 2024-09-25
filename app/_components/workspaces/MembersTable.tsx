@@ -15,6 +15,8 @@ const MembersTable: FC<IMemberTableProps> = ({
         id: workspaceId,
     });
 
+    const membersData = data?.[0]?.members ?? [];
+
     if (isLoading) return <Loading />;
 
     if (isError)
@@ -24,13 +26,11 @@ const MembersTable: FC<IMemberTableProps> = ({
             </p>
         );
 
-    console.log('D', data);
-    
     return (
         <>
             <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>Members</h4>
             <div className='mt-1'>
-                <GlobalTable data={[]} columns={columns} />
+                <GlobalTable data={membersData} columns={columns} />
             </div>
         </>
     );
