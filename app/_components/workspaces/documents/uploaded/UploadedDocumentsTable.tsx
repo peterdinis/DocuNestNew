@@ -4,13 +4,16 @@ interface IUploadDocumentsTableProps {
     workspaceId: string;
 }
 
-const UploadDocumentsTable: FC<IUploadDocumentsTableProps> = ({ workspaceId }) => {
-
+const UploadDocumentsTable: FC<IUploadDocumentsTableProps> = ({
+    workspaceId,
+}) => {
     return (
         <>
-            <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>Uploaded Documents</h4>
+            <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>
+                Uploaded Documents
+            </h4>
             <div className='mt-1'>
-              {/*   {workspaceDocumentData.length > 0 ? (
+                {/*   {workspaceDocumentData.length > 0 ? (
                     <GlobalTable
                         data={workspaceDocumentData}
                         columns={documentColumns}
