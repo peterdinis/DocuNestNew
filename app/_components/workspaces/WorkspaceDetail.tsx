@@ -26,7 +26,7 @@ const WorkspaceDetail: FC = () => {
 
     sessionStorage.setItem('WorkspaceId', id);
 
-    const { data, isLoading, isError } = useWorkspaceDetail({ id });
+    const { data, isLoading, isError, error } = useWorkspaceDetail({ id });
 
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
@@ -35,9 +35,9 @@ const WorkspaceDetail: FC = () => {
     if (isLoading) return <Loading />;
 
     if (isError) {
-        return (
-            <p className='prose font-bold text-red-800'>Something went wrong</p>
-        );
+        const errorMessage =
+            (error as Error)?.message || 'Something went wrong.';
+        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
 
     return (
