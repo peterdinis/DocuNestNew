@@ -17,7 +17,7 @@ export const uploadRouter = {
         })
         .onUploadComplete(async ({ metadata, file }) => {
             try {
-                await db.file.create({
+                await db.uploadedDocument.create({
                     data: {
                         name: file.name,
                         size: file.size,

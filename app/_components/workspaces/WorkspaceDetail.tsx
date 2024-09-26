@@ -87,7 +87,7 @@ const WorkspaceDetail: FC = () => {
                         </div>
                         <DocumentsTable workspaceId={id} />
                     </div>
-                    <DocumentsTable workspaceId={id} />
+                    
                 </div>
             </div>
         </GlobalLayout>
