@@ -24,7 +24,9 @@ const DocumentInfo: FC = () => {
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
 
-    const { data, isLoading, isError, error } = useWorkspaceDocumentDetail({ id });
+    const { data, isLoading, isError, error } = useWorkspaceDocumentDetail({
+        id,
+    });
     const { mutate: updateDocument } = useUpdateWorkspaceDocument({ id }); // Use the update hook
 
     useEffect(() => {
@@ -74,12 +76,9 @@ const DocumentInfo: FC = () => {
     if (isLoading) return <Loading />;
 
     if (isError) {
-        const errorMessage = (error as Error)?.message || 'Something went wrong.';
-        return (
-            <p className='text-xl font-bold text-red-700'>
-                {errorMessage}
-            </p>
-        );
+        const errorMessage =
+            (error as Error)?.message || 'Something went wrong.';
+        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
 
     return (

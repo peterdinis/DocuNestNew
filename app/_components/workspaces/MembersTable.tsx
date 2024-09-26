@@ -36,14 +36,11 @@ const MembersTable: FC<IMemberTableProps> = ({
     if (isLoading) return <Loading />;
 
     if (isError) {
-        const errorMessage = (error as Error)?.message || 'Something went wrong.';
-        return (
-            <p className='text-xl font-bold text-red-700'>
-                {errorMessage}
-            </p>
-        );
+        const errorMessage =
+            (error as Error)?.message || 'Something went wrong.';
+        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
-    
+
     return (
         <>
             <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>Members</h4>

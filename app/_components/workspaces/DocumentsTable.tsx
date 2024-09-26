@@ -18,12 +18,9 @@ const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
     if (isLoading) return <Loading />;
 
     if (isError) {
-        const errorMessage = (error as Error)?.message || 'Something went wrong.';
-        return (
-            <p className='text-xl font-bold text-red-700'>
-                {errorMessage}
-            </p>
-        );
+        const errorMessage =
+            (error as Error)?.message || 'Something went wrong.';
+        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
     return (
         <>
