@@ -3,11 +3,11 @@
 import { fetchAllWorkspaceMembersForWorkspace } from '@/app/_store/queries/workspaeMemberQueries';
 import { useQuery } from '@tanstack/react-query';
 
-interface Props {
+interface MemberProps {
     id: string;
 }
 
-const useDisplayWorkspaceMembers = ({ id }: Props) => {
+const useDisplayWorkspaceMembers = ({ id }: MemberProps) => {
     return useQuery({
         queryKey: ['workspaceMembers', id],
         queryFn: async () => {
