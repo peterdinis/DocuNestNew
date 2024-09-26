@@ -47,7 +47,7 @@ const WorkspaceDetail: FC = () => {
                     <Header text={`Workspace Detail`} />
                     <br />
                     <div className='mt-5'>
-                        <span className='text-3xl'>{data.workspaceEmoji}</span>
+                        <span className='text-6xl'>{data.workspaceEmoji}</span>
                         <h2 className='break-all text-left text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
                             {data.name}
                         </h2>

@@ -1,6 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
+import prettyBytes from "pretty-bytes";
 
 export type Document = {
     id: number;
@@ -14,7 +15,11 @@ export const uploadedDocumentColumns: ColumnDef<Document>[] = [
         header: 'Name',
     },
     {
-        accessorKey: 'size',
-        header: 'Size',
+    accessorKey: 'size',
+    header: 'Size',
+    cell: ({ getValue }) => {
+      const sizeInBytes = getValue() as number;
+      return prettyBytes(sizeInBytes);
     },
+  },
 ];
