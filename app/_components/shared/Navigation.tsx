@@ -148,28 +148,32 @@ const Navigation: FC = () => {
                 <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
                     <Link
                         href='/dashboard'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
-                        Dashboard
+                        Services
                     </Link>
                     <Link
                         href='/projects'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
-                        Projects
+                        Pricing
                     </Link>
-                    <Link
-                        href='/tasks'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                    <Button
+                        variant={'ghost'}
+                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
                     >
-                        Tasks
-                    </Link>
-                    <Link
-                        href='/team'
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                        <Link className='dark:text-white' href='/register'>
+                            Register
+                        </Link>
+                    </Button>
+                    <Button
+                        variant={'ghost'}
+                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
                     >
-                        Team
-                    </Link>
+                        <Link className='dark:text-white' href='/login'>
+                            Login
+                        </Link>
+                    </Button>
                 </div>
                 {session?.user && (
                     <div className='border-t border-gray-200 pb-3 pt-4'>
