@@ -73,16 +73,6 @@ const WorkspaceDetail: FC = () => {
                     </div>
                     <div className='mt-10'>
                         <div className='flex items-center justify-end space-x-4'>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger>
-                                        <UploadDocumentToWorkspaceModal />
-                                        <TooltipContent>
-                                            Upload document to workspace
-                                        </TooltipContent>
-                                    </TooltipTrigger>
-                                </Tooltip>
-                            </TooltipProvider>
                             <div className='flex items-center'>
                                 <CreateDocumentModal workspaceId={id} />
                             </div>
