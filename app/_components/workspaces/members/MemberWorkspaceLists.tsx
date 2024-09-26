@@ -14,7 +14,7 @@ import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 const MemberWorkspaceLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
-    const { data, isLoading, isError, currentPage, setCurrentPage, refetch } =
+    const { data, isLoading, isError, error, currentPage, setCurrentPage, refetch } =
         useDisplayMyMemberWorkspaces();
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,9 +33,10 @@ const MemberWorkspaceLists: FC = () => {
     if (isLoading) return <Loading />;
 
     if (isError) {
+        const errorMessage = (error as Error)?.message || 'Something went wrong.';
         return (
             <p className='text-xl font-bold text-red-700'>
-                Something went wrong
+                {errorMessage}
             </p>
         );
     }

@@ -14,18 +14,20 @@ import Loading from '../shared/Loading';
 const WorkspacesSelect: FC<{ onChange: (value: string) => void }> = ({
     onChange,
 }) => {
-    const { data, isLoading, isError } = useDisplayAllWorkspaces();
+    const { data, isLoading, isError, error } = useDisplayAllWorkspaces();
 
     const allWorkspaces = useMemo(() => data?.workspaces, [data?.workspaces]);
 
     if (isLoading) return <Loading />;
 
-    if (isError)
+    if (isError) {
+        const errorMessage = (error as Error)?.message || 'Something went wrong.';
         return (
-            <p className='prose-p: prose text-xl font-bold text-red-800'>
-                Something went wrong
+            <p className='text-xl font-bold text-red-700'>
+                {errorMessage}
             </p>
         );
+    }
 
     return (
         <Select onValueChange={onChange}>

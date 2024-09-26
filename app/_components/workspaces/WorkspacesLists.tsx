@@ -17,7 +17,7 @@ const WorkspacesLists: FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-    const { data, isLoading, isError, refetch, error } = usePaginatedWorkspaces({
+    const { data, isLoading, isError, error, refetch } = usePaginatedWorkspaces({
         query: debouncedSearchQuery,
         page: currentPage,
     });

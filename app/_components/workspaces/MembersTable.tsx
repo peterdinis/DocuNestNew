@@ -19,7 +19,7 @@ type Member = {
 const MembersTable: FC<IMemberTableProps> = ({
     workspaceId,
 }: IMemberTableProps) => {
-    const { data, isLoading, isError } = useDisplayWorkspaceMembers({
+    const { data, isLoading, isError, error } = useDisplayWorkspaceMembers({
         id: workspaceId,
     });
 
@@ -35,13 +35,15 @@ const MembersTable: FC<IMemberTableProps> = ({
 
     if (isLoading) return <Loading />;
 
-    if (isError)
+    if (isError) {
+        const errorMessage = (error as Error)?.message || 'Something went wrong.';
         return (
-            <p className='prose-p: prose text-xl font-bold text-red-800'>
-                Something went wrong
+            <p className='text-xl font-bold text-red-700'>
+                {errorMessage}
             </p>
         );
-
+    }
+    
     return (
         <>
             <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>Members</h4>
