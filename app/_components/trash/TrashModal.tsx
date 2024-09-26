@@ -7,21 +7,42 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import Header from '../shared/Header';
+import TrashDocuments from './TrashDocuments';
+import TrashWorkspaces from './TrashWorkspaces';
+import { Button } from '@/components/ui/button';
+import { Trash } from 'lucide-react';
 
 const TrashModal: FC = () => {
     return (
         <>
             <Dialog>
-                <DialogTrigger>Open</DialogTrigger>
+                <DialogTrigger>Trash</DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogTitle>
+                            <Header text={'Trash'} />
+                        </DialogTitle>
                         <DialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete your account and remove your data from our
-                            servers.
+                            <h5 className='prose-h5: prose font-bold dark:text-white'>
+                                WORKSPACES
+                            </h5>
+                            <div className='mt-3'>
+                                <TrashWorkspaces />
+                            </div>
+                            <h5 className='prose-h5: prose font-bold dark:text-white'>
+                                DOCUMENTS
+                            </h5>
+                            <div className='mt-3'>
+                                <TrashDocuments />
+                            </div>
                         </DialogDescription>
                     </DialogHeader>
+
+                    <Button>
+                        <Trash />
+                        Delete all Trash
+                    </Button>
                 </DialogContent>
             </Dialog>
         </>

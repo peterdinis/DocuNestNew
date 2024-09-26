@@ -4,7 +4,13 @@ import { FC, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { MenuIcon, HomeIcon, SettingsIcon, FileTextIcon, TrashIcon } from 'lucide-react';
+import {
+    MenuIcon,
+    HomeIcon,
+    SettingsIcon,
+    FileTextIcon,
+    TrashIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import TrashModal from '../trash/TrashModal';
 
