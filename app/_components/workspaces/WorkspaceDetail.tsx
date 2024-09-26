@@ -18,6 +18,7 @@ import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal
 import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 import CreateDocumentModal from './documents/CreateDocumentModal';
 import Loading from '../shared/Loading';
+import UploadDocumentsTable from './documents/uploaded/UploadedDocumentsTable';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -87,7 +88,9 @@ const WorkspaceDetail: FC = () => {
                         </div>
                         <DocumentsTable workspaceId={id} />
                     </div>
-                    
+                    <div className='mt-5'>
+                        <UploadDocumentsTable workspaceId={id} />
+                    </div>
                 </div>
             </div>
         </GlobalLayout>
