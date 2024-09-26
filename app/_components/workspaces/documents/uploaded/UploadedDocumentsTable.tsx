@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { GlobalTable } from '@/app/_components/shared/GlobalTable';
 import Loading from '@/app/_components/shared/Loading';
@@ -13,10 +13,10 @@ interface IUploadDocumentsTableProps {
 const UploadDocumentsTable: FC<IUploadDocumentsTableProps> = ({
     workspaceId,
 }) => {
+    const { data, isLoading, isError, error } =
+        useDisplayAllUploadedDocuments();
 
-    const {data, isLoading, isError, error} = useDisplayAllUploadedDocuments();
-
-    if(isLoading) return <Loading />
+    if (isLoading) return <Loading />;
 
     if (isError) {
         const errorMessage =
@@ -30,7 +30,10 @@ const UploadDocumentsTable: FC<IUploadDocumentsTableProps> = ({
                 Uploaded Documents
             </h4>
             <div className='mt-1'>
-                 <GlobalTable data={data?.data?.allUploadedDocuments} columns={uploadedDocumentColumns} />
+                <GlobalTable
+                    data={data?.data?.allUploadedDocuments}
+                    columns={uploadedDocumentColumns}
+                />
             </div>
         </>
     );
