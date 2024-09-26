@@ -9,7 +9,7 @@ interface IDocumentsTableProps {
 }
 
 const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
-    const { data, isLoading, isError } = useAllWorkspaceDocuments({
+    const { data, isLoading, isError, error } = useAllWorkspaceDocuments({
         id: workspaceId,
     });
 
@@ -17,13 +17,14 @@ const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
 
     if (isLoading) return <Loading />;
 
-    if (isError)
+    if (isError) {
+        const errorMessage = (error as Error)?.message || 'Something went wrong.';
         return (
-            <p className='prose-p: prose text-xl font-bold text-red-800'>
-                Something went wrong
+            <p className='text-xl font-bold text-red-700'>
+                {errorMessage}
             </p>
         );
-
+    }
     return (
         <>
             <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>
