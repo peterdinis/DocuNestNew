@@ -17,10 +17,12 @@ const WorkspacesLists: FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-    const { data, isLoading, isError, refetch } = usePaginatedWorkspaces({
-        query: debouncedSearchQuery,
-        page: currentPage,
-    });
+    const { data, isLoading, isError, error, refetch } = usePaginatedWorkspaces(
+        {
+            query: debouncedSearchQuery,
+            page: currentPage,
+        },
+    );
 
     useEffect(() => {
         refetch();
@@ -31,11 +33,9 @@ const WorkspacesLists: FC = () => {
     }
 
     if (isError) {
-        return (
-            <p className='text-xl font-bold text-red-700'>
-                Something went wrong
-            </p>
-        );
+        const errorMessage =
+            (error as Error)?.message || 'Something went wrong.';
+        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
 
     const workspaces = data?.workspaces || [];
