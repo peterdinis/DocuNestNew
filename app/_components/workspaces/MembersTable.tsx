@@ -12,9 +12,9 @@ type Member = {
     user: {
         name: string;
         email: string;
-    },
+    };
     role: string;
-}
+};
 
 const MembersTable: FC<IMemberTableProps> = ({
     workspaceId,

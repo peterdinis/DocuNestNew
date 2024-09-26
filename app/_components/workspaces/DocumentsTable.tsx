@@ -26,7 +26,9 @@ const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
 
     return (
         <>
-            <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>Documents</h4>
+            <h4 className='prose-h4: prose ml-1 dark:text-sky-50'>
+                Created Documents
+            </h4>
             <div className='mt-1'>
                 {workspaceDocumentData.length > 0 ? (
                     <GlobalTable

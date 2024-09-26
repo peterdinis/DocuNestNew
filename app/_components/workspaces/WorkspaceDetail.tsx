@@ -18,6 +18,8 @@ import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal
 import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 import CreateDocumentModal from './documents/CreateDocumentModal';
 import Loading from '../shared/Loading';
+import UploadedDocumentsTable from './documents/uploaded/UploadedDocumentsTable';
+import UploadedDocumentModal from './documents/uploaded/UploadedDocumentModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -86,6 +88,21 @@ const WorkspaceDetail: FC = () => {
                             </div>
                         </div>
                         <DocumentsTable workspaceId={id} />
+                    </div>
+                    <div className='mt-10'>
+                        <div className='flex items-center justify-end space-x-4'>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <UploadedDocumentModal />
+                                        <TooltipContent>
+                                            Upload custom document
+                                        </TooltipContent>
+                                    </TooltipTrigger>
+                                </Tooltip>
+                            </TooltipProvider>
+                        </div>
+                        <UploadedDocumentsTable workspaceId={id} />
                     </div>
                 </div>
             </div>
