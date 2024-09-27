@@ -12,14 +12,15 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Trash } from 'lucide-react';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
 import { format } from 'date-fns';
 import AddNewMemberToWorkspaceModal from './members/AddNewMemberToWorkspaceModal';
-import UploadDocumentToWorkspaceModal from './documents/UploadDocumentToWroskacpeModal';
 import CreateDocumentModal from './documents/CreateDocumentModal';
 import Loading from '../shared/Loading';
 import UploadedDocumentsTable from './documents/uploaded/UploadedDocumentsTable';
 import UploadedDocumentModal from './documents/uploaded/UploadedDocumentModal';
+import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'; // Importing the custom hook for trash action
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -27,6 +28,7 @@ const WorkspaceDetail: FC = () => {
     sessionStorage.setItem('WorkspaceId', id);
 
     const { data, isLoading, isError, error } = useWorkspaceDetail({ id });
+    const moveWorkspaceToTrash = useMoveWorkspaceToTrash({ id });
 
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
@@ -55,7 +57,7 @@ const WorkspaceDetail: FC = () => {
                             Workspace was created at:{' '}
                             {format(data.createdAt, 'yyyy-MM-dd')}
                         </div>
-                        <div className='flex justify-end'>
+                        <div className='flex justify-end space-x-4'>
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger>
@@ -66,6 +68,14 @@ const WorkspaceDetail: FC = () => {
                                     </TooltipTrigger>
                                 </Tooltip>
                             </TooltipProvider>
+
+                            {/* Trash Button */}
+                            <button
+                                onClick={() => moveWorkspaceToTrash.mutate()} // Call the mutation on click
+                                className='flex items-center justify-center p-2 text-red-600 hover:bg-gray-100 rounded-md'
+                            >
+                                <Trash className='w-6 h-6' />
+                            </button>
                         </div>
                     </div>
                     <div className='mt-5'>
