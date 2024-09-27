@@ -25,7 +25,7 @@ const useMoveWorkspaceToTrash = ({ id }: WorkspaceProps) => {
                 duration: 2000,
                 className: 'bg-green-800 text-white font-bold',
             });
-            router.push("/workspaces");
+            router.push('/workspaces');
             queryClient.invalidateQueries({
                 queryKey: ['trashWorkspaces'],
             });

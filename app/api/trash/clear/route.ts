@@ -18,9 +18,9 @@ export async function DELETE() {
         },
     });
 
-    console.log("CT", cleanTrash);
+    console.log('CT', cleanTrash);
 
     return NextResponse.json({
-        message: "Trash was cleaned"
+        message: 'Trash was cleaned',
     });
 }
