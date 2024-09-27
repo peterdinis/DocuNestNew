@@ -24,6 +24,8 @@ const WorkspacesLists: FC = () => {
         },
     );
 
+    console.log("D", data);
+
     useEffect(() => {
         refetch();
     }, [debouncedSearchQuery, currentPage, refetch]);
