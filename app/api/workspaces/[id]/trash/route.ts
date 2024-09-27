@@ -23,20 +23,9 @@ export async function PUT(request: NextRequest) {
         );
     }
 
-    const findOneWorkspace = await db.workspace.findUnique({
-        where: {
-            id,
-            userId: session.user.id,
-        },
-    });
-
-    if (!findOneWorkspace) {
-        throw new Error('Workspace not found');
-    }
-
     const moveWorkspaceToTrash = await db.workspace.update({
         where: {
-            id: findOneWorkspace.id
+            id
         },
 
         data: {
@@ -48,5 +37,5 @@ export async function PUT(request: NextRequest) {
         throw new Error("Failed to move workspace to trash")
     }
 
-    return NextResponse.json(findOneWorkspace);
+    return NextResponse.json(moveWorkspaceToTrash);
 }
