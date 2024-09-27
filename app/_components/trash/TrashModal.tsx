@@ -13,17 +13,14 @@ import Header from '../shared/Header';
 import TrashWorkspaces from './TrashWorkspaces';
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import useClearTrash from '@/app/_hooks/trash/useClearTrash';
+import Loading from '../shared/Loading';
 
 const TrashModal: FC = () => {
-    const { toast } = useToast();
+    const clearTrashMutation = useClearTrash();
 
-    const clearTrash = () => {
-        toast({
-            title: 'Trash was cleaned',
-            duration: 2000,
-            className: 'bg-green-800 text-white font-bold text-xl',
-        });
+    const handleClearTrash = () => {
+        clearTrashMutation.mutate();
     };
 
     return (
@@ -45,9 +42,16 @@ const TrashModal: FC = () => {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <Button onClick={clearTrash}>
+                    <Button
+                        onClick={handleClearTrash}
+                        disabled={clearTrashMutation.isPending}
+                    >
                         <Trash />
-                        Delete all Trash
+                        {clearTrashMutation.isPending ? (
+                            <Loading />
+                        ) : (
+                            'Delete all Trash'
+                        )}
                     </Button>
                 </DialogContent>
             </Dialog>

@@ -8,7 +8,6 @@
         "start": "next start",
         "lint": "next lint",
         "format": "prettier --write --ignore-path .gitignore .",
-        "test": "jest",
         "seed": "ts-node ./prisma/seed.ts"
     },
     "dependencies": {

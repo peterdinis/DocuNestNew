@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
-import authOptions from '../auth/authOptions';
 import { db } from '@/app/_utils/db';
+import authOptions from '../../auth/authOptions';
 
-export async function GET() {
+export async function DELETE() {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
         return NextResponse.json(
@@ -12,21 +12,15 @@ export async function GET() {
         );
     }
 
-    const allWorkspaces = await db.workspace.findMany({
+    const cleanTrash = await db.workspace.deleteMany({
         where: {
             userId: session.user.id,
-            inTrash: false,
         },
     });
 
-    const allCountedWorkspaces = await db.workspace.count({
-        where: {
-            userId: session.user.id,
-        },
-    });
+    console.log('CT', cleanTrash);
 
     return NextResponse.json({
-        workspaces: allWorkspaces,
-        totalCount: allCountedWorkspaces,
+        message: 'Trash was cleaned',
     });
 }

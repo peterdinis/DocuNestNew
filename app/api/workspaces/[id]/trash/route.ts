@@ -8,7 +8,7 @@ export async function PUT(request: NextRequest) {
     const pathnameParts = url.pathname.split('/');
 
     // Assuming the id is the second-to-last segment (before "trash")
-    const id = pathnameParts[pathnameParts.length - 2]; 
+    const id = pathnameParts[pathnameParts.length - 2];
 
     if (!id) {
         return NextResponse.json(
@@ -16,7 +16,6 @@ export async function PUT(request: NextRequest) {
             { status: 400 },
         );
     }
-
 
     const session = await getServerSession(authOptions);
 
@@ -33,21 +32,21 @@ export async function PUT(request: NextRequest) {
         },
     });
 
-    console.log("WORKPSACE", findWorkspace, "ID", url);
+    console.log('WORKPSACE', findWorkspace, 'ID', url);
 
-    if(!findWorkspace) {
-        throw new Error("Workspace not found");
+    if (!findWorkspace) {
+        throw new Error('Workspace not found');
     }
 
     const moveWorkspaceToTrash = await db.workspace.update({
         where: {
-            id: findWorkspace.id
+            id: findWorkspace.id,
         },
 
         data: {
-            inTrash: true
-        }
-    })
+            inTrash: true,
+        },
+    });
 
     if (!moveWorkspaceToTrash) {
         throw new Error('Failed to move workspace to trash');

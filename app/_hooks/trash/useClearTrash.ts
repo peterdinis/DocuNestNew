@@ -1,39 +1,32 @@
 'use client';
 
-import { moveWorkspaceToTrash } from '@/app/_store/mutations/trashMutations';
+import { cleanTrash } from '@/app/_store/mutations/trashMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
-type WorkspaceProps = {
-    id: string;
-};
-
-const useMoveWorkspaceToTrash = ({ id }: WorkspaceProps) => {
+const useClearTrash = () => {
     const { toast } = useToast();
-    const router = useRouter();
 
     return useMutation({
-        mutationKey: ['moveToTrash', id],
+        mutationKey: ['clearTrash'],
         mutationFn: async () => {
-            return await moveWorkspaceToTrash(id);
+            return await cleanTrash();
         },
         onSuccess: () => {
             toast({
-                title: 'Workspace was moved to trash',
+                title: 'Trash was cleaned',
                 duration: 2000,
                 className: 'bg-green-800 text-white font-bold',
             });
-            router.push('/workspaces');
             queryClient.invalidateQueries({
-                queryKey: ['trashWorkspaces'],
-            });
+                queryKey: ["trashWorkspaces"]
+            })
         },
 
         onError: () => {
             toast({
-                title: 'Workspace was not moved to trash',
+                title: 'Trash was not cleaned',
                 duration: 2000,
                 className: 'bg-red-800 text-white font-bold',
             });
@@ -41,4 +34,4 @@ const useMoveWorkspaceToTrash = ({ id }: WorkspaceProps) => {
     });
 };
 
-export default useMoveWorkspaceToTrash;
+export default useClearTrash;
