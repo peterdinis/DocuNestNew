@@ -5,7 +5,10 @@ import authOptions from '@/app/api/auth/authOptions';
 
 export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
+    const pathnameParts = url.pathname.split('/');
+
+    // Assuming the id is the second-to-last segment (before "trash")
+    const id = pathnameParts[pathnameParts.length - 2]; 
 
     if (!id) {
         return NextResponse.json(
@@ -13,6 +16,7 @@ export async function PUT(request: NextRequest) {
             { status: 400 },
         );
     }
+
 
     const session = await getServerSession(authOptions);
 
@@ -23,30 +27,31 @@ export async function PUT(request: NextRequest) {
         );
     }
 
-    const findOneWorkspace = await db.workspace.findUnique({
+    const findWorkspace = await db.workspace.findFirst({
         where: {
             id,
-            userId: session.user.id,
         },
     });
 
-    if (!findOneWorkspace) {
-        throw new Error('Workspace not found');
+    console.log("WORKPSACE", findWorkspace, "ID", url);
+
+    if(!findWorkspace) {
+        throw new Error("Workspace not found");
     }
 
     const moveWorkspaceToTrash = await db.workspace.update({
         where: {
-            id: findOneWorkspace.id
+            id: findWorkspace.id
         },
 
         data: {
             inTrash: true
         }
-    });
+    })
 
-    if(!moveWorkspaceToTrash) {
-        throw new Error("Failed to move workspace to trash")
+    if (!moveWorkspaceToTrash) {
+        throw new Error('Failed to move workspace to trash');
     }
 
-    return NextResponse.json(findOneWorkspace);
+    return NextResponse.json(moveWorkspaceToTrash);
 }

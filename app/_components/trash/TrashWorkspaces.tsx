@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { FC, useMemo } from 'react';
 import { GlobalTable } from '../shared/GlobalTable';
@@ -9,7 +9,10 @@ import Loading from '../shared/Loading';
 const TrashWorkspaces: FC = () => {
     const { data, isLoading, isError, error } = useAllTrashWorkspaces();
 
-    const trashWorkspacesData = useMemo(() => data?.trashWorkspaces ?? [], [data?.trashWorkspaces]);
+    const trashWorkspacesData = useMemo(
+        () => data?.trashWorkspaces ?? [],
+        [data?.trashWorkspaces],
+    );
 
     if (isLoading) return <Loading />;
 

@@ -33,7 +33,7 @@ export const trashColumns: ColumnDef<Workspace>[] = [
         header: 'Name',
         cell: (info) => info.getValue(),
     },
-]
+];
 
 export const documentColumns: ColumnDef<Document>[] = [
     {

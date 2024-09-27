@@ -15,7 +15,7 @@ export async function GET() {
     const allTrashWorkspaces = await db.workspace.findMany({
         where: {
             userId: session.user.id,
-            inTrash: true
+            inTrash: true,
         },
     });
 
