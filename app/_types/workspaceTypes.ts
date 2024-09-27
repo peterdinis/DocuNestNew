@@ -20,6 +20,7 @@ export type PaginatedWorkspace = Pick<
 export type WorkspacePaginationType = {
     id: string;
     createdAt: string | Date;
+    inTrash: boolean;
 } & WorkspaceType;
 
 export type WorkspaceDetailType = Pick<WorkspacePaginationType, 'id'>;
