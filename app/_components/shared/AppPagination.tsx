@@ -11,7 +11,7 @@ import { FC } from 'react';
 interface AppPaginationProps {
     currentPage: number;
     onPageChange: (page: number) => void;
-    hasNextPage: boolean; // New prop to control the next button state
+    hasNextPage: boolean;
 }
 
 const AppPagination: FC<AppPaginationProps> = ({
