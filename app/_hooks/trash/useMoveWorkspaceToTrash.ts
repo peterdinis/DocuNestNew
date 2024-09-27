@@ -5,11 +5,11 @@ import { queryClient } from '@/app/_store/queryClient';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 
-type WorkspaceProps =  {
+type WorkspaceProps = {
     id: string;
-}
+};
 
-const useMoveWorkspaceToTrash = ({id}: WorkspaceProps) => {
+const useMoveWorkspaceToTrash = ({ id }: WorkspaceProps) => {
     const { toast } = useToast();
     return useMutation({
         mutationKey: ['moveToTrash', id],

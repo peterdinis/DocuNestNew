@@ -72,9 +72,9 @@ const WorkspaceDetail: FC = () => {
                             {/* Trash Button */}
                             <button
                                 onClick={() => moveWorkspaceToTrash.mutate()} // Call the mutation on click
-                                className='flex items-center justify-center p-2 text-red-600 hover:bg-gray-100 rounded-md'
+                                className='flex items-center justify-center rounded-md p-2 text-red-600 hover:bg-gray-100'
                             >
-                                <Trash className='w-6 h-6' />
+                                <Trash className='h-6 w-6' />
                             </button>
                         </div>
                     </div>

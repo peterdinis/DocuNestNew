@@ -25,16 +25,16 @@ export async function PUT(request: NextRequest) {
 
     const moveWorkspaceToTrash = await db.workspace.update({
         where: {
-            id
+            id,
         },
 
         data: {
-            inTrash: true
-        }
+            inTrash: true,
+        },
     });
 
-    if(!moveWorkspaceToTrash) {
-        throw new Error("Failed to move workspace to trash")
+    if (!moveWorkspaceToTrash) {
+        throw new Error('Failed to move workspace to trash');
     }
 
     return NextResponse.json(moveWorkspaceToTrash);

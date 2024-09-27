@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { FC } from 'react';
 import {
@@ -16,17 +16,16 @@ import { Trash } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const TrashModal: FC = () => {
-    
-    const {toast} = useToast();
+    const { toast } = useToast();
 
     const clearTrash = () => {
         toast({
-            title: "Trash was cleaned",
+            title: 'Trash was cleaned',
             duration: 2000,
-            className: "bg-green-800 text-white font-bold text-xl"
-        })
-    }
-    
+            className: 'bg-green-800 text-white font-bold text-xl',
+        });
+    };
+
     return (
         <>
             <Dialog>

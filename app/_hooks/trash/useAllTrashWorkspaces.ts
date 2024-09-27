@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import { useQuery } from "@tanstack/react-query"
-import { allTrashWorkspaces } from "@/app/_store/queries/trashQueries"
+import { useQuery } from '@tanstack/react-query';
+import { allTrashWorkspaces } from '@/app/_store/queries/trashQueries';
 
 const useAllTrashWorkspaces = () => {
     return useQuery({
@@ -12,6 +12,6 @@ const useAllTrashWorkspaces = () => {
         refetchOnWindowFocus: true,
         refetchOnMount: true,
     });
-}
+};
 
-export default useAllTrashWorkspaces
+export default useAllTrashWorkspaces;

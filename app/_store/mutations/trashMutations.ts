@@ -1,7 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const moveWorkspaceToTrash = async (
-    id: string,
-) => {
+export const moveWorkspaceToTrash = async (id: string) => {
     return await axios.put(`/api/workspaces/${id}/trash`);
 };
