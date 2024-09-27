@@ -47,7 +47,7 @@ const WorkspaceDetail: FC = () => {
                     <Header text={`Workspace Detail`} />
                     <br />
                     <div className='mt-5'>
-                        <span className='text-3xl'>{data.workspaceEmoji}</span>
+                        <span className='text-6xl'>{data.workspaceEmoji}</span>
                         <h2 className='break-all text-left text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
                             {data.name}
                         </h2>
@@ -73,16 +73,6 @@ const WorkspaceDetail: FC = () => {
                     </div>
                     <div className='mt-10'>
                         <div className='flex items-center justify-end space-x-4'>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger>
-                                        <UploadDocumentToWorkspaceModal />
-                                        <TooltipContent>
-                                            Upload document to workspace
-                                        </TooltipContent>
-                                    </TooltipTrigger>
-                                </Tooltip>
-                            </TooltipProvider>
                             <div className='flex items-center'>
                                 <CreateDocumentModal workspaceId={id} />
                             </div>

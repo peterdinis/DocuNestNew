@@ -63,21 +63,24 @@ model Workspace {
   userId             String
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade, name: "UserWorkspaces")
   members            WorkspaceMember[]
-  workspaceDocuments WorkspaceDocument[]
+  workspaceDocuments WorkspaceDocument[] @relation("WorkspaceToDocuments") // Add this relation
+  uploadedDocuments  UploadedDocument[]  @relation("WorkspaceDocuments")   // Relation to UploadedDocument
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
 }
 
 model UploadedDocument {
-  id        String   @id @default(uuid())
-  name      String?
-  url       String?
-  size      Int?
-  type      String?
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String   @id @default(uuid())
+  name        String?
+  url         String?
+  size        Int?
+  type        String?
+  userId      String
+  workspaceId String  @default("1222")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade, name: "WorkspaceDocuments") // Relation to Workspace
 }
 
 model WorkspaceDocument {
@@ -85,7 +88,7 @@ model WorkspaceDocument {
   name        String
   content     String
   workspaceId String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade, name: "WorkspaceToDocuments") // Correct relation name
   userId      String
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
