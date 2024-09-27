@@ -10,11 +10,30 @@ export type Member = {
     role: string;
 };
 
+export type Workspace = {
+    id: number;
+    name: string;
+};
+
 export type Document = {
     id: number;
     name: string;
     createdAt: string | Date;
 };
+
+export const trashColumns: ColumnDef<Workspace>[] = [
+    {
+        accessorKey: 'id',
+        header: 'Id',
+        cell: (info) => info.getValue(),
+    },
+
+    {
+        accessorKey: 'name',
+        header: 'Name',
+        cell: (info) => info.getValue(),
+    },
+]
 
 export const documentColumns: ColumnDef<Document>[] = [
     {

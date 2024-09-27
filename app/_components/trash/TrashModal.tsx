@@ -1,3 +1,5 @@
+"use client"
+
 import { FC } from 'react';
 import {
     Dialog,
@@ -11,8 +13,20 @@ import Header from '../shared/Header';
 import TrashWorkspaces from './TrashWorkspaces';
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const TrashModal: FC = () => {
+    
+    const {toast} = useToast();
+
+    const clearTrash = () => {
+        toast({
+            title: "Trash was cleaned",
+            duration: 2000,
+            className: "bg-green-800 text-white font-bold text-xl"
+        })
+    }
+    
     return (
         <>
             <Dialog>
@@ -32,7 +46,7 @@ const TrashModal: FC = () => {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <Button>
+                    <Button onClick={clearTrash}>
                         <Trash />
                         Delete all Trash
                     </Button>
