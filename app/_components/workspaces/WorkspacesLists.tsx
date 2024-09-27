@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { FC, useState, useEffect, ChangeEvent } from 'react';
+import { FC, useState, useEffect, ChangeEvent, useMemo } from 'react';
 import CreateNewWorkspaceModal from './CreateNewWorkspaceModal';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import usePaginatedWorkspaces from '@/app/_hooks/workspaces/usePaginatedWorkspaces';
@@ -28,6 +28,12 @@ const WorkspacesLists: FC = () => {
         refetch();
     }, [debouncedSearchQuery, currentPage, refetch]);
 
+    const filteredWorkspaces = useMemo(() => {
+        return data?.workspaces?.filter(
+            (workspace: WorkspacePaginationType) => !workspace.inTrash
+        ) || [];
+    }, [data?.workspaces]);
+
     if (isLoading) {
         return <Loading />;
     }
@@ -38,7 +44,6 @@ const WorkspacesLists: FC = () => {
         return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
 
-    const workspaces = data?.workspaces || [];
     const totalWorkspaces = data?.totalWorkspaces || 0;
     const workspacesPerPage = 6; // Adjust based on your API response
     const totalPages = Math.ceil(totalWorkspaces / workspacesPerPage);
@@ -70,8 +75,8 @@ const WorkspacesLists: FC = () => {
                 </div>
                 <CardContent>
                     <div className='grid grid-cols-3 gap-4'>
-                        {workspaces.length > 0 ? (
-                            workspaces.map(
+                        {filteredWorkspaces.length > 0 ? (
+                            filteredWorkspaces.map(
                                 (workspace: WorkspacePaginationType) => (
                                     <motion.div
                                         key={workspace.id}

@@ -20,8 +20,8 @@ const useClearTrash = () => {
                 className: 'bg-green-800 text-white font-bold',
             });
             queryClient.invalidateQueries({
-                queryKey: ["trashWorkspaces"]
-            })
+                queryKey: ['trashWorkspaces'],
+            });
         },
 
         onError: () => {
