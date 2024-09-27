@@ -61,6 +61,7 @@ model Workspace {
   image              String?             @default("https://picsum.photos/200/300")
   workspaceEmoji     String
   userId             String
+  inTrash            Boolean?            @default(false)
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade, name: "UserWorkspaces")
   members            WorkspaceMember[]
   workspaceDocuments WorkspaceDocument[] @relation("WorkspaceToDocuments") // Add this relation

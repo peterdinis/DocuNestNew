@@ -8,7 +8,6 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import Header from '../shared/Header';
-import TrashDocuments from './TrashDocuments';
 import TrashWorkspaces from './TrashWorkspaces';
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
@@ -29,12 +28,6 @@ const TrashModal: FC = () => {
                             </h5>
                             <div className='mt-3'>
                                 <TrashWorkspaces />
-                            </div>
-                            <h5 className='prose-h5: prose font-bold dark:text-white'>
-                                DOCUMENTS
-                            </h5>
-                            <div className='mt-3'>
-                                <TrashDocuments />
                             </div>
                         </DialogDescription>
                     </DialogHeader>
