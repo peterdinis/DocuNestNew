@@ -7,8 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "format": "prettier --write --ignore-path .gitignore .",
-        "seed": "ts-node ./prisma/seed.ts"
+        "format": "prettier --write --ignore-path .gitignore ."
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
