@@ -7,7 +7,6 @@ export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
     const pathnameParts = url.pathname.split('/');
 
-    // Assuming the id is the second-to-last segment (before "trash")
     const id = pathnameParts[pathnameParts.length - 2];
 
     if (!id) {
@@ -41,12 +40,12 @@ export async function PUT(request: NextRequest) {
         },
 
         data: {
-            inTrash: true,
+            inTrash: false
         },
     });
 
     if (!moveWorkspaceToTrash) {
-        throw new Error('Failed to move workspace to trash');
+        throw new Error('Failed to move restore workspace to trash');
     }
 
     return NextResponse.json(moveWorkspaceToTrash);
