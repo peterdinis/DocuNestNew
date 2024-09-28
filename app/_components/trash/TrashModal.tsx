@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
 import useClearTrash from '@/app/_hooks/trash/useClearTrash';
 import Loading from '../shared/Loading';
+import useAllTrashWorkspaces from '@/app/_hooks/trash/useAllTrashWorkspaces';
 
 const TrashModal: FC = () => {
     const clearTrashMutation = useClearTrash();
@@ -22,6 +23,10 @@ const TrashModal: FC = () => {
     const handleClearTrash = () => {
         clearTrashMutation.mutate();
     };
+
+    const { data } = useAllTrashWorkspaces();
+
+    console.log('D', data);
 
     return (
         <>
@@ -44,7 +49,10 @@ const TrashModal: FC = () => {
 
                     <Button
                         onClick={handleClearTrash}
-                        disabled={clearTrashMutation.isPending}
+                        disabled={
+                            !data?.trashWorkspaces ||
+                            data?.trashWorkspaces.length === 0
+                        }
                     >
                         <Trash />
                         {clearTrashMutation.isPending ? (
