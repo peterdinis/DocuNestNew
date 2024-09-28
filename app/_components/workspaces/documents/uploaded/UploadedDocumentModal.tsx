@@ -30,7 +30,7 @@ const UploadedDocumentModal: FC = () => {
                         <DialogDescription>
                             <UploadDropzone
                                 endpoint='fileUploader'
-                                onClientUploadComplete={(res) => {
+                                onClientUploadComplete={() => {
                                     toast({
                                         title: 'Document was uploaded',
                                         duration: 2000,

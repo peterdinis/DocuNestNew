@@ -8,7 +8,7 @@ const f = createUploadthing();
 
 export const uploadRouter = {
     fileUploader: f(['application/pdf', 'text/plain', 'application/msword'])
-        .middleware(async ({ req }) => {
+        .middleware(async () => {
             const session = await getServerSession(authOptions);
             if (!session || !session.user) {
                 throw new UploadThingError('Unauthorized');

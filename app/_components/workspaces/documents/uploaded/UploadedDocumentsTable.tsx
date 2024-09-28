@@ -10,9 +10,7 @@ interface IUploadDocumentsTableProps {
     workspaceId: string;
 }
 
-const UploadDocumentsTable: FC<IUploadDocumentsTableProps> = ({
-    workspaceId,
-}) => {
+const UploadDocumentsTable: FC<IUploadDocumentsTableProps> = ({}) => {
     const { data, isLoading, isError, error } =
         useDisplayAllUploadedDocuments();
 
