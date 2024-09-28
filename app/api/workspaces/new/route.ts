@@ -35,9 +35,7 @@ export async function POST(req: Request) {
                 description,
             },
         });
-
-        console.log('CreateNewWorkspace', createNewWorkspace);
-
+        
         if (!createNewWorkspace) {
             return new NextResponse('Failed to create workspace', {
                 status: 500,
