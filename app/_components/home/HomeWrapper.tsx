@@ -26,14 +26,6 @@ const HomeWrapper: FC = () => {
                         <Button variant={'default'} size='lg' color='primary'>
                             <Link href='/register'>Try now</Link>
                         </Button>
-                        <Button
-                            variant={'destructive'}
-                            size='lg'
-                            color='secondary'
-                            className='ml-4'
-                        >
-                            Pricing
-                        </Button>
                     </div>
                 </div>
             </BackgroundBeamsWithCollision>
