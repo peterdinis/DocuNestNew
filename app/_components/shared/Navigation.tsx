@@ -205,6 +205,9 @@ const Navigation: FC = () => {
                                 Sign out
                             </Button>
                         </div>
+                        <div className='ml-5 mt-5'>
+                        <ThemeButton />
+                    </div>
                     </div>
                 )}
             </div>
