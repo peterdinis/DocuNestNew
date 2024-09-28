@@ -33,15 +33,13 @@ export async function POST(req: Request) {
         }
 
         // Add user to workspace
-        const doo = await db.workspaceMember.create({
+        await db.workspaceMember.create({
             data: {
                 userId: user.id,
                 workspaceId,
                 role,
             },
         });
-
-        // console.log('D', doo);
 
         // Send email notification
         await sendInvitationEmail(email, workspaceId);
