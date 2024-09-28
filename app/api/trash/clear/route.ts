@@ -18,8 +18,6 @@ export async function DELETE() {
         },
     });
 
-    console.log('CT', cleanTrash);
-
     return NextResponse.json({
         message: 'Trash was cleaned',
     });

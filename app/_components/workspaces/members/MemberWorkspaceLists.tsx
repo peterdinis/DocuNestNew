@@ -15,7 +15,7 @@ const MemberWorkspaceLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
     const {
-        data, 
+        data,
         isLoading,
         isError,
         error,
