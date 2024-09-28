@@ -29,20 +29,28 @@ import Loading from '../shared/Loading';
 
 const CreateNewWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
+    const [open, setOpen] = useState<boolean>(false);
     const { mutate: createWorkspace, isPending } = useCreateWorkspace();
     const form = useForm<WorkspaceFormData>();
 
     const onSubmit: SubmitHandler<WorkspaceFormData> = (data) => {
-        createWorkspace({
-            name: data.name,
-            description: data.description,
-            workspaceEmoji: selectedEmoji,
-        });
-        form.reset();
+        createWorkspace(
+            {
+                name: data.name,
+                description: data.description,
+                workspaceEmoji: selectedEmoji,
+            },
+            {
+                onSuccess: () => {
+                    form.reset();
+                    setOpen(false);
+                },
+            },
+        );
     };
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
                 <Button variant={'link'} size='default'>
                     <Plus className='h-5 w-5 cursor-pointer text-gray-700 dark:text-white' />

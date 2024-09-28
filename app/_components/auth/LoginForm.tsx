@@ -134,7 +134,7 @@ const LoginForm: FC = () => {
                 <span className='text-ls'>Do not have an account? </span>
                 <Link
                     href='/register'
-                    className='ml-4 text-ls text-blue-500'
+                    className='text-ls ml-4 text-blue-500'
                     prefetch={false}
                 >
                     Register

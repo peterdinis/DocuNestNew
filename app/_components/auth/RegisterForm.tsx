@@ -150,7 +150,7 @@ const RegisterForm: FC = () => {
                 <span className='text-ls'>Already have an account?</span>
                 <Link
                     href='/login'
-                    className='ml-4 text-ls text-blue-500'
+                    className='text-ls ml-4 text-blue-500'
                     prefetch={false}
                 >
                     Login
