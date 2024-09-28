@@ -12,7 +12,7 @@ export async function DELETE() {
         );
     }
 
-    const cleanTrash = await db.workspace.deleteMany({
+    await db.workspace.deleteMany({
         where: {
             userId: session.user.id,
         },
