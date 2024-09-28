@@ -29,6 +29,9 @@ const useRestoreWorkspaceFromTrash = ({ id }: WorkspaceProps) => {
             queryClient.invalidateQueries({
                 queryKey: ['trashWorkspaces'],
             });
+            queryClient.invalidateQueries({
+                queryKey: ['myPaginatedWorkspaces'],
+            });
         },
 
         onError: () => {
