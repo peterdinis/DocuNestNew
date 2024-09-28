@@ -27,10 +27,14 @@ const TrashWorkspaces: FC = () => {
         <>
             {trashWorkspacesData.length > 0 ? (
                 <GlobalTable
-                    data={trashWorkspacesData.map((workspace: { id: { toString: () => string; }; }) => ({
-                        ...workspace,
-                        restore: <RestoreButton id={workspace.id.toString()} />,
-                    }))}
+                    data={trashWorkspacesData.map(
+                        (workspace: { id: { toString: () => string } }) => ({
+                            ...workspace,
+                            restore: (
+                                <RestoreButton id={workspace.id.toString()} />
+                            ),
+                        }),
+                    )}
                     columns={[...trashColumns]}
                 />
             ) : (

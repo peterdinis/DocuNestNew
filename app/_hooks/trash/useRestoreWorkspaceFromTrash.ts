@@ -30,8 +30,8 @@ const useRestoreWorkspaceFromTrash = ({ id }: WorkspaceProps) => {
                 queryKey: ['trashWorkspaces'],
             });
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedWorkspaces"]
-            })
+                queryKey: ['myPaginatedWorkspaces'],
+            });
         },
 
         onError: () => {

@@ -39,7 +39,7 @@ export const trashColumns: ColumnDef<Workspace>[] = [
     {
         header: 'Actions',
         cell: ({ row }) => {
-            const workspaceId = row.original.id.toString(); 
+            const workspaceId = row.original.id.toString();
             return <RestoreButton id={workspaceId} />;
         },
     },
