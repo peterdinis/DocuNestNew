@@ -3,6 +3,7 @@
 import useRestoreWorkspaceFromTrash from "@/app/_hooks/trash/useRestoreWorkspaceFromTrash";
 import { FC } from "react";
 import Loading from "../shared/Loading";
+import { Button } from "@/components/ui/button";
 
 type RestoreButtonProps = {
     id: string;
@@ -12,13 +13,15 @@ const RestoreButton: FC<RestoreButtonProps> = ({ id }) => {
     const restoreMutation = useRestoreWorkspaceFromTrash({ id });
 
     return (
-        <button
+        <Button
             onClick={() => restoreMutation.mutate()}
             disabled={restoreMutation.isPending}
-            className='bg-blue-500 text-white px-4 py-2 rounded-md'
+            className='px-4 py-2 rounded-md'
+            variant={"outline"}
+            size={"sm"}
         >
             {restoreMutation.isPending ? <Loading /> : 'Restore'}
-        </button>
+        </Button>
     );
 };
 
