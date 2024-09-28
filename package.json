@@ -7,8 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "format": "prettier --write --ignore-path .gitignore .",
-        "seed": "ts-node ./prisma/seed.ts"
+        "format": "prettier --write --ignore-path .gitignore ."
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
@@ -84,7 +83,7 @@
         "@types/file-saver": "^2.0.7",
         "@types/html-to-pdfmake": "^2.4.4",
         "@types/jest": "^29.5.13",
-        "@types/node": "^20",
+        "@types/node": "^20.16.5",
         "@types/nodemailer": "^6.4.16",
         "@types/pdfmake": "^0.2.9",
         "@types/react": "^18",
