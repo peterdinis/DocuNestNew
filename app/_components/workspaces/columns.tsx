@@ -2,6 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
+import RestoreButton from '../trash/RestoreButton';
 
 export type Member = {
     id: string;
@@ -32,6 +33,15 @@ export const trashColumns: ColumnDef<Workspace>[] = [
         accessorKey: 'name',
         header: 'Name',
         cell: (info) => info.getValue(),
+    },
+
+    // Nový stĺpec pre tlačidlo "Restore"
+    {
+        header: 'Actions',
+        cell: ({ row }) => {
+            const workspaceId = row.original.id.toString(); 
+            return <RestoreButton id={workspaceId} />;
+        },
     },
 ];
 

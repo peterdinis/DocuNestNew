@@ -5,6 +5,7 @@ import { GlobalTable } from '../shared/GlobalTable';
 import { trashColumns } from '../workspaces/columns';
 import useAllTrashWorkspaces from '@/app/_hooks/trash/useAllTrashWorkspaces';
 import Loading from '../shared/Loading';
+import RestoreButton from './RestoreButton';
 
 const TrashWorkspaces: FC = () => {
     const { data, isLoading, isError, error } = useAllTrashWorkspaces();
@@ -24,7 +25,17 @@ const TrashWorkspaces: FC = () => {
 
     return (
         <>
-            <GlobalTable data={trashWorkspacesData} columns={trashColumns} />
+            {trashWorkspacesData.length > 0 ? (
+                <GlobalTable
+                    data={trashWorkspacesData.map((workspace: { id: { toString: () => string; }; }) => ({
+                        ...workspace,
+                        restore: <RestoreButton id={workspace.id.toString()} />,
+                    }))}
+                    columns={[...trashColumns]}
+                />
+            ) : (
+                <p className='text-xl font-bold'>No workspaces in trash</p>
+            )}
         </>
     );
 };
