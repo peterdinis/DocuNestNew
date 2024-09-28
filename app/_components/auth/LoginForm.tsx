@@ -103,7 +103,7 @@ const LoginForm: FC = () => {
                                 type='button'
                                 onClick={toggleVisibility}
                                 className='absolute inset-y-0 right-3 top-9 flex items-center'
-                                tabIndex={-1} // Prevents button from interfering with form focus
+                                tabIndex={-1}
                             >
                                 {isVisible ? (
                                     <EyeOff className='h-5 w-5 text-gray-500' />
@@ -131,10 +131,10 @@ const LoginForm: FC = () => {
                 </form>
             </Card>
             <div className='mt-4'>
-                <span className='text-sm'>Do not have an account? </span>
+                <span className='text-ls'>Do not have an account? </span>
                 <Link
                     href='/register'
-                    className='ml-4 text-sm text-blue-500'
+                    className='ml-4 text-ls text-blue-500'
                     prefetch={false}
                 >
                     Register

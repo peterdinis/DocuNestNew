@@ -147,10 +147,10 @@ const RegisterForm: FC = () => {
                 </form>
             </Card>
             <div className='mt-4'>
-                <span className='text-sm'>Already have an account?</span>
+                <span className='text-ls'>Already have an account?</span>
                 <Link
                     href='/login'
-                    className='ml-4 text-sm text-blue-500'
+                    className='ml-4 text-ls text-blue-500'
                     prefetch={false}
                 >
                     Login
