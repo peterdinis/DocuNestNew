@@ -19,12 +19,12 @@ export async function POST(req: Request) {
 
         const user = await db.user.findUnique({
             where: {
-                id: session.user.id
-            }
+                id: session.user.id,
+            },
         });
 
-        if(!user) {
-            throw new Error("User not found");
+        if (!user) {
+            throw new Error('User not found');
         }
 
         const createNewWorkspace = await db.workspace.create({
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
             },
         });
 
-        console.log("CreateNewWorkspace", createNewWorkspace);
+        console.log('CreateNewWorkspace', createNewWorkspace);
 
         if (!createNewWorkspace) {
             return new NextResponse('Failed to create workspace', {

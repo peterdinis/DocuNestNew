@@ -76,7 +76,7 @@ export function GlobalTable<TData, TValue>({
                                 colSpan={columns.length}
                                 className='h-24 text-center'
                             >
-                                <Frown className='w-6 h-6' /> No results.
+                                <Frown className='h-6 w-6' /> No results.
                             </TableCell>
                         </TableRow>
                     )}

@@ -40,7 +40,7 @@ export async function PUT(request: NextRequest) {
         },
 
         data: {
-            inTrash: false
+            inTrash: false,
         },
     });
 

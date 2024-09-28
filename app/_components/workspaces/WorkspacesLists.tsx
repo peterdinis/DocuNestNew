@@ -29,9 +29,11 @@ const WorkspacesLists: FC = () => {
     }, [debouncedSearchQuery, currentPage, refetch]);
 
     const filteredWorkspaces = useMemo(() => {
-        return data?.workspaces?.filter(
-            (workspace: WorkspacePaginationType) => !workspace.inTrash
-        ) || [];
+        return (
+            data?.workspaces?.filter(
+                (workspace: WorkspacePaginationType) => !workspace.inTrash,
+            ) || []
+        );
     }, [data?.workspaces]);
 
     if (isLoading) {
