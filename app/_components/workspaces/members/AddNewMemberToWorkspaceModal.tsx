@@ -45,7 +45,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
                 onSuccess: () => {
                     setOpen(false); // Close the modal on success
                 },
-            }
+            },
         );
     };
 
