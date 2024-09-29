@@ -7,7 +7,7 @@ export const createWorkspace = async (data: WorkspaceType) => {
 };
 
 
-export const updateWorkspace = async (id: number, data: UpdateWorkspaceType) => {
+export const updateWorkspace = async (id: string, data: UpdateWorkspaceType) => {
     const request = await axios.put(`/api/workspaces/${id}`, data);
     return request.data;
 };

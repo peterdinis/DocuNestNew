@@ -7,7 +7,7 @@ import { updateWorkspace } from '@/app/_store/mutations/workspaceMutations';
 import { queryClient } from '@/app/_store/queryClient';
 
 type UpdateWorkspaceProps = {
-    id: number;
+    id: string;
 }
 
 const useUpdateWorkspace = ({id}: UpdateWorkspaceProps) => {
