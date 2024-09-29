@@ -41,7 +41,7 @@ export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
 
-    const {name, workspaceEmoji, description} = await request.json();
+    const { name, workspaceEmoji, description } = await request.json();
 
     if (!id) {
         return NextResponse.json(
@@ -72,18 +72,18 @@ export async function PUT(request: NextRequest) {
 
     const updateActualWorkspace = await db.workspace.update({
         where: {
-            id: findOneWorkspace.id
+            id: findOneWorkspace.id,
         },
 
         data: {
             name,
             workspaceEmoji,
-            description
-        }
+            description,
+        },
     });
 
-    if(!updateActualWorkspace) {
-        throw new Error("Failed to update workspace");
+    if (!updateActualWorkspace) {
+        throw new Error('Failed to update workspace');
     }
 
     return NextResponse.json(updateActualWorkspace);

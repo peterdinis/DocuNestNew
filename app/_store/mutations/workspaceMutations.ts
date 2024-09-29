@@ -1,4 +1,7 @@
-import { UpdateWorkspaceType, WorkspaceType } from '@/app/_types/workspaceTypes';
+import {
+    UpdateWorkspaceType,
+    WorkspaceType,
+} from '@/app/_types/workspaceTypes';
 import axios from 'axios';
 
 export const createWorkspace = async (data: WorkspaceType) => {
@@ -6,8 +9,10 @@ export const createWorkspace = async (data: WorkspaceType) => {
     return request.data;
 };
 
-
-export const updateWorkspace = async (id: string, data: UpdateWorkspaceType) => {
+export const updateWorkspace = async (
+    id: string,
+    data: UpdateWorkspaceType,
+) => {
     const request = await axios.put(`/api/workspaces/${id}`, data);
     return request.data;
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useState, ChangeEvent, FormEvent } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -12,54 +12,57 @@ import {
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import Header from '../shared/Header';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import useUpdateWorkspace from '@/app/_hooks/workspaces/useUpdateWorkspace';
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import EmojiPicker from 'emoji-picker-react';
-
-interface UpdateWorkspaceFormInputs {
-    name: string;
-    description: string;
-    emoji: string;
-}
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 interface IUpdateWorkspaceModalProps {
     workspaceId: string;
 }
 
-const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({workspaceId}: IUpdateWorkspaceModalProps) => {
+const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({ workspaceId }) => {
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [selectedEmoji, setSelectedEmoji] = useState('');
-    const { handleSubmit, setValue, watch, control } = useForm<UpdateWorkspaceFormInputs>();
-    const updateWorkspaceMutation = useUpdateWorkspace({ id: workspaceId }); 
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+    });
+    const updateWorkspaceMutation = useUpdateWorkspace({ id: workspaceId });
 
-    // Handle form submission
-    const onSubmit: SubmitHandler<UpdateWorkspaceFormInputs> = (data) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         updateWorkspaceMutation.mutate({
-            name: data.name,
-            description: data.description,
-            workspaceEmoji: selectedEmoji, // Use the selected emoji
+            name: formData.name,
+            description: formData.description,
+            workspaceEmoji: selectedEmoji,
         });
     };
 
-    // Handle emoji selection
     const onEmojiClick = (emojiObject: { emoji: string }) => {
         setSelectedEmoji(emojiObject.emoji);
-        setValue('emoji', emojiObject.emoji); // Set emoji value in form
-        setShowEmojiPicker(false); // Close emoji picker after selection
+        setShowEmojiPicker(false);
     };
 
     return (
         <Dialog>
             <DialogTrigger>
-                <Button size='icon' variant='outline'>
-                    <Plus className='h-4 w-4' />
+                <Button size="icon" variant="outline">
+                    <Plus className="h-4 w-4" />
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        <Header text='Update Workspace' />
+                        <Header text="Update Workspace" />
                     </DialogTitle>
                     <DialogDescription>
                         Update your workspace details. This action cannot be undone.
@@ -67,73 +70,53 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({workspaceId}: IUp
                 </DialogHeader>
 
                 {/* Update Workspace Form */}
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <FormField
-                        name="name"
-                        control={control}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Workspace Name</FormLabel>
-                                <FormControl>
-                                    <input
-                                        {...field}
-                                        className="border rounded p-2 w-full"
-                                        placeholder="Workspace Name"
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    
-                    <FormField
-                        name="description"
-                        control={control}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Description</FormLabel>
-                                <FormControl>
-                                    <textarea
-                                        {...field}
-                                        className="border rounded p-2 w-full"
-                                        placeholder="Workspace Description"
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                <form onSubmit={onSubmit}>
+                    <div>
+                        <label className="block mb-2">Workspace Name</label>
+                        <Input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="w-full rounded border p-2"
+                            placeholder="Workspace Name"
+                        />
+                    </div>
 
-                    <FormField
-                        name="emoji"
-                        control={control}
-                        render={() => (
-                            <FormItem>
-                                <FormLabel>Emoji</FormLabel>
-                                <div className="flex items-center">
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                                        type="button"
-                                    >
-                                        {selectedEmoji || 'Select Emoji'}
-                                    </Button>
-                                    {watch('emoji') && (
-                                        <span className="ml-2 text-lg">{watch('emoji')}</span>
-                                    )}
-                                </div>
-                                {showEmojiPicker && (
-                                    <div className="mt-2">
-                                        <EmojiPicker onEmojiClick={onEmojiClick} />
-                                    </div>
-                                )}
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className="mt-4">
+                        <label className="block mb-2">Description</label>
+                        <Textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            className="w-full rounded border p-2"
+                            placeholder="Workspace Description"
+                        />
+                    </div>
 
-                    <Button type="submit" variant="default">
+                    <div className="mt-4">
+                        <label className="block mb-2">Emoji</label>
+                        <div className="flex items-center">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                                type="button"
+                            >
+                                {selectedEmoji || 'Select Emoji'}
+                            </Button>
+                            {selectedEmoji && (
+                                <span className="ml-2 text-lg">{selectedEmoji}</span>
+                            )}
+                        </div>
+                        {showEmojiPicker && (
+                            <div className="mt-2">
+                                <EmojiPicker onEmojiClick={onEmojiClick} />
+                            </div>
+                        )}
+                    </div>
+
+                    <Button type="submit" variant="default" className="mt-4">
                         Update Workspace
                     </Button>
                 </form>
