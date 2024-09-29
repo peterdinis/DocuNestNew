@@ -30,8 +30,6 @@ const WorkspaceDetail: FC = () => {
     const { data, isLoading, isError, error } = useWorkspaceDetail({ id });
     const moveWorkspaceToTrash = useMoveWorkspaceToTrash({ id });
 
-    console.log("D", data);
-
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
