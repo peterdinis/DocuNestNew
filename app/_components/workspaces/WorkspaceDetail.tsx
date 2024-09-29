@@ -87,13 +87,24 @@ const WorkspaceDetail: FC = () => {
                                 </Tooltip>
                             </TooltipProvider>
 
-                            <Button
-                                variant={'ghost'}
-                                onClick={() => moveWorkspaceToTrash.mutate()} // Call the mutation on click
-                                className='flex items-center justify-center rounded-md p-2 text-red-600'
-                            >
-                                <Trash className='h-6 w-6' />
-                            </Button>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Button
+                                            variant={'ghost'}
+                                            onClick={() =>
+                                                moveWorkspaceToTrash.mutate()
+                                            }
+                                            className='flex items-center justify-center rounded-md p-2 text-red-600'
+                                        >
+                                            <Trash className='h-6 w-6' />
+                                        </Button>
+                                        <TooltipContent>
+                                            Move workspace to trash
+                                        </TooltipContent>
+                                    </TooltipTrigger>
+                                </Tooltip>
+                            </TooltipProvider>
                         </div>
                     </div>
                     <div className='mt-5'>
