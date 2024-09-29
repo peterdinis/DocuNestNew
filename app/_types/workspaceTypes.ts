@@ -4,6 +4,8 @@ export type WorkspaceType = {
     description: string;
 };
 
+export type UpdateWorkspaceType = Partial<WorkspaceType>;
+
 export type WorkspaceFormData = WorkspaceType;
 
 export type BasePaginatedWorkspaces = {

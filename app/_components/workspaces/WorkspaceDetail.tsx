@@ -22,6 +22,7 @@ import UploadedDocumentsTable from './documents/uploaded/UploadedDocumentsTable'
 import UploadedDocumentModal from './documents/uploaded/UploadedDocumentModal';
 import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'; // Importing the custom hook for trash action
 import { Button } from '@/components/ui/button';
+import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -48,13 +49,26 @@ const WorkspaceDetail: FC = () => {
             <div className='flex-1 overflow-auto p-8'>
                 <div className='mx-auto max-w-4xl'>
                     <Header text={`Workspace Detail`} />
+                    <div className='float-right'>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    {' '}
+                                    <UpdateWorkspaceModal />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Update Workspace</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
                     <br />
                     <div className='mt-5'>
                         <span className='text-6xl'>{data.workspaceEmoji}</span>
-                        <h2 className='break-all text-left mt-5 text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
+                        <h2 className='mt-5 break-all text-left text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
                             {data.name}
                         </h2>
-                        <p className='mt-4 prose prose-p: font-bold dark:text-white'>
+                        <p className='prose-p: prose mt-4 font-bold dark:text-white'>
                             {data.description}
                         </p>
                         <div className='prose-p: prose pt-5 dark:text-sky-50'>
@@ -74,7 +88,7 @@ const WorkspaceDetail: FC = () => {
                             </TooltipProvider>
 
                             <Button
-                                variant={"ghost"}
+                                variant={'ghost'}
                                 onClick={() => moveWorkspaceToTrash.mutate()} // Call the mutation on click
                                 className='flex items-center justify-center rounded-md p-2 text-red-600'
                             >
