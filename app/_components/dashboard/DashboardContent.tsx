@@ -3,7 +3,6 @@
 import { FC } from 'react';
 import Header from '../shared/Header';
 import { useSession } from 'next-auth/react';
-import DashboardTeams from './DashboardTeams';
 import DashboardActivities from './DashboardActivites';
 import DashboardStatus from './DashboardStatus';
 
@@ -20,7 +19,6 @@ const DashboardContent: FC = () => {
                     <div className='mt-3'>
                         <DashboardActivities />
                     </div>
-                    <DashboardTeams />
                 </div>
             </main>
         </div>
