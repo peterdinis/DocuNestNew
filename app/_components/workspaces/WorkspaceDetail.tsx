@@ -21,6 +21,7 @@ import Loading from '../shared/Loading';
 import UploadedDocumentsTable from './documents/uploaded/UploadedDocumentsTable';
 import UploadedDocumentModal from './documents/uploaded/UploadedDocumentModal';
 import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'; // Importing the custom hook for trash action
+import { Button } from '@/components/ui/button';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -50,7 +51,7 @@ const WorkspaceDetail: FC = () => {
                     <br />
                     <div className='mt-5'>
                         <span className='text-6xl'>{data.workspaceEmoji}</span>
-                        <h2 className='break-all text-left text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
+                        <h2 className='break-all text-left mt-5 text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
                             {data.name}
                         </h2>
                         <p className='mt-4 prose prose-p: font-bold dark:text-white'>
@@ -72,13 +73,13 @@ const WorkspaceDetail: FC = () => {
                                 </Tooltip>
                             </TooltipProvider>
 
-                            {/* Trash Button */}
-                            <button
+                            <Button
+                                variant={"ghost"}
                                 onClick={() => moveWorkspaceToTrash.mutate()} // Call the mutation on click
-                                className='flex items-center justify-center rounded-md p-2 text-red-600 hover:bg-gray-100'
+                                className='flex items-center justify-center rounded-md p-2 text-red-600'
                             >
                                 <Trash className='h-6 w-6' />
-                            </button>
+                            </Button>
                         </div>
                     </div>
                     <div className='mt-5'>
