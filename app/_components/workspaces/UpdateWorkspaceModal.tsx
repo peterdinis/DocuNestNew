@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
+import Header from '../shared/Header';
 
 const UpdateWorkspaceModal: FC = () => {
     return (
@@ -20,7 +21,9 @@ const UpdateWorkspaceModal: FC = () => {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogTitle>
+                        <Header text='Update Workspace' />
+                    </DialogTitle>
                     <DialogDescription>
                         This action cannot be undone. This will permanently
                         delete your account and remove your data from our

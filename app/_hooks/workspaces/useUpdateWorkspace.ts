@@ -6,11 +6,11 @@ import { UpdateWorkspaceType} from '@/app/_types/workspaceTypes';
 import { updateWorkspace } from '@/app/_store/mutations/workspaceMutations';
 import { queryClient } from '@/app/_store/queryClient';
 
-type Props = {
+type UpdateWorkspaceProps = {
     id: number;
 }
 
-const useUpdateWorkspace = ({id}: Props) => {
+const useUpdateWorkspace = ({id}: UpdateWorkspaceProps) => {
     const { toast } = useToast();
     return useMutation({
         mutationKey: ['updateWorkspace', id],
