@@ -206,8 +206,8 @@ const Navigation: FC = () => {
                             </Button>
                         </div>
                         <div className='ml-5 mt-5'>
-                        <ThemeButton />
-                    </div>
+                            <ThemeButton />
+                        </div>
                     </div>
                 )}
             </div>
