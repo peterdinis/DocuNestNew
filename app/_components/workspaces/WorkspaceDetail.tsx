@@ -6,12 +6,6 @@ import Header from '../shared/Header';
 import { useParams } from 'next/navigation';
 import MembersTable from './MembersTable';
 import DocumentsTable from './DocumentsTable';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { Trash } from 'lucide-react';
 import useWorkspaceDetail from '@/app/_hooks/workspaces/useWorkspaceDetail';
 import { format } from 'date-fns';
@@ -20,7 +14,7 @@ import CreateDocumentModal from './documents/CreateDocumentModal';
 import Loading from '../shared/Loading';
 import UploadedDocumentsTable from './documents/uploaded/UploadedDocumentsTable';
 import UploadedDocumentModal from './documents/uploaded/UploadedDocumentModal';
-import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'; // Importing the custom hook for trash action
+import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash';
 import { Button } from '@/components/ui/button';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import TooltipWrapper from '../shared/TooltipWrapper';
@@ -83,23 +77,9 @@ const WorkspaceDetail: FC = () => {
                                 contentText='Add new member to workspace'
                             />
 
-                            <TooltipWrapper 
-                                triggerChildren={<>
-                                     <Button
-                                            variant={'ghost'}
-                                            onClick={() =>
-                                                moveWorkspaceToTrash.mutate()
-                                            }
-                                            className='flex items-center justify-center rounded-md p-2 text-red-600'
-                                        >
-                                            <Trash className='h-6 w-6' />
-                                        </Button>
-                                </>}
-                                contentText='Move workspace to trash'
-                            />
-                            {/* <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger>
+                            <TooltipWrapper
+                                triggerChildren={
+                                    <>
                                         <Button
                                             variant={'ghost'}
                                             onClick={() =>
@@ -109,12 +89,10 @@ const WorkspaceDetail: FC = () => {
                                         >
                                             <Trash className='h-6 w-6' />
                                         </Button>
-                                        <TooltipContent>
-                                            Move workspace to trash
-                                        </TooltipContent>
-                                    </TooltipTrigger>
-                                </Tooltip>
-                            </TooltipProvider> */}
+                                    </>
+                                }
+                                contentText='Move workspace to trash'
+                            />
                         </div>
                     </div>
                     <div className='mt-5'>
@@ -130,16 +108,14 @@ const WorkspaceDetail: FC = () => {
                     </div>
                     <div className='mt-10'>
                         <div className='flex items-center justify-end space-x-4'>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger>
+                            <TooltipWrapper
+                                triggerChildren={
+                                    <>
                                         <UploadedDocumentModal />
-                                        <TooltipContent>
-                                            Upload custom document
-                                        </TooltipContent>
-                                    </TooltipTrigger>
-                                </Tooltip>
-                            </TooltipProvider>
+                                    </>
+                                }
+                                contentText='Upload custom document'
+                            />
                         </div>
                         <UploadedDocumentsTable workspaceId={id} />
                     </div>
