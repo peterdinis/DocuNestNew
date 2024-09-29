@@ -26,8 +26,6 @@ const TrashModal: FC = () => {
 
     const { data } = useAllTrashWorkspaces();
 
-    console.log('D', data);
-
     return (
         <>
             <Dialog>

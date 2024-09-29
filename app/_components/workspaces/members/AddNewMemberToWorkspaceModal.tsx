@@ -23,6 +23,7 @@ const AddNewMemberToWorkspaceModal: FC = () => {
     const [email, setEmail] = useState('');
     const [workspaceId, setWorkspaceId] = useState('');
     const [role, setRole] = useState('');
+    const [open, setOpen] = useState(false); // State to control modal open/close
 
     const { mutate: addMember, isPending } = useAddNewWorkspaceMember();
 
@@ -34,15 +35,22 @@ const AddNewMemberToWorkspaceModal: FC = () => {
             return;
         }
 
-        addMember({
-            email,
-            workspaceId,
-            role,
-        });
+        addMember(
+            {
+                email,
+                workspaceId,
+                role,
+            },
+            {
+                onSuccess: () => {
+                    setOpen(false); // Close the modal on success
+                },
+            }
+        );
     };
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
                 <Button size='icon' variant='outline'>
                     <Plus className='h-4 w-4' />
