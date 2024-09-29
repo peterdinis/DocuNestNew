@@ -28,6 +28,7 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({ workspaceId }) =
         name: '',
         description: '',
     });
+    console.log("WorkspaceID", workspaceId);
     const updateWorkspaceMutation = useUpdateWorkspace({ id: workspaceId });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
