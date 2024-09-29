@@ -30,6 +30,8 @@ const WorkspaceDetail: FC = () => {
     const { data, isLoading, isError, error } = useWorkspaceDetail({ id });
     const moveWorkspaceToTrash = useMoveWorkspaceToTrash({ id });
 
+    console.log("D", data);
+
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
@@ -53,6 +55,9 @@ const WorkspaceDetail: FC = () => {
                         <h2 className='break-all text-left text-xl dark:text-sky-50 sm:text-2xl md:text-center md:text-3xl lg:text-4xl'>
                             {data.name}
                         </h2>
+                        <p className='mt-4 prose prose-p: font-bold dark:text-white'>
+                            {data.description}
+                        </p>
                         <div className='prose-p: prose pt-5 dark:text-sky-50'>
                             Workspace was created at:{' '}
                             {format(data.createdAt, 'yyyy-MM-dd')}
