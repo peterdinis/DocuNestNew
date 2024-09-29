@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,6 +26,7 @@ interface ICreateDocumentModalProps {
 const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
     workspaceId,
 }: ICreateDocumentModalProps) => {
+    const [isOpen, setIsOpen] = useState(false); // Modal open state
     const { mutate: createDocument, isPending } = useCreateWorkspaceDocument();
     const { data: session } = useSession();
     const {
@@ -51,14 +52,20 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
             userId: session?.user.id,
         };
 
-        createDocument(documentData);
-        reset();
+        createDocument(documentData, {
+            onSuccess: () => {
+                reset(); // Reset form
+                setIsOpen(false); // Close modal
+            },
+        });
     };
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant='outline'>Create new document</Button>
+                <Button variant='outline' onClick={() => setIsOpen(true)}>
+                    Create new document
+                </Button>
             </DialogTrigger>
             <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-[1000px]'>
                 <DialogHeader>
