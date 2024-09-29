@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import React, { FC } from 'react';
 import GlobalLayout from '../shared/GlobalLayout';
 import Header from '../shared/Header';
 import { useParams } from 'next/navigation';
@@ -23,6 +23,7 @@ import UploadedDocumentModal from './documents/uploaded/UploadedDocumentModal';
 import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'; // Importing the custom hook for trash action
 import { Button } from '@/components/ui/button';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
+import TooltipWrapper from '../shared/TooltipWrapper';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -50,17 +51,14 @@ const WorkspaceDetail: FC = () => {
                 <div className='mx-auto max-w-4xl'>
                     <Header text={`Workspace Detail`} />
                     <div className='float-right'>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger>
-                                    {' '}
+                        <TooltipWrapper
+                            triggerChildren={
+                                <>
                                     <UpdateWorkspaceModal workspaceId={id} />
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>Update Workspace</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
+                                </>
+                            }
+                            contentText={'Update Workspace'}
+                        />
                     </div>
                     <br />
                     <div className='mt-5'>
@@ -76,18 +74,30 @@ const WorkspaceDetail: FC = () => {
                             {format(data.createdAt, 'yyyy-MM-dd')}
                         </div>
                         <div className='flex justify-end space-x-4'>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger>
+                            <TooltipWrapper
+                                triggerChildren={
+                                    <>
                                         <AddNewMemberToWorkspaceModal />
-                                        <TooltipContent>
-                                            Add new member to workspace
-                                        </TooltipContent>
-                                    </TooltipTrigger>
-                                </Tooltip>
-                            </TooltipProvider>
+                                    </>
+                                }
+                                contentText='Add new member to workspace'
+                            />
 
-                            <TooltipProvider>
+                            <TooltipWrapper 
+                                triggerChildren={<>
+                                     <Button
+                                            variant={'ghost'}
+                                            onClick={() =>
+                                                moveWorkspaceToTrash.mutate()
+                                            }
+                                            className='flex items-center justify-center rounded-md p-2 text-red-600'
+                                        >
+                                            <Trash className='h-6 w-6' />
+                                        </Button>
+                                </>}
+                                contentText='Move workspace to trash'
+                            />
+                            {/* <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Button
@@ -104,7 +114,7 @@ const WorkspaceDetail: FC = () => {
                                         </TooltipContent>
                                     </TooltipTrigger>
                                 </Tooltip>
-                            </TooltipProvider>
+                            </TooltipProvider> */}
                         </div>
                     </div>
                     <div className='mt-5'>

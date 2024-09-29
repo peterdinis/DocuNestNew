@@ -1,12 +1,12 @@
 'use client';
 
+import React, { FC, ReactNode } from 'react';
 import {
     TooltipProvider,
     Tooltip,
     TooltipTrigger,
     TooltipContent,
 } from '@/components/ui/tooltip';
-import { FC, ReactNode } from 'react';
 
 interface ITooltipWrapperProps {
     triggerChildren?: ReactNode;
