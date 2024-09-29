@@ -54,7 +54,7 @@ const WorkspaceDetail: FC = () => {
                             <Tooltip>
                                 <TooltipTrigger>
                                     {' '}
-                                    <UpdateWorkspaceModal />
+                                    <UpdateWorkspaceModal workspaceId={id} />
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     <p>Update Workspace</p>
