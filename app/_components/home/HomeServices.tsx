@@ -27,8 +27,8 @@ const HeroServices: FC = () => {
                 </div>
                 <div className='mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
                     <motion.div
-                        initial="hidden"
-                        whileInView="visible"
+                        initial='hidden'
+                        whileInView='visible'
                         viewport={{ once: true }}
                         variants={zoomInEffect}
                     >
@@ -39,8 +39,8 @@ const HeroServices: FC = () => {
                         />
                     </motion.div>
                     <motion.div
-                        initial="hidden"
-                        whileInView="visible"
+                        initial='hidden'
+                        whileInView='visible'
                         viewport={{ once: true }}
                         variants={zoomInEffect}
                     >
@@ -51,8 +51,8 @@ const HeroServices: FC = () => {
                         />
                     </motion.div>
                     <motion.div
-                        initial="hidden"
-                        whileInView="visible"
+                        initial='hidden'
+                        whileInView='visible'
                         viewport={{ once: true }}
                         variants={zoomInEffect}
                     >
