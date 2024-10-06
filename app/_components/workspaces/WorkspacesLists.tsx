@@ -47,7 +47,7 @@ const WorkspacesLists: FC = () => {
     }
 
     const totalWorkspaces = data?.totalWorkspaces || 0;
-    const workspacesPerPage = 6; // Adjust based on your API response
+    const workspacesPerPage = 6;
     const totalPages = Math.ceil(totalWorkspaces / workspacesPerPage);
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +82,7 @@ const WorkspacesLists: FC = () => {
                                 (workspace: WorkspacePaginationType) => (
                                     <motion.div
                                         key={workspace.id}
-                                        className='rounded-lg border bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-zinc-800'
+                                        className='rounded-lg overflow-x-scroll border bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-zinc-800'
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
