@@ -1,5 +1,4 @@
 import { db } from '@/app/_utils/db';
-import { sendInvitationEmail } from '@/lib/email';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -40,11 +39,6 @@ export async function POST(req: Request) {
                 role,
             },
         });
-
-        // Send email notification
-        await sendInvitationEmail(email, workspaceId);
-
-        return NextResponse.json(email);
     } catch (error) {
         // console.error(error);
         return NextResponse.json(
