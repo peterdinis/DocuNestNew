@@ -1,5 +1,4 @@
 import { db } from '@/app/_utils/db';
-import { sendInvitationEmail } from '@/lib/email';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -13,6 +12,16 @@ export async function POST(req: Request) {
                 { error: 'User not found' },
                 { status: 404 },
             );
+        }
+
+        const workspaceCheck = await db.workspace.findUnique({
+            where: {
+                id: workspaceId
+            }
+        });
+
+        if(!workspaceCheck) {
+            throw new Error("Workspace does not exists");
         }
 
         // Check if user is already a member of the workspace
@@ -40,10 +49,6 @@ export async function POST(req: Request) {
                 role,
             },
         });
-
-        // Send email notification
-        await sendInvitationEmail(email, workspaceId);
-
         return NextResponse.json(email);
     } catch (error) {
         // console.error(error);
