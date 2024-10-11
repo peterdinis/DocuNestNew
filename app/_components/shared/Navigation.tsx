@@ -17,7 +17,6 @@ import { useSession, signOut } from 'next-auth/react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
-// Reusable components for links
 const NavLink = ({ href, label }: { href: string; label: string }) => (
     <Link href={href} className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'>
         {label}
