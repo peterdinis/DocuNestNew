@@ -7,7 +7,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, Plus, Trash, X, Text } from 'lucide-react';
+import { ChevronDown, Pencil, Trash, Text, PencilOff } from 'lucide-react';
 import { FC } from 'react';
 import {
     AlertDialog,
@@ -60,9 +60,9 @@ const DocToolbar: FC<DocToolbarProps> = ({
                             size='icon'
                         >
                             {isEditMode ? (
-                                <Plus className='h-4 w-4' />
+                                <Pencil className='h-4 w-4' />
                             ) : (
-                                <X className='h-4 w-4' />
+                                <PencilOff className='h-4 w-4' />
                             )}
                         </Button>
                     }
