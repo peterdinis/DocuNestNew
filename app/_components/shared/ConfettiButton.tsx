@@ -47,7 +47,9 @@ const ConfettiButton: FC<IConfettiButtonProps> = ({
 
     return (
         <div className='relative'>
-            <Button variant={"default"} onClick={handleClick}>{text}</Button>
+            <Button variant={'default'} onClick={handleClick}>
+                {text}
+            </Button>
         </div>
     );
 };

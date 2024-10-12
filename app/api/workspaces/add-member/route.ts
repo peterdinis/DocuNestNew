@@ -16,12 +16,12 @@ export async function POST(req: Request) {
 
         const workspaceCheck = await db.workspace.findUnique({
             where: {
-                id: workspaceId
-            }
+                id: workspaceId,
+            },
         });
 
-        if(!workspaceCheck) {
-            throw new Error("Workspace does not exists");
+        if (!workspaceCheck) {
+            throw new Error('Workspace does not exists');
         }
 
         // Check if user is already a member of the workspace

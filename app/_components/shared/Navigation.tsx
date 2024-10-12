@@ -18,13 +18,19 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
 const NavLink = ({ href, label }: { href: string; label: string }) => (
-    <Link href={href} className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'>
+    <Link
+        href={href}
+        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+    >
         {label}
     </Link>
 );
 
 const AuthButton = ({ href, label }: { href: string; label: string }) => (
-    <Button variant={'outline'} className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'>
+    <Button
+        variant={'outline'}
+        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
+    >
         <Link className='dark:text-white' href={href}>
             {label}
         </Link>
@@ -54,12 +60,17 @@ const Navigation: FC = () => {
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                 <div className='flex h-16 items-center justify-between'>
                     <div className='flex items-center'>
-                        <Link href={session?.user ? '/dashboard' : '/'} className='flex-shrink-0'>
-                            <span className='text-2xl font-bold text-primary'>DocuNest</span>
+                        <Link
+                            href={session?.user ? '/dashboard' : '/'}
+                            className='flex-shrink-0'
+                        >
+                            <span className='text-2xl font-bold text-primary'>
+                                DocuNest
+                            </span>
                         </Link>
 
                         {!session?.user && (
-                            <div className='hidden md:block ml-10 space-x-4'>
+                            <div className='ml-10 hidden space-x-4 md:block'>
                                 <NavLink href='/dashboard' label='Services' />
                                 <NavLink href='/projects' label='Pricing' />
                                 <AuthButton href='/register' label='Register' />
@@ -73,16 +84,25 @@ const Navigation: FC = () => {
                             <div className='flex items-center'>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <Button variant='ghost' className='relative ml-3'>
-                                            <span className='sr-only'>Open user menu</span>
+                                        <Button
+                                            variant='ghost'
+                                            className='relative ml-3'
+                                        >
+                                            <span className='sr-only'>
+                                                Open user menu
+                                            </span>
                                             <User className='h-5 w-5' />
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align='end'>
-                                        <DropdownMenuLabel>{session?.user.name}</DropdownMenuLabel>
+                                        <DropdownMenuLabel>
+                                            {session?.user.name}
+                                        </DropdownMenuLabel>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem>
-                                            <Link href='/dashboard'>Profile</Link>
+                                            <Link href='/dashboard'>
+                                                Profile
+                                            </Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem onClick={logoutUser}>
                                             Sign out
@@ -97,9 +117,17 @@ const Navigation: FC = () => {
                     </div>
 
                     <div className='md:hidden'>
-                        <Button variant='ghost' onClick={toggleMenu} size='icon'>
+                        <Button
+                            variant='ghost'
+                            onClick={toggleMenu}
+                            size='icon'
+                        >
                             <span className='sr-only'>Open main menu</span>
-                            {isOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
+                            {isOpen ? (
+                                <X className='h-6 w-6' />
+                            ) : (
+                                <Menu className='h-6 w-6' />
+                            )}
                         </Button>
                     </div>
                 </div>
@@ -127,10 +155,17 @@ const Navigation: FC = () => {
                             </div>
                         </div>
                         <div className='mt-3 space-y-1 px-2'>
-                            <Button variant='ghost' className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'>
+                            <Button
+                                variant='ghost'
+                                className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                            >
                                 <Link href='/dashboard'>Dashboard</Link>
                             </Button>
-                            <Button variant='ghost' onClick={logoutUser} className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'>
+                            <Button
+                                variant='ghost'
+                                onClick={logoutUser}
+                                className='block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+                            >
                                 Sign out
                             </Button>
                         </div>
