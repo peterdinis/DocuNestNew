@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
 import useUpdateWorkspaceDocument from '@/app/_hooks/workspace-documents/useUpdateWorkspaceDocument';
 import Loading from '../shared/Loading';
+import { ConfettiButton } from '@/components/ui/confetti-button';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -103,13 +104,13 @@ const DocumentInfo: FC = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     {isEditMode && (
-                        <Button
+                        <ConfettiButton
                             variant={'default'}
                             className='mt-4'
                             onClick={handleSave} // Call handleSave on click
                         >
                             Save document
-                        </Button>
+                        </ConfettiButton>
                     )}
                     <div className='mt-4'>
                         <QuillEditor
