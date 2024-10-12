@@ -1,13 +1,21 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, Pencil, Trash, Text, PencilOff } from 'lucide-react';
+import {
+    ChevronDown,
+    Pencil,
+    Trash,
+    Text,
+    PencilOff,
+    ArrowLeft,
+} from 'lucide-react';
 import { FC } from 'react';
 import {
     AlertDialog,
@@ -119,6 +127,16 @@ const DocToolbar: FC<DocToolbarProps> = ({
                             <div className='flex items-center'>
                                 <FaFileWord className='mr-2' /> Word file
                             </div>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link
+                                href={`/workspaces/${sessionStorage.getItem('WorkspaceId')}`}
+                            >
+                                <div className='flex items-center'>
+                                    <ArrowLeft className='mr-2 h-4 w-4' />
+                                    Go back
+                                </div>
+                            </Link>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
