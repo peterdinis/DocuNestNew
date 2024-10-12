@@ -11,7 +11,6 @@ import { saveAs } from 'file-saver';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 // @ts-expect-error: This import may not have TypeScript definitions available.
 import htmlDocx from 'html-docx-js/dist/html-docx';
-import { Button } from '@/components/ui/button';
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
 import useUpdateWorkspaceDocument from '@/app/_hooks/workspace-documents/useUpdateWorkspaceDocument';
 import Loading from '../shared/Loading';
