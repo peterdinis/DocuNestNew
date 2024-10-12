@@ -89,7 +89,6 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
                     </DialogDescription>
                 </DialogHeader>
 
-                {/* Update Workspace Form */}
                 <form onSubmit={onSubmit}>
                     <div>
                         <label className='mb-2 block'>Workspace Name</label>
@@ -99,7 +98,7 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
                             value={formData.name}
                             onChange={handleChange}
                             className='w-full rounded border p-2'
-                            placeholder='Workspace Name'
+                            placeholder='New workspace name'
                         />
                     </div>
 
@@ -110,7 +109,7 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
                             value={formData.description}
                             onChange={handleChange}
                             className='w-full rounded border p-2'
-                            placeholder='Workspace Description'
+                            placeholder='New Description for workspace'
                         />
                     </div>
 
@@ -125,7 +124,7 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
                                 }
                                 type='button'
                             >
-                                {selectedEmoji || 'Select Emoji'}
+                                {selectedEmoji || 'Add new emoji'}
                             </Button>
                             {selectedEmoji && (
                                 <span className='ml-2 text-lg'>

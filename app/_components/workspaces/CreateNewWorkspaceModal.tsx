@@ -26,6 +26,7 @@ import { Input } from '@/components/ui/input';
 import useCreateWorkspace from '@/app/_hooks/workspaces/useCreateWorkspace';
 import { WorkspaceFormData } from '@/app/_types/workspaceTypes';
 import Loading from '../shared/Loading';
+import ConfettiButton from '../shared/ConfettiButton';
 
 const CreateNewWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
@@ -113,9 +114,9 @@ const CreateNewWorkspaceModal: FC = () => {
                             </FormDescription>
                         </FormItem>
 
-                        <Button type='submit' disabled={isPending}>
+                        <ConfettiButton type='submit' disabled={isPending}>
                             {isPending ? <Loading /> : 'Create Workspace'}
-                        </Button>
+                        </ConfettiButton>
                     </form>
                 </Form>
             </DialogContent>

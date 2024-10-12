@@ -17,17 +17,36 @@ import { useSession, signOut } from 'next-auth/react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
+const NavLink = ({ href, label }: { href: string; label: string }) => (
+    <Link
+        href={href}
+        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
+    >
+        {label}
+    </Link>
+);
+
+const AuthButton = ({ href, label }: { href: string; label: string }) => (
+    <Button
+        variant={'outline'}
+        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
+    >
+        <Link className='dark:text-white' href={href}>
+            {label}
+        </Link>
+    </Button>
+);
+
 const Navigation: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session } = useSession();
-    const toggleMenu = () => setIsOpen(!isOpen);
     const { toast } = useToast();
     const router = useRouter();
 
-    const logoutUser = () => {
-        signOut({
-            redirect: false,
-        });
+    const toggleMenu = () => setIsOpen(!isOpen);
+
+    const logoutUser = async () => {
+        await signOut({ redirect: false });
         toast({
             title: 'Logout DONE',
             duration: 2000,
@@ -41,100 +60,62 @@ const Navigation: FC = () => {
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                 <div className='flex h-16 items-center justify-between'>
                     <div className='flex items-center'>
-                        {session?.user ? (
-                            <Link href='/dashboard' className='flex-shrink-0'>
-                                <span className='text-2xl font-bold text-primary'>
-                                    DocuNest
-                                </span>
-                            </Link>
-                        ) : (
-                            <Link href='/' className='flex-shrink-0'>
-                                <span className='text-2xl font-bold text-primary'>
-                                    DocuNest
-                                </span>
-                            </Link>
-                        )}
+                        <Link
+                            href={session?.user ? '/dashboard' : '/'}
+                            className='flex-shrink-0'
+                        >
+                            <span className='text-2xl font-bold text-primary'>
+                                DocuNest
+                            </span>
+                        </Link>
+
                         {!session?.user && (
-                            <div className='hidden md:block'>
-                                <div className='ml-10 flex items-baseline space-x-4'>
-                                    <Link
-                                        href='/dashboard'
-                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                                    >
-                                        Services
-                                    </Link>
-                                    <Link
-                                        href='/projects'
-                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                                    >
-                                        Pricing
-                                    </Link>
-                                    <Button
-                                        variant={'outline'}
-                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                                    >
-                                        <Link
-                                            className='dark:text-white'
-                                            href='/register'
+                            <div className='ml-10 hidden space-x-4 md:block'>
+                                <NavLink href='/dashboard' label='Services' />
+                                <NavLink href='/projects' label='Pricing' />
+                                <AuthButton href='/register' label='Register' />
+                                <AuthButton href='/login' label='Login' />
+                            </div>
+                        )}
+                    </div>
+
+                    <div className='hidden md:block'>
+                        {session?.user && (
+                            <div className='flex items-center'>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button
+                                            variant='ghost'
+                                            className='relative ml-3'
                                         >
-                                            Register
-                                        </Link>
-                                    </Button>
-                                    <Button
-                                        variant={'outline'}
-                                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
-                                    >
-                                        <Link
-                                            className='dark:text-white'
-                                            href='/login'
-                                        >
-                                            Login
-                                        </Link>
-                                    </Button>
+                                            <span className='sr-only'>
+                                                Open user menu
+                                            </span>
+                                            <User className='h-5 w-5' />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align='end'>
+                                        <DropdownMenuLabel>
+                                            {session?.user.name}
+                                        </DropdownMenuLabel>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem>
+                                            <Link href='/dashboard'>
+                                                Profile
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem onClick={logoutUser}>
+                                            Sign out
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                                <div className='ml-5'>
+                                    <ThemeButton />
                                 </div>
                             </div>
                         )}
                     </div>
-                    <div className='hidden md:block'>
-                        <div className='ml-4 flex items-center md:ml-6'>
-                            {session?.user && (
-                                <>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button
-                                                variant='ghost'
-                                                className='relative ml-3'
-                                            >
-                                                <span className='sr-only'>
-                                                    Open user menu
-                                                </span>
-                                                <User className='h-5 w-5' />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align='end'>
-                                            <DropdownMenuLabel>
-                                                {session?.user.name}
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem>
-                                                <Link href='/dashboard'>
-                                                    Profile
-                                                </Link>
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem
-                                                onClick={logoutUser}
-                                            >
-                                                Sign out
-                                            </DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                    <div className='ml-5'>
-                                        <ThemeButton />
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                    </div>
+
                     <div className='md:hidden'>
                         <Button
                             variant='ghost'
@@ -153,42 +134,17 @@ const Navigation: FC = () => {
             </div>
 
             <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-                <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
-                    <Link
-                        href='/dashboard'
-                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                    >
-                        Services
-                    </Link>
-                    <Link
-                        href='/projects'
-                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                    >
-                        Pricing
-                    </Link>
-                    <Button
-                        variant={'ghost'}
-                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-                    >
-                        <Link className='dark:text-white' href='/register'>
-                            Register
-                        </Link>
-                    </Button>
-                    <Button
-                        variant={'ghost'}
-                        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-white'
-                    >
-                        <Link className='dark:text-white' href='/login'>
-                            Login
-                        </Link>
-                    </Button>
-                </div>
-                {session?.user && (
+                {!session?.user ? (
+                    <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
+                        <NavLink href='/dashboard' label='Services' />
+                        <NavLink href='/projects' label='Pricing' />
+                        <AuthButton href='/register' label='Register' />
+                        <AuthButton href='/login' label='Login' />
+                    </div>
+                ) : (
                     <div className='border-t border-gray-200 pb-3 pt-4'>
                         <div className='flex items-center px-5'>
-                            <div className='flex-shrink-0'>
-                                <User className='h-10 w-10 rounded-full' />
-                            </div>
+                            <User className='h-10 w-10 rounded-full' />
                             <div className='ml-3'>
                                 <div className='text-base font-medium text-gray-800 dark:text-sky-50'>
                                     {session?.user.name}
