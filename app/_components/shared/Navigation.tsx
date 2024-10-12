@@ -17,15 +17,6 @@ import { useSession, signOut } from 'next-auth/react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
-const NavLink = ({ href, label }: { href: string; label: string }) => (
-    <Link
-        href={href}
-        className='prose-a: prose rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary dark:text-sky-50'
-    >
-        {label}
-    </Link>
-);
-
 const AuthButton = ({ href, label }: { href: string; label: string }) => (
     <Button
         variant={'outline'}
@@ -71,8 +62,6 @@ const Navigation: FC = () => {
 
                         {!session?.user && (
                             <div className='ml-10 hidden space-x-4 md:block'>
-                                <NavLink href='/dashboard' label='Services' />
-                                <NavLink href='/projects' label='Pricing' />
                                 <AuthButton href='/register' label='Register' />
                                 <AuthButton href='/login' label='Login' />
                             </div>
@@ -136,8 +125,6 @@ const Navigation: FC = () => {
             <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
                 {!session?.user ? (
                     <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
-                        <NavLink href='/dashboard' label='Services' />
-                        <NavLink href='/projects' label='Pricing' />
                         <AuthButton href='/register' label='Register' />
                         <AuthButton href='/login' label='Login' />
                     </div>
