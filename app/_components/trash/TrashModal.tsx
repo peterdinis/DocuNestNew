@@ -16,6 +16,7 @@ import { Trash } from 'lucide-react';
 import useClearTrash from '@/app/_hooks/trash/useClearTrash';
 import Loading from '../shared/Loading';
 import useAllTrashWorkspaces from '@/app/_hooks/trash/useAllTrashWorkspaces';
+import useFindWorkspaceMember from '@/app/_hooks/workspace-mebers/useFindWorkspaceMember';
 
 const TrashModal: FC = () => {
     const clearTrashMutation = useClearTrash();
@@ -25,6 +26,10 @@ const TrashModal: FC = () => {
     };
 
     const { data } = useAllTrashWorkspaces();
+
+    const {
+        data: memberData,
+    } = useFindWorkspaceMember();
 
     return (
         <>
@@ -45,7 +50,8 @@ const TrashModal: FC = () => {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <Button
+                    {memberData?.findMemberInWorkspace?.role === "admin" ? (
+                        <Button
                         onClick={handleClearTrash}
                         disabled={
                             !data?.trashWorkspaces ||
@@ -59,6 +65,9 @@ const TrashModal: FC = () => {
                             'Delete all Trash'
                         )}
                     </Button>
+                    ): (
+                        <></>
+                    )}
                 </DialogContent>
             </Dialog>
         </>
