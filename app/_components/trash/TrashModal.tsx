@@ -27,9 +27,7 @@ const TrashModal: FC = () => {
 
     const { data } = useAllTrashWorkspaces();
 
-    const {
-        data: memberData,
-    } = useFindWorkspaceMember();
+    const { data: memberData } = useFindWorkspaceMember();
 
     return (
         <>
@@ -50,22 +48,22 @@ const TrashModal: FC = () => {
                         </DialogDescription>
                     </DialogHeader>
 
-                    {memberData?.findMemberInWorkspace?.role === "admin" ? (
+                    {memberData?.findMemberInWorkspace?.role === 'admin' ? (
                         <Button
-                        onClick={handleClearTrash}
-                        disabled={
-                            !data?.trashWorkspaces ||
-                            data?.trashWorkspaces.length === 0
-                        }
-                    >
-                        <Trash />
-                        {clearTrashMutation.isPending ? (
-                            <Loading />
-                        ) : (
-                            'Delete all Trash'
-                        )}
-                    </Button>
-                    ): (
+                            onClick={handleClearTrash}
+                            disabled={
+                                !data?.trashWorkspaces ||
+                                data?.trashWorkspaces.length === 0
+                            }
+                        >
+                            <Trash />
+                            {clearTrashMutation.isPending ? (
+                                <Loading />
+                            ) : (
+                                'Delete all Trash'
+                            )}
+                        </Button>
+                    ) : (
                         <></>
                     )}
                 </DialogContent>
