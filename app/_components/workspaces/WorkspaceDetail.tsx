@@ -22,14 +22,16 @@ import useFindWorkspaceMember from '@/app/_hooks/workspace-mebers/useFindWorkspa
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
-    const {data: memberData, isLoading: memberLoading, error: memberError} = useFindWorkspaceMember();
+    const {
+        data: memberData,
+        isLoading: memberLoading,
+        error: memberError,
+    } = useFindWorkspaceMember();
 
     sessionStorage.setItem('WorkspaceId', id);
 
     const { data, isLoading, isError, error } = useWorkspaceDetail({ id });
     const moveWorkspaceToTrash = useMoveWorkspaceToTrash({ id });
-
-    console.log("MemberData", memberData);
 
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
@@ -75,7 +77,10 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <AddNewMemberToWorkspaceModal />
+                                        {memberData.findMemberInWorkspace
+                                            ?.role === 'admin' && (
+                                            <AddNewMemberToWorkspaceModal />
+                                        )}
                                     </>
                                 }
                                 contentText='Add new member to workspace'
@@ -84,15 +89,20 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <Button
-                                            variant={'ghost'}
-                                            onClick={() =>
-                                                moveWorkspaceToTrash.mutate()
-                                            }
-                                            className='flex items-center justify-center rounded-md p-2 text-red-600'
-                                        >
-                                            <Trash className='h-6 w-6' />
-                                        </Button>
+                                        {memberData.findMemberInWorkspace
+                                            ?.role === 'admin' ? (
+                                            <Button
+                                                variant={'ghost'}
+                                                onClick={() =>
+                                                    moveWorkspaceToTrash.mutate()
+                                                }
+                                                className='flex items-center justify-center rounded-md p-2 text-red-600'
+                                            >
+                                                <Trash className='h-6 w-6' />
+                                            </Button>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </>
                                 }
                                 contentText='Move workspace to trash'
@@ -115,7 +125,10 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <UploadedDocumentModal />
+                                        {memberData?.findMemberInWorkspace
+                                            ?.role === 'admin' && (
+                                            <UploadedDocumentModal />
+                                        )}
                                     </>
                                 }
                                 contentText='Upload custom document'

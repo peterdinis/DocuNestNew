@@ -7,7 +7,7 @@ const useFindWorkspaceMember = () => {
     return useQuery({
         queryKey: ['findWorkspaceMember'],
         queryFn: async () => {
-            return await findMemberInWorkspace()
+            return await findMemberInWorkspace();
         },
         staleTime: Infinity,
         refetchOnWindowFocus: true,
