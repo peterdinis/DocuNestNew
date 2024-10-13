@@ -18,9 +18,15 @@ import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'
 import { Button } from '@/components/ui/button';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import TooltipWrapper from '../shared/TooltipWrapper';
+import useFindWorkspaceMember from '@/app/_hooks/workspace-mebers/useFindWorkspaceMember';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
+    const {
+        data: memberData,
+        isLoading: memberLoading,
+        error: memberError,
+    } = useFindWorkspaceMember();
 
     sessionStorage.setItem('WorkspaceId', id);
 
@@ -31,9 +37,9 @@ const WorkspaceDetail: FC = () => {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
 
-    if (isLoading) return <Loading />;
+    if (isLoading || memberLoading) return <Loading />;
 
-    if (isError) {
+    if (isError || memberError) {
         const errorMessage =
             (error as Error)?.message || 'Something went wrong.';
         return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
@@ -71,7 +77,10 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <AddNewMemberToWorkspaceModal />
+                                        {memberData.findMemberInWorkspace
+                                            ?.role === 'admin' && (
+                                            <AddNewMemberToWorkspaceModal />
+                                        )}
                                     </>
                                 }
                                 contentText='Add new member to workspace'
@@ -80,15 +89,20 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <Button
-                                            variant={'ghost'}
-                                            onClick={() =>
-                                                moveWorkspaceToTrash.mutate()
-                                            }
-                                            className='flex items-center justify-center rounded-md p-2 text-red-600'
-                                        >
-                                            <Trash className='h-6 w-6' />
-                                        </Button>
+                                        {memberData.findMemberInWorkspace
+                                            ?.role === 'admin' ? (
+                                            <Button
+                                                variant={'ghost'}
+                                                onClick={() =>
+                                                    moveWorkspaceToTrash.mutate()
+                                                }
+                                                className='flex items-center justify-center rounded-md p-2 text-red-600'
+                                            >
+                                                <Trash className='h-6 w-6' />
+                                            </Button>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </>
                                 }
                                 contentText='Move workspace to trash'
@@ -111,7 +125,10 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <UploadedDocumentModal />
+                                        {memberData?.findMemberInWorkspace
+                                            ?.role === 'admin' && (
+                                            <UploadedDocumentModal />
+                                        )}
                                     </>
                                 }
                                 contentText='Upload custom document'
