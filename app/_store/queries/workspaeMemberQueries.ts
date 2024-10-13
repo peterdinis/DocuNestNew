@@ -15,3 +15,7 @@ export const fetchAllWorkspaceMembersForWorkspace = async (id: string) => {
 
     return request.data;
 };
+
+export const findMemberInWorkspace = async() => {
+    const request = await axios.get(`/api/permissions/`)
+}
