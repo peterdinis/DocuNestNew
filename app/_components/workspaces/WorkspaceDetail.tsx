@@ -18,22 +18,26 @@ import useMoveWorkspaceToTrash from '@/app/_hooks/trash/useMoveWorkspaceToTrash'
 import { Button } from '@/components/ui/button';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import TooltipWrapper from '../shared/TooltipWrapper';
+import useFindWorkspaceMember from '@/app/_hooks/workspace-mebers/useFindWorkspaceMember';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
+    const {data: memberData, isLoading: memberLoading, error: memberError} = useFindWorkspaceMember();
 
     sessionStorage.setItem('WorkspaceId', id);
 
     const { data, isLoading, isError, error } = useWorkspaceDetail({ id });
     const moveWorkspaceToTrash = useMoveWorkspaceToTrash({ id });
 
+    console.log("MemberData", memberData);
+
     if (!id) {
         return <p className='text-red-500'>Workspace ID is missing.</p>;
     }
 
-    if (isLoading) return <Loading />;
+    if (isLoading || memberLoading) return <Loading />;
 
-    if (isError) {
+    if (isError || memberError) {
         const errorMessage =
             (error as Error)?.message || 'Something went wrong.';
         return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
