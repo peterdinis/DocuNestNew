@@ -9,8 +9,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const UpdatePermissionModal: FC = () => {
     return (
@@ -23,31 +23,37 @@ const UpdatePermissionModal: FC = () => {
                     <DialogHeader>
                         <DialogTitle>Update Permission for member</DialogTitle>
                         <DialogDescription>
-                            Make changes to your profile here. Click save when
-                            you're done.
+                            Make changes to user permissions here. Click save when you're done.
                         </DialogDescription>
                     </DialogHeader>
                     <div className='grid gap-4 py-4'>
-                        <div className='grid grid-cols-4 items-center gap-4'>
-                            <Label htmlFor='name' className='text-right'>
-                                Name
-                            </Label>
-                            <Input
-                                id='name'
-                                value='Pedro Duarte'
-                                className='col-span-3'
-                            />
-                        </div>
-                        <div className='grid grid-cols-4 items-center gap-4'>
-                            <Label htmlFor='username' className='text-right'>
-                                Username
-                            </Label>
-                            <Input
-                                id='username'
-                                value='@peduarte'
-                                className='col-span-3'
-                            />
-                        </div>
+                        {/* Permissions Table */}
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Name</TableHead>
+                                    <TableHead>Permission</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>Pedro Duarte</TableCell>
+                                    <TableCell>
+                                        <Select>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select permission" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="admin">Admin</SelectItem>
+                                                <SelectItem value="editor">Editor</SelectItem>
+                                                <SelectItem value="viewer">Viewer</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </TableCell>
+                                </TableRow>
+                                {/* Add more rows here if needed */}
+                            </TableBody>
+                        </Table>
                     </div>
                     <DialogFooter>
                         <Button type='submit'>Save changes</Button>
