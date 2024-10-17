@@ -17,17 +17,16 @@ const UpdatePermissionModal: FC = () => {
         <>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant='outline'>Update Permission for member</Button>
+                    <Button variant='outline'>Update Permission for user</Button>
                 </DialogTrigger>
                 <DialogContent className='sm:max-w-[425px]'>
                     <DialogHeader>
-                        <DialogTitle>Update Permission for member</DialogTitle>
+                        <DialogTitle>Update Permission for user</DialogTitle>
                         <DialogDescription>
                             Make changes to user permissions here. Click save when you're done.
                         </DialogDescription>
                     </DialogHeader>
                     <div className='grid gap-4 py-4'>
-                        {/* Permissions Table */}
                         <Table>
                             <TableHeader>
                                 <TableRow>
@@ -51,7 +50,6 @@ const UpdatePermissionModal: FC = () => {
                                         </Select>
                                     </TableCell>
                                 </TableRow>
-                                {/* Add more rows here if needed */}
                             </TableBody>
                         </Table>
                     </div>
