@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import UpdateWorkspaceModal from './UpdateWorkspaceModal';
 import TooltipWrapper from '../shared/TooltipWrapper';
 import useFindWorkspaceMember from '@/app/_hooks/workspace-mebers/useFindWorkspaceMember';
+import UpdatePermissionModal from './permissions/UpdatePermissionModal';
 
 const WorkspaceDetail: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -74,6 +75,17 @@ const WorkspaceDetail: FC = () => {
                             {format(data.createdAt, 'yyyy-MM-dd')}
                         </div>
                         <div className='flex justify-end space-x-4'>
+                            <TooltipWrapper
+                                triggerChildren={
+                                    <>
+                                        <UpdatePermissionModal
+                                            workspaceId={id}
+                                        />
+                                    </>
+                                }
+                                contentText='Update permission for user'
+                            />
+
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
