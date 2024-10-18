@@ -78,7 +78,9 @@ const WorkspaceDetail: FC = () => {
                             <TooltipWrapper
                                 triggerChildren={
                                     <>
-                                        <UpdatePermissionModal />
+                                        <UpdatePermissionModal
+                                            workspaceId={id}
+                                        />
                                     </>
                                 }
                                 contentText='Update permission for user'
