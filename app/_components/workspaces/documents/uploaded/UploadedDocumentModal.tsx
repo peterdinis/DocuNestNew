@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { UploadDropzone } from '@/app/_utils/uploadthing';
 
 const UploadedDocumentModal: FC = () => {

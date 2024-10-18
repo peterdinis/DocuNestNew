@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { RegisterUser } from '@/app/_store/mutations/authMutations';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import Loading from '../shared/Loading';
 
 const RegisterForm: FC = () => {

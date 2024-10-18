@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { WorkspaceType } from '@/app/_types/workspaceTypes';
 import { createWorkspace } from '@/app/_store/mutations/workspaceMutations';
 import { queryClient } from '@/app/_store/queryClient';

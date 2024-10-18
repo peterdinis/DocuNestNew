@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import ThemeButton from './ThemeButton';
 import { useSession, signOut } from 'next-auth/react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
 const AuthButton = ({ href, label }: { href: string; label: string }) => (

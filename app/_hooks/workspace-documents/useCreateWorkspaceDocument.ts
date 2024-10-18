@@ -3,7 +3,7 @@
 import { newDocumentWorkspace } from '@/app/_store/mutations/workspaceDocumentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { WorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 
 const useCreateWorkspaceDocument = () => {

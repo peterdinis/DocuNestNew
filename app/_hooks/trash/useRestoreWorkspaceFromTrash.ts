@@ -2,7 +2,7 @@
 
 import { restoreWorkspaceFromTrash } from '@/app/_store/mutations/trashMutations';
 import { queryClient } from '@/app/_store/queryClient';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { CopiedValue, CopyFn } from '@/app/_types/hookTypes';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { useCallback, useState } from 'react';
 
 export function useCopyToClipboard(): [CopiedValue, CopyFn] {

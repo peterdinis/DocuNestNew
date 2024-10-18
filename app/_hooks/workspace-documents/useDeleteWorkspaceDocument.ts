@@ -2,7 +2,7 @@
 
 import { deleteWorkspaceDocument } from '@/app/_store/mutations/workspaceDocumentMutations';
 import { WorkspaceDetailType } from '@/app/_types/workspaceTypes';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/_hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/app/_store/queryClient';
 import { useRouter } from 'next/navigation';
