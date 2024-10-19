@@ -11,12 +11,12 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { useToast } from '@/app/_hooks/use-toast';
 import { UploadDropzone } from '@/app/_utils/uploadthing';
+import { useToast } from '@/app/_hooks/shared/use-toast';
 
 const UploadedDocumentModal: FC = () => {
     const { toast } = useToast();
-    const [isOpen, setIsOpen] = useState(false); // Manage modal state
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
