@@ -3,8 +3,8 @@
 import { newDocumentWorkspace } from '@/app/_store/mutations/workspaceDocumentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { WorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
-import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
+import { useToast } from '../shared/use-toast';
 
 const useCreateWorkspaceDocument = () => {
     const { toast } = useToast();

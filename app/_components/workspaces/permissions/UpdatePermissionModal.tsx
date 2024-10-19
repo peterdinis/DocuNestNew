@@ -33,6 +33,10 @@ interface IUpdatePermissionModalProps {
     workspaceId: string;
 }
 
+// 1. Write endpoint for update permission for multiple users
+// 2. Write mutation, and hook
+// 3. Use here new hook
+
 const UpdatePermissionModal: FC<IUpdatePermissionModalProps> = ({
     workspaceId,
 }: IUpdatePermissionModalProps) => {

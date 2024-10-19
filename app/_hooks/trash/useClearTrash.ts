@@ -2,8 +2,8 @@
 
 import { cleanTrash } from '@/app/_store/mutations/trashMutations';
 import { queryClient } from '@/app/_store/queryClient';
-import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
+import { useToast } from '../shared/use-toast';
 
 const useClearTrash = () => {
     const { toast } = useToast();

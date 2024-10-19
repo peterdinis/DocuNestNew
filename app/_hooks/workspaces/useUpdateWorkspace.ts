@@ -1,10 +1,10 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useToast } from '@/hooks/use-toast';
 import { UpdateWorkspaceType } from '@/app/_types/workspaceTypes';
 import { updateWorkspace } from '@/app/_store/mutations/workspaceMutations';
 import { queryClient } from '@/app/_store/queryClient';
+import { useToast } from '../shared/use-toast';
 
 type UpdateWorkspaceProps = {
     id: string;

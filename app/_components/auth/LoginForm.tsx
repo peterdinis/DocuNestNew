@@ -8,7 +8,6 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
 import { loginSchema } from './authSchema';
-import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -18,6 +17,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Loading from '../shared/Loading';
+import { useToast } from '@/app/_hooks/shared/use-toast';
 
 const LoginForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
