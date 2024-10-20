@@ -6,8 +6,7 @@ import authOptions from '@/app/api/auth/authOptions';
 export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
     const pathnameParts = url.pathname.split('/');
-
-    // Assuming the id is the second-to-last segment (before "trash")
+    
     const id = pathnameParts[pathnameParts.length - 2];
 
     if (!id) {
