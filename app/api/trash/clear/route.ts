@@ -18,6 +18,11 @@ export async function DELETE() {
         },
     });
 
+    await db.workspaceMember.deleteMany({
+        where: {
+            userId: session.user.id
+        }
+    });
     return NextResponse.json({
         message: 'Trash was cleaned',
     });
