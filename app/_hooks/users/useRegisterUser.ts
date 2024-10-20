@@ -2,11 +2,11 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useToast } from '@/app/_hooks/use-toast';
 import {
     RegisterUser,
     registerUser,
 } from '@/app/_store/mutations/authMutations';
+import { useToast } from '../shared/use-toast';
 
 const useRegisterUser = () => {
     const router = useRouter();
