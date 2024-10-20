@@ -110,23 +110,26 @@ const RegisterForm: FC = () => {
 
                         <div className='relative space-y-2'>
                             <div>Password</div>
-                            <Input
-                                id='password'
-                                placeholder='Enter your password'
-                                {...register('password')}
-                                type={isVisible ? 'text' : 'password'}
-                            />
-                            <button
-                                type='button'
-                                onClick={toggleVisibility}
-                                className='absolute inset-y-0 right-0 top-3 flex items-center px-2'
-                            >
-                                {isVisible ? (
-                                    <EyeOff className='h-5 w-5' />
-                                ) : (
-                                    <Eye className='h-5 w-5' />
-                                )}
-                            </button>
+                            <div className='flex items-center'>
+                                <Input
+                                    id='password'
+                                    placeholder='Enter your password'
+                                    {...register('password')}
+                                    type={isVisible ? 'text' : 'password'}
+                                    className='pr-10'
+                                />
+                                <button
+                                    type='button'
+                                    onClick={toggleVisibility}
+                                    className='absolute right-3 mt-5 transform -translate-y-1/2'
+                                >
+                                    {isVisible ? (
+                                        <EyeOff className='h-5 w-5' />
+                                    ) : (
+                                        <Eye className='h-5 w-5' />
+                                    )}
+                                </button>
+                            </div>
                             {errors.password && (
                                 <p className='font-bold text-red-600'>
                                     Password is required

@@ -92,28 +92,29 @@ const LoginForm: FC = () => {
                         </div>
                         <div className='relative space-y-2'>
                             <div>Password</div>
-                            <Input
-                                id='password'
-                                placeholder='Enter your password'
-                                {...register('password')}
-                                disabled={loading}
-                                type={isVisible ? 'text' : 'password'}
-                            />
-                            <button
-                                type='button'
-                                onClick={toggleVisibility}
-                                className='absolute inset-y-0 right-3 top-9 flex items-center'
-                                tabIndex={-1}
-                            >
-                                {isVisible ? (
-                                    <EyeOff className='h-5 w-5 text-gray-500' />
-                                ) : (
-                                    <Eye className='h-5 w-5 text-gray-500' />
-                                )}
-                            </button>
+                            <div className='flex items-center'>
+                                <Input
+                                    id='password'
+                                    placeholder='Enter your password'
+                                    {...register('password')}
+                                    type={isVisible ? 'text' : 'password'}
+                                    className='pr-10'
+                                />
+                                <button
+                                    type='button'
+                                    onClick={toggleVisibility}
+                                    className='absolute right-3 mt-5 transform -translate-y-1/2'
+                                >
+                                    {isVisible ? (
+                                        <EyeOff className='h-5 w-5' />
+                                    ) : (
+                                        <Eye className='h-5 w-5' />
+                                    )}
+                                </button>
+                            </div>
                             {errors.password && (
                                 <p className='font-bold text-red-600'>
-                                    {errors.password.message as ReactNode}
+                                    Password is required
                                 </p>
                             )}
                         </div>
