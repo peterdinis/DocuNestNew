@@ -9,17 +9,6 @@ import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import SessionCheckHelper from './_components/auth/SessionChcekHelper';
 
-const geistSans = localFont({
-    src: './fonts/GeistVF.woff',
-    variable: '--font-geist-sans',
-    weight: '100 900',
-});
-const geistMono = localFont({
-    src: './fonts/GeistMonoVF.woff',
-    variable: '--font-geist-mono',
-    weight: '100 900',
-});
-
 export const metadata: Metadata = {
     title: 'DocuNest',
     description: 'Application for taking notes with AI power',
@@ -33,7 +22,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`antialiased`}
             >
                 <ThemeProvider>
                     <QueryProvider>
