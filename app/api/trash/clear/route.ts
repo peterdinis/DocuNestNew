@@ -18,7 +18,7 @@ export async function DELETE() {
         },
     });
 
-   /*  await db.workspaceMember.delete({
+    /*  await db.workspaceMember.delete({
         where: {
             userId: session.user.id
         }

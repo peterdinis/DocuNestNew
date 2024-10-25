@@ -70,6 +70,14 @@ model Workspace {
   updatedAt          DateTime            @updatedAt
 }
 
+model WorkspaceMessages {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
+
 model UploadedDocument {
   id          String   @id @default(uuid())
   name        String?
