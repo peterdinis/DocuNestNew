@@ -1,7 +1,7 @@
-import { db } from "@/app/_utils/db";
-import authOptions from "@/app/api/auth/authOptions";
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
+import { db } from '@/app/_utils/db';
+import authOptions from '@/app/api/auth/authOptions';
+import { getServerSession } from 'next-auth';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
     const url = new URL(request.url);
@@ -25,13 +25,15 @@ export async function GET(request: NextRequest) {
 
     const messagesForWorkspace = await db.workspace.findFirst({
         where: {
-            id
+            id,
         },
 
         include: {
-            workspaceMessages: true
-        }
+            workspaceMessages: true,
+        },
     });
-    
+
     return NextResponse.json(messagesForWorkspace);
 }
+
+/* TODO: Delete route for workspaceMessages */
