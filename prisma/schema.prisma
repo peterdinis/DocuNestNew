@@ -76,6 +76,7 @@ model WorkspaceMessages {
   name        String
   description String
   workspaceId String
+  messageCreated DateTime @default(now())
   workspace   Workspace @relation(fields: [workspaceId], references: [id], name: "WorkspaceToMessages")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
