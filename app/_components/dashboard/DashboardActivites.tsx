@@ -1,7 +1,6 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import { FC, useState } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -79,14 +78,6 @@ const DashboardActivities: FC = () => {
                                     className='flex items-center justify-between'
                                 >
                                     <div className='flex items-center'>
-                                        <Avatar className='h-9 w-9'>
-                                            <AvatarImage
-                                                className='rounded-lg'
-                                                src='https://github.com/shadcn.png'
-                                                alt='Avatar'
-                                            />
-                                            <AvatarFallback>JD</AvatarFallback>
-                                        </Avatar>
                                         <div className='ml-4'>
                                             <p className='text-sm font-medium'>
                                                 {activity.name}
