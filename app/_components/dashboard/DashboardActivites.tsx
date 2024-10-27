@@ -32,20 +32,18 @@ const DashboardActivities: FC = () => {
     const userId = session?.user.id;
 
     useEffect(() => {
-        // Fetch initial notifications
+        
         const fetchNotifications = async () => {
             const response = await axios.get(`/api/notifications/${userId}`);
             setNotifications(response.data);
         };
         fetchNotifications();
 
-        // Connect to Socket.IO server
         const newSocket = io(process.env.SOCKET_SERVER_URL, {
             transports: ['websocket'],
         });
         setSocket(newSocket);
 
-        // Listen for new notifications
         newSocket.on('notification', (notification: Notification) => {
             setNotifications((prev) => [notification, ...prev]);
         });
