@@ -1,10 +1,12 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppPagination from '../shared/AppPagination';
+import { io, Socket } from "socket.io-client";
+import axios from "axios";
 
 interface Activity {
     id: number;
