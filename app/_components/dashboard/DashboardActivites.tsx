@@ -5,8 +5,8 @@ import { FC, useState, useEffect } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppPagination from '../shared/AppPagination';
-import { io, Socket } from "socket.io-client";
-import axios from "axios";
+import { io, Socket } from 'socket.io-client';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 interface Notification {
@@ -15,13 +15,12 @@ interface Notification {
     message: string;
     isRead: boolean;
     createdAt: string;
-  }
-  
+}
 
 const DashboardActivities: FC = () => {
     const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [socket, setSocket] = useState<Socket | null>(null);
-  const { data: session} = useSession();
+    const [socket, setSocket] = useState<Socket | null>(null);
+    const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 5;
 
@@ -29,29 +28,38 @@ const DashboardActivities: FC = () => {
         setCurrentPage(page);
     };
 
-    const userId = session?.user.id!
+    const userId = session?.user.id!;
 
     useEffect(() => {
         // Fetch initial notifications
         const fetchNotifications = async () => {
-          const response = await axios.get(`/api/notifications/${userId!}`);
-          setNotifications(response.data);
+            const response = await axios.get(`/api/notifications/${userId!}`);
+            setNotifications(response.data);
         };
         fetchNotifications();
-    
+
         // Connect to Socket.IO server
-        const newSocket = io("http://localhost:3001"); // Ensure the correct server URL
-        setSocket(newSocket);
-    
-        // Listen for new notifications
-        newSocket.on("notification", (notification: Notification) => {
-          setNotifications((prev) => [notification, ...prev]);
+        const newSocket = io('http://localhost:3001', {
+            transports: ['websocket'],
         });
-    
+        setSocket(newSocket);
+
+        // Listen for new notifications
+        newSocket.on('notification', (notification: Notification) => {
+            setNotifications((prev) => [notification, ...prev]);
+        });
+
+        newSocket.on('connect_error', (error) => {
+            console.error('Socket connection error:', error);
+        });
+
         return () => {
-          newSocket.disconnect();
+            newSocket.disconnect();
         };
-      }, [userId]);
+    }, [userId]);
+
+    console.log('N', notifications);
+    console.log("S", socket);
 
     return (
         <Card className='mb-6'>
