@@ -1,54 +1,26 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppPagination from '../shared/AppPagination';
-import useAllWorkspaceMessages from '@/app/_hooks/workspace-messages/useAllWorkspaceMessages';
-import Loading from '../shared/Loading';
+import { io, Socket } from 'socket.io-client';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
-interface Activity {
-    id: number;
-    name: string;
-    timeAgo: string;
+interface Notification {
+    id: string;
+    title: string;
+    message: string;
+    isRead: boolean;
+    createdAt: string;
 }
 
-const initialActivities: Activity[] = [
-    {
-        id: 1,
-        name: 'John Doe updated the project status',
-        timeAgo: '2 hours ago',
-    },
-    {
-        id: 2,
-        name: 'John Doe updated the project status',
-        timeAgo: '2 hours ago',
-    },
-    {
-        id: 3,
-        name: 'John Doe updated the project status',
-        timeAgo: '2 hours ago',
-    },
-    {
-        id: 4,
-        name: 'John Doe updated the project status',
-        timeAgo: '2 hours ago',
-    },
-    {
-        id: 5,
-        name: 'John Doe updated the project status',
-        timeAgo: '2 hours ago',
-    },
-];
-
 const DashboardActivities: FC = () => {
-    const workspaceID = sessionStorage.getItem('WorkspaceId');
-    const { data, isLoading, isError, error } = useAllWorkspaceMessages({
-        id: workspaceID!,
-    });
-
-    const [activities, setActivities] = useState<Activity[]>(initialActivities);
+    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [socket, setSocket] = useState<Socket | null>(null);
+    const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 5;
 
@@ -56,21 +28,38 @@ const DashboardActivities: FC = () => {
         setCurrentPage(page);
     };
 
-    const handleDelete = (id: number) => {
-        setActivities((prevActivities) =>
-            prevActivities.filter((activity) => activity.id !== id),
-        );
-    };
+    const userId = session?.user.id!;
 
-    if (isLoading) return <Loading />;
+    useEffect(() => {
+        // Fetch initial notifications
+        const fetchNotifications = async () => {
+            const response = await axios.get(`/api/notifications/${userId!}`);
+            setNotifications(response.data);
+        };
+        fetchNotifications();
 
-    if (isError || error) {
-        const errorMessage =
-            (error as Error)?.message || 'Something went wrong.';
-        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
-    }
+        // Connect to Socket.IO server
+        const newSocket = io('http://localhost:3001', {
+            transports: ['websocket'],
+        });
+        setSocket(newSocket);
 
-    console.log('D', data);
+        // Listen for new notifications
+        newSocket.on('notification', (notification: Notification) => {
+            setNotifications((prev) => [notification, ...prev]);
+        });
+
+        newSocket.on('connect_error', (error) => {
+            console.error('Socket connection error:', error);
+        });
+
+        return () => {
+            newSocket.disconnect();
+        };
+    }, [userId]);
+
+    console.log('N', notifications);
+    console.log('S', socket);
 
     return (
         <Card className='mb-6'>
@@ -78,7 +67,7 @@ const DashboardActivities: FC = () => {
                 <CardTitle>Recent Activities</CardTitle>
             </CardHeader>
             <CardContent>
-                {activities.length === 0 ? (
+                {/* {activities.length === 0 ? (
                     <p className='text-center text-sm text-muted-foreground'>
                         No messages found
                     </p>
@@ -117,7 +106,7 @@ const DashboardActivities: FC = () => {
                             ))}
                         </AnimatePresence>
                     </ul>
-                )}
+                )} */}
             </CardContent>
             <AppPagination
                 currentPage={currentPage}
