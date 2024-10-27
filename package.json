@@ -3,11 +3,11 @@
     "version": "1.5.0",
     "private": true,
     "scripts": {
-        "dev": "next dev --turbo && pnpm run scoket-server",
+        "dev": "next dev --turbo",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "socket-server": "ts-node ./socketServer.ts",
+        "socket-server": "tsc ./socketServer.ts && node ./socketServer.js",
         "format": "prettier --write --ignore-path .gitignore ."
     },
     "dependencies": {

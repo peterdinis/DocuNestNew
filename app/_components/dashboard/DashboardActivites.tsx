@@ -59,7 +59,7 @@ const DashboardActivities: FC = () => {
     }, [userId]);
 
     console.log('N', notifications);
-    console.log("S", socket);
+    console.log('S', socket);
 
     return (
         <Card className='mb-6'>
