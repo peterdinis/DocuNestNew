@@ -17,3 +17,21 @@ export async function GET(
         );
     }
 }
+
+
+export async function DELETE(
+    req: NextRequest,
+    { params }: { params: { userId: string } },
+) {
+    try {
+        const notifications = await NotificationService.removeNotification(
+            params.userId,
+        );
+        return NextResponse.json(notifications);
+    } catch (error) {
+        return NextResponse.json(
+            { error: 'Error fetching notifications' },
+            { status: 500 },
+        );
+    }
+}
