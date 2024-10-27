@@ -19,7 +19,7 @@ interface Notification {
 
 const DashboardActivities: FC = () => {
     const [notifications, setNotifications] = useState<Notification[]>([]);
-    const [socket, setSocket] = useState<Socket | null>(null);
+    const [, setSocket] = useState<Socket | null>(null);
     const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 5;
@@ -59,7 +59,6 @@ const DashboardActivities: FC = () => {
     }, [userId]);
 
     console.log('N', notifications);
-    console.log('S', socket);
 
     return (
         <Card className='mb-6'>

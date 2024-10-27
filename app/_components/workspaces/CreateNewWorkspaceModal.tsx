@@ -114,9 +114,9 @@ const CreateNewWorkspaceModal: FC = () => {
                             </FormDescription>
                         </FormItem>
 
-                        <ConfettiButton type='submit' disabled={isPending}>
+                        <Button type='submit' disabled={isPending}>
                             {isPending ? <Loading /> : 'Create Workspace'}
-                        </ConfettiButton>
+                        </Button>
                     </form>
                 </Form>
             </DialogContent>

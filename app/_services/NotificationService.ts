@@ -16,13 +16,6 @@ export const NotificationService = {
         });
     },
 
-    async markAsRead(notificationId: string) {
-        return await db.notification.update({
-            where: { id: notificationId },
-            data: { isRead: true },
-        });
-    },
-
     async removeNotification(notificationId: string) {
         return await db.notification.delete({
             where: {
