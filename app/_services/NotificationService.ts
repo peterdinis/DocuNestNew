@@ -1,5 +1,7 @@
 import { db } from '../_utils/db';
 
+/* TODO: Later bring this to endpoints */
+
 export const NotificationService = {
     async createNotification(userId: string, title: string, message: string) {
         return await db.notification.create({
@@ -20,4 +22,12 @@ export const NotificationService = {
             data: { isRead: true },
         });
     },
+
+    async removeNotification(notificationId: string) {
+        return await db.notification.delete({
+            where: {
+                id: notificationId
+            }
+        })
+    }
 };
