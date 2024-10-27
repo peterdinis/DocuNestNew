@@ -2,13 +2,13 @@
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { FC, useState, useEffect } from 'react';
-import { TrashIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppPagination from '../shared/AppPagination';
 import { io, Socket } from 'socket.io-client';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useToast } from '@/app/_hooks/shared/use-toast';
+import { TrashIcon } from 'lucide-react';
 
 interface Notification {
     id: string;
@@ -40,7 +40,7 @@ const DashboardActivities: FC = () => {
         fetchNotifications();
 
         // Connect to Socket.IO server
-        const newSocket = io('http://localhost:3001', {
+        const newSocket = io(process.env.SOCKET_SERVER_URL, {
             transports: ['websocket'],
         });
         setSocket(newSocket);
