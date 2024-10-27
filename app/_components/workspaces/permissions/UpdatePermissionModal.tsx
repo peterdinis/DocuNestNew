@@ -45,7 +45,7 @@ const UpdatePermissionModal: FC<IUpdatePermissionModalProps> = ({
     });
 
     const allMembersInWorkspace = useMemo(() => {
-        return data && data[0]?.members || [];
+        return (data && data[0]?.members) || [];
     }, [data]);
 
     if (isLoading) return <Loading />;

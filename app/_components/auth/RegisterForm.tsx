@@ -121,7 +121,7 @@ const RegisterForm: FC = () => {
                                 <button
                                     type='button'
                                     onClick={toggleVisibility}
-                                    className='absolute right-3 mt-5 transform -translate-y-1/2'
+                                    className='absolute right-3 mt-5 -translate-y-1/2 transform'
                                 >
                                     {isVisible ? (
                                         <EyeOff className='h-5 w-5' />

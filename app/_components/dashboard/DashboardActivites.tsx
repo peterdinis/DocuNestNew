@@ -5,6 +5,8 @@ import { FC, useState } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppPagination from '../shared/AppPagination';
+import useAllWorkspaceMessages from '@/app/_hooks/workspace-messages/useAllWorkspaceMessages';
+import Loading from '../shared/Loading';
 
 interface Activity {
     id: number;
@@ -41,6 +43,11 @@ const initialActivities: Activity[] = [
 ];
 
 const DashboardActivities: FC = () => {
+    const workspaceID = sessionStorage.getItem('WorkspaceId');
+    const { data, isLoading, isError, error } = useAllWorkspaceMessages({
+        id: workspaceID!,
+    });
+
     const [activities, setActivities] = useState<Activity[]>(initialActivities);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 5;
@@ -54,6 +61,16 @@ const DashboardActivities: FC = () => {
             prevActivities.filter((activity) => activity.id !== id),
         );
     };
+
+    if (isLoading) return <Loading />;
+
+    if (isError || error) {
+        const errorMessage =
+            (error as Error)?.message || 'Something went wrong.';
+        return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
+    }
+
+    console.log('D', data);
 
     return (
         <Card className='mb-6'>

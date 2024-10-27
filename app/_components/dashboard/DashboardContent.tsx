@@ -13,7 +13,7 @@ const DashboardContent: FC = () => {
         <div>
             <main className='flex-1 overflow-auto p-8'>
                 <div className='mx-auto max-w-4xl'>
-                    <Header text={`Welcome ${session?.user.name}`} />
+                    <Header text={`Welcome ${session?.user!.name}`} />
                     <br />
                     <DashboardStatus />
                     <div className='mt-3'>

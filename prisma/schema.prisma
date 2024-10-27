@@ -64,10 +64,22 @@ model Workspace {
   inTrash            Boolean?            @default(false)
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade, name: "UserWorkspaces")
   members            WorkspaceMember[]
-  workspaceDocuments WorkspaceDocument[] @relation("WorkspaceToDocuments") // Add this relation
-  uploadedDocuments  UploadedDocument[]  @relation("WorkspaceDocuments")   // Relation to UploadedDocument
+  workspaceDocuments WorkspaceDocument[] @relation("WorkspaceToDocuments")
+  uploadedDocuments  UploadedDocument[]  @relation("WorkspaceDocuments")
+  workspaceMessages  WorkspaceMessages[] @relation("WorkspaceToMessages") // Add relation to WorkspaceMessages
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
+}
+
+model WorkspaceMessages {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  workspaceId String
+  messageCreated DateTime @default(now())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], name: "WorkspaceToMessages")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model UploadedDocument {

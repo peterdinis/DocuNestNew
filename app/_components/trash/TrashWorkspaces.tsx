@@ -36,7 +36,7 @@ const TrashWorkspaces: FC = () => {
                         }),
                     )}
                     columns={[...trashColumns]}
-            />
+                />
             ) : (
                 <p className='text-base font-bold'>No workspaces in trash</p>
             )}

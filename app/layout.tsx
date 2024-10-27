@@ -21,9 +21,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body
-                className={`antialiased`}
-            >
+            <body className={`antialiased`}>
                 <ThemeProvider>
                     <QueryProvider>
                         <SessionAppProvider>

@@ -39,8 +39,8 @@ const TrashModal: FC = () => {
                             <Header text={'Trash'} />
                         </DialogTitle>
                         <DialogDescription>
-                            <h5 className='mt-5 prose-h5: prose text-lg font-bold dark:text-white'>
-                               Workspaces
+                            <h5 className='prose-h5: prose mt-5 text-lg font-bold dark:text-white'>
+                                Workspaces
                             </h5>
                             <div className='mt-3'>
                                 <TrashWorkspaces />
