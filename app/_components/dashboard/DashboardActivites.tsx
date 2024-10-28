@@ -1,5 +1,3 @@
-'use client';
-
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { FC, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,29 +14,42 @@ const DashboardActivities: FC = () => {
     const [, setSocket] = useState<Socket | null>(null);
     const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 5;
-    const {toast} = useToast();
+    const [totalPages, setTotalPages] = useState(1);
+    const { toast } = useToast();
+
+    const userId = session?.user.id;
+    const limit = 10;
+
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
 
-    const userId = session?.user.id;
+    // Fetch paginated notifications from the API
+    const fetchNotifications = async () => {
+        try {
+            const response = await axios.get(`/api/notifications/${userId}?page=${currentPage}&limit=${limit}`);
+            setNotifications(response.data.notifications);
+            setTotalPages(response.data.totalPages); 
+        } catch (error) {
+            console.error('Failed to fetch notifications:', error);
+            toast({
+                title: "Error",
+                description: "Failed to fetch notifications",
+                duration: 3000,
+            });
+        }
+    };
 
     useEffect(() => {
-        
-        const fetchNotifications = async () => {
-            const response = await axios.get(`/api/notifications/${userId}`);
-            setNotifications(response.data);
-        };
         fetchNotifications();
 
         const newSocket = io(process.env.SOCKET_SERVER_URL, {
             transports: ['websocket'],
         });
         setSocket(newSocket);
-
+        
         newSocket.on('notification', (notification: NotificationType) => {
-            setNotifications((prev) => [notification, ...prev]);
+            setNotifications((prev) => [notification, ...prev].slice(0, limit));
         });
 
         newSocket.on('connect_error', (error) => {
@@ -48,9 +59,8 @@ const DashboardActivities: FC = () => {
         return () => {
             newSocket.disconnect();
         };
-    }, [userId]);
+    }, [userId, currentPage]);
 
-    // Function to remove a notification
     const handleDelete = async (notificationId: string) => {
         try {
             await axios.delete(`/api/notifications/${notificationId}`);
@@ -58,10 +68,15 @@ const DashboardActivities: FC = () => {
                 title: "Notification was removed",
                 duration: 2000,
                 className: "bg-green-600 text-white font-bold"
-            })
+            });
             setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
         } catch (error) {
             console.error('Failed to delete notification:', error);
+            toast({
+                title: "Error",
+                description: "Failed to delete notification",
+                duration: 3000,
+            });
         }
     };
 

@@ -1,12 +1,12 @@
 import { db } from '../_utils/db';
 
-/* TODO: Later bring this to endpoints */
-
 export const NotificationService = {
-    async getUserNotifications(userId: string) {
+    async getUserNotifications(userId: string, page: number = 1, limit: number = 10) {
         return await db.notification.findMany({
             where: { userId },
             orderBy: { createdAt: 'desc' },
+            skip: (page - 1) * limit,
+            take: limit,
         });
     },
 
