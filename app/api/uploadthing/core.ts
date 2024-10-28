@@ -3,6 +3,7 @@ import { createUploadthing, type FileRouter } from 'uploadthing/next';
 import { UploadThingError } from 'uploadthing/server';
 import authOptions from '../auth/authOptions';
 import { db } from '@/app/_utils/db';
+import axios from 'axios';
 
 const f = createUploadthing();
 
@@ -17,6 +18,10 @@ export const uploadRouter = {
         })
         .onUploadComplete(async ({ metadata, file }) => {
             try {
+                const session = await getServerSession(authOptions);
+                if (!session || !session.user) {
+                    throw new UploadThingError('Unauthorized');
+                }
                 await db.uploadedDocument.create({
                     data: {
                         name: file.name,
@@ -25,6 +30,11 @@ export const uploadRouter = {
                         userId: metadata.userId,
                         type: file.type,
                     },
+                });
+                await axios.post('/api/notifications', {
+                    userId: session.user.id,
+                    title: 'New Document',
+                    message: `New document was uploaded ${file.name}`,
                 });
                 return { uploadedBy: metadata.userId };
             } catch (error) {

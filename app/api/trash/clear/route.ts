@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { db } from '@/app/_utils/db';
 import authOptions from '../../auth/authOptions';
+import axios from 'axios';
 
 export async function DELETE() {
     const session = await getServerSession(authOptions);
@@ -18,11 +19,11 @@ export async function DELETE() {
         },
     });
 
-    /*  await db.workspaceMember.delete({
-        where: {
-            userId: session.user.id
-        }
-    }); */
+    await axios.post('/api/notifications', {
+        userId: session.user.id,
+        title: 'Trash',
+        message: `You cleaned trash`,
+    });
     return NextResponse.json({
         message: 'Trash was cleaned',
     });
