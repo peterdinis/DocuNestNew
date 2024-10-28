@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
+import axios from 'axios';
 
 export async function POST(req: Request) {
     try {
@@ -25,6 +26,12 @@ export async function POST(req: Request) {
                 workspaceId,
             },
         });
+
+        await axios.post("/api/notifications", {
+            userId: session.user.id,
+            title: "New Document",
+            message: `New document was created for workspace - ${createWorkspaceDocument.name}`
+        })
 
         if (!createWorkspaceDocument) {
             return new NextResponse('Failed to create workspace document', {
