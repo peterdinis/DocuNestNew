@@ -2,6 +2,9 @@
 
 const config = {
     reactStrictMode: true,
+    experimental: {
+       optimizeCss: true,
+    },
     images: {
         remotePatterns: [
             {
