@@ -3,7 +3,6 @@ import { getServerSession } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
-import { NotificationService } from '@/app/_services/NotificationService';
 import axios from 'axios';
 
 export async function POST(req: Request) {
@@ -37,7 +36,7 @@ export async function POST(req: Request) {
                 description,
             },
         });
-        
+
         await axios.post("/api/notifications", {
             userId: user!.id,
             title: "New document",
