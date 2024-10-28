@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
 import { NotificationService } from '@/app/_services/NotificationService';
+import axios from 'axios';
 
 export async function POST(req: Request) {
     try {
@@ -36,9 +37,12 @@ export async function POST(req: Request) {
                 description,
             },
         });
-
-        await NotificationService.createNotification(user!.id, `New document`, `New workspace was created ${createNewWorkspace.name}`);
-
+        
+        await axios.post("/api/notifications", {
+            userId: user!.id,
+            title: "New document",
+            message: `New workspace was created ${createNewWorkspace.name}`
+        })
         if (!createNewWorkspace) {
             return new NextResponse('Failed to create workspace', {
                 status: 500,
