@@ -27,14 +27,16 @@ const DashboardActivities: FC = () => {
     // Fetch paginated notifications from the API
     const fetchNotifications = async () => {
         try {
-            const response = await axios.get(`/api/notifications/${userId}?page=${currentPage}&limit=${limit}`);
+            const response = await axios.get(
+                `/api/notifications/${userId}?page=${currentPage}&limit=${limit}`,
+            );
             setNotifications(response.data.notifications);
-            setTotalPages(response.data.totalPages); 
+            setTotalPages(response.data.totalPages);
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
             toast({
-                title: "Error",
-                description: "Failed to fetch notifications",
+                title: 'Error',
+                description: 'Failed to fetch notifications',
                 duration: 3000,
             });
         }
@@ -47,7 +49,7 @@ const DashboardActivities: FC = () => {
             transports: ['websocket'],
         });
         setSocket(newSocket);
-        
+
         newSocket.on('notification', (notification: NotificationType) => {
             setNotifications((prev) => [notification, ...prev].slice(0, limit));
         });
@@ -65,16 +67,18 @@ const DashboardActivities: FC = () => {
         try {
             await axios.delete(`/api/notifications/${notificationId}`);
             toast({
-                title: "Notification was removed",
+                title: 'Notification was removed',
                 duration: 2000,
-                className: "bg-green-600 text-white font-bold"
+                className: 'bg-green-600 text-white font-bold',
             });
-            setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
+            setNotifications((prev) =>
+                prev.filter((n) => n.id !== notificationId),
+            );
         } catch (error) {
             console.error('Failed to delete notification:', error);
             toast({
-                title: "Error",
-                description: "Failed to delete notification",
+                title: 'Error',
+                description: 'Failed to delete notification',
                 duration: 3000,
             });
         }
@@ -111,12 +115,16 @@ const DashboardActivities: FC = () => {
                                                 {notification.message}
                                             </p>
                                             <p className='text-xs text-muted-foreground'>
-                                                {new Date(notification.createdAt).toLocaleString()}
+                                                {new Date(
+                                                    notification.createdAt,
+                                                ).toLocaleString()}
                                             </p>
                                         </div>
                                     </div>
                                     <button
-                                        onClick={() => handleDelete(notification.id)}
+                                        onClick={() =>
+                                            handleDelete(notification.id)
+                                        }
                                         className='text-red-500 hover:text-red-700'
                                         aria-label='Delete notification'
                                     >

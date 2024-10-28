@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
             data: { userId, title, message },
         });
 
-        if(!notification) {
-            throw new Error("Failed to create new notification")
+        if (!notification) {
+            throw new Error('Failed to create new notification');
         }
 
         return NextResponse.json(notification);

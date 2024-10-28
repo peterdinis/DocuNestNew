@@ -4,4 +4,4 @@ export type NotificationType = {
     message: string;
     isRead: boolean;
     createdAt: string;
-}
+};

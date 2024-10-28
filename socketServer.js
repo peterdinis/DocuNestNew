@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.io = exports.server = void 0;
-var socket_io_1 = require("socket.io");
-var http = require("http");
+var socket_io_1 = require('socket.io');
+var http = require('http');
 var PORT = 3001;
 var server = http.createServer();
 exports.server = server;
@@ -29,5 +29,5 @@ io.on('connection', function (socket) {
 });
 // Make the server listen on the defined port
 server.listen(PORT, function () {
-    console.log("Socket.IO server running on http://localhost:".concat(PORT));
+    console.log('Socket.IO server running on http://localhost:'.concat(PORT));
 });

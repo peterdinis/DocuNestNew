@@ -27,11 +27,11 @@ export async function POST(req: Request) {
             },
         });
 
-        await axios.post("/api/notifications", {
+        await axios.post('/api/notifications', {
             userId: session.user.id,
-            title: "New Document",
-            message: `New document was created for workspace - ${createWorkspaceDocument.name}`
-        })
+            title: 'New Document',
+            message: `New document was created for workspace - ${createWorkspaceDocument.name}`,
+        });
 
         if (!createWorkspaceDocument) {
             return new NextResponse('Failed to create workspace document', {

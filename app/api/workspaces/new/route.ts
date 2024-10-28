@@ -37,11 +37,11 @@ export async function POST(req: Request) {
             },
         });
 
-        await axios.post("/api/notifications", {
+        await axios.post('/api/notifications', {
             userId: user!.id,
-            title: "New document",
-            message: `New workspace was created ${createNewWorkspace.name}`
-        })
+            title: 'New document',
+            message: `New workspace was created ${createNewWorkspace.name}`,
+        });
         if (!createNewWorkspace) {
             return new NextResponse('Failed to create workspace', {
                 status: 500,
