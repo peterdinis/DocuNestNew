@@ -9,17 +9,10 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useToast } from '@/app/_hooks/shared/use-toast';
 import { TrashIcon } from 'lucide-react';
-
-interface Notification {
-    id: string;
-    title: string;
-    message: string;
-    isRead: boolean;
-    createdAt: string;
-}
+import { NotificationType } from '@/app/_types/notificationTypes';
 
 const DashboardActivities: FC = () => {
-    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [notifications, setNotifications] = useState<NotificationType[]>([]);
     const [, setSocket] = useState<Socket | null>(null);
     const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +37,7 @@ const DashboardActivities: FC = () => {
         });
         setSocket(newSocket);
 
-        newSocket.on('notification', (notification: Notification) => {
+        newSocket.on('notification', (notification: NotificationType) => {
             setNotifications((prev) => [notification, ...prev]);
         });
 
