@@ -18,6 +18,7 @@ import { WorkspaceDocumentType } from '@/app/_types/workspaceDocumentTypes';
 import useCreateWorkspaceDocument from '@/app/_hooks/workspace-documents/useCreateWorkspaceDocument';
 import { useSession } from 'next-auth/react';
 import Loading from '../../shared/Loading';
+import { useToast } from '@/app/_hooks/shared/use-toast';
 
 interface ICreateDocumentModalProps {
     workspaceId: string;
@@ -26,7 +27,8 @@ interface ICreateDocumentModalProps {
 const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
     workspaceId,
 }: ICreateDocumentModalProps) => {
-    const [isOpen, setIsOpen] = useState(false); // Modal open state
+    const [isOpen, setIsOpen] = useState(false);
+    const {toast} = useToast();
     const { mutate: createDocument, isPending } = useCreateWorkspaceDocument();
     const { data: session } = useSession();
     const {
@@ -54,8 +56,23 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
 
         createDocument(documentData, {
             onSuccess: () => {
-                reset(); // Reset form
-                setIsOpen(false); // Close modal
+                reset();
+                setIsOpen(false);
+            },
+            onError: (error: any) => {
+                if (error.response?.data?.error === 'Document with the same name already exists in this workspace') {
+                   toast({
+                        title: "Document with the same name already exists in this workspace",
+                        duration: 2000,
+                        className: "bg-red-800 text-white font-bold text-xl"
+                   })
+                } else {
+                    toast({
+                        title: "Failed to create new document for workspace",
+                        duration: 2000,
+                        className: "bg-red-800 text-white font-bold text-xl"
+                   })
+                }
             },
         });
     };
