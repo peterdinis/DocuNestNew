@@ -56,7 +56,6 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
                 workspaceEmoji: selectedEmoji,
             },
             {
-                // Reset form and close modal on successful mutation
                 onSuccess: () => {
                     setFormData({ name: '', description: '' });
                     setSelectedEmoji('');

@@ -29,7 +29,7 @@ const DocumentsTable: FC<IDocumentsTableProps> = ({ workspaceId }) => {
             </h4>
             <div className='mt-1'>
                 {workspaceDocumentData.length > 0 ? (
-                    <GlobalTable
+    <GlobalTable
                         data={workspaceDocumentData}
                         columns={documentColumns}
                     />
