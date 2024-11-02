@@ -27,6 +27,8 @@ export async function POST(req: Request) {
             },
         });
 
+        console.log("CD", createWorkspaceDocument);
+
         await axios.post('/api/notifications', {
             userId: session.user.id,
             title: 'New Document',
