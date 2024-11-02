@@ -1,14 +1,14 @@
 import { Server } from 'socket.io';
 import * as http from 'http';
 
-const PORT = process.env.SOCKET_SERVER_PORT;
+const PORT = 3001;
 
 const server = http.createServer();
 
 const io = new Server(server, {
     cors: {
-        origin: process.env.FRONTEND_URL, 
-        methods: ['GET', 'POST'],
+        origin: process.env.FRONTEND_URL,
+        methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
         allowedHeaders: [
             'Access-Control-Allow-Headers',
             'Origin, X-Requested-With, Content-Type, Accept',
