@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import Loading from '../shared/Loading';
 import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import AppPagination from '../shared/AppPagination';
-import { format } from 'date-fns'; // Import date-fns
+import { format } from 'date-fns';
 
 const WorkspacesLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
