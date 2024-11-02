@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import Loading from '../shared/Loading';
 import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import AppPagination from '../shared/AppPagination';
+import { format } from 'date-fns'; // Import date-fns
 
 const WorkspacesLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -92,25 +93,28 @@ const WorkspacesLists: FC = () => {
                                             <p className='text-2xl'>
                                                 {workspace.workspaceEmoji}
                                             </p>
-                                            <CardTitle className='prose-p: prose text-lg font-bold dark:text-white'>
+                                            <CardTitle className='prose-p: prose break-all text-lg font-bold dark:text-white'>
                                                 {workspace.name}
                                             </CardTitle>
-                                            <CardTitle className='prose-p: prose text-sm text-gray-600 dark:text-white'>
+                                            <CardTitle className='prose-p: prose text-sm break-all text-gray-600 dark:text-white'>
                                                 {workspace.description ||
                                                     'No description'}
                                             </CardTitle>
-                                            <CardTitle className='text-xs text-gray-400 dark:text-white'>
+                                            <CardTitle className='text-xs text-gray-400 break-all dark:text-white'>
                                                 Created at:{' '}
-                                                {new Date(
-                                                    workspace.createdAt,
-                                                ).toLocaleDateString()}
+                                                {format(
+                                                    new Date(
+                                                        workspace.createdAt,
+                                                    ),
+                                                    'MMMM dd, yyyy'
+                                                )}
                                             </CardTitle>
                                         </Link>
                                     </motion.div>
                                 ),
                             )
                         ) : (
-                            <p className='col-span-3 text-center'>
+                            <p className='prose prose-p text-zinc-600 dark:text-white col-span-3 text-center'>
                                 No workspaces found.
                             </p>
                         )}
