@@ -3,13 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { userId: string; page: number; limit: number } },
+    { params }: { params: { userId: string; page: number; limit: number, skip: number } },
 ) {
     try {
         const notifications = await db.notification.findMany({
             where: { userId: params.userId },
             orderBy: { createdAt: 'desc' },
-            skip: (params.page - 1) * params.limit,
+            skip: params.skip * params.limit,
             take: params.limit,
         });
         return NextResponse.json(notifications);

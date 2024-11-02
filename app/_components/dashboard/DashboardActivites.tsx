@@ -19,7 +19,7 @@ const DashboardActivities: FC = () => {
 
     const userId = session?.user.id;
     const limit = 10;
-
+    const skip = 1;
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
@@ -28,15 +28,14 @@ const DashboardActivities: FC = () => {
     const fetchNotifications = async () => {
         try {
             const response = await axios.get(
-                `/api/notifications/${userId}?page=${currentPage}&limit=${limit}`,
+                `/api/notifications/${userId}?page=${currentPage}&limit=${limit}&skip=${skip}`,
             );
             setNotifications(response.data.notifications);
             setTotalPages(response.data.totalPages);
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
             toast({
-                title: 'Error',
-                description: 'Failed to fetch notifications',
+                title: "Failed to load messages",
                 duration: 3000,
             });
         }

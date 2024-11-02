@@ -17,6 +17,20 @@ export async function POST(req: Request) {
         }
 
         const { name, content, workspaceId } = await req.json();
+        
+        const existingDocument = await db.workspaceDocument.findFirst({
+            where: {
+                name,
+                workspaceId,
+            },
+        });
+
+        if (existingDocument) {
+            return NextResponse.json(
+                { error: 'Document with the same name already exists in this workspace' },
+                { status: 400 },
+            );
+        }
 
         const createWorkspaceDocument = await db.workspaceDocument.create({
             data: {
@@ -27,11 +41,11 @@ export async function POST(req: Request) {
             },
         });
 
-        await axios.post('/api/notifications', {
+        /* await axios.post('/api/notifications', {
             userId: session.user.id,
             title: 'New Document',
             message: `New document was created for workspace - ${createWorkspaceDocument.name}`,
-        });
+        }); */
 
         if (!createWorkspaceDocument) {
             return new NextResponse('Failed to create workspace document', {

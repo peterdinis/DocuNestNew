@@ -26,13 +26,14 @@ import { Input } from '@/components/ui/input';
 import useCreateWorkspace from '@/app/_hooks/workspaces/useCreateWorkspace';
 import { WorkspaceFormData } from '@/app/_types/workspaceTypes';
 import Loading from '../shared/Loading';
-import ConfettiButton from '../shared/ConfettiButton';
+import { useToast } from '@/app/_hooks/shared/use-toast';
 
 const CreateNewWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('😊');
     const [open, setOpen] = useState<boolean>(false);
     const { mutate: createWorkspace, isPending } = useCreateWorkspace();
     const form = useForm<WorkspaceFormData>();
+    const {toast} = useToast();
 
     const onSubmit: SubmitHandler<WorkspaceFormData> = (data) => {
         createWorkspace(
@@ -46,7 +47,22 @@ const CreateNewWorkspaceModal: FC = () => {
                     form.reset();
                     setOpen(false);
                 },
-            },
+                onError: (error: any) => {
+                    if (error.response?.status === 400) {
+                        toast({
+                            title: 'Workspace creation failed',
+                            description: 'A workspace with this name already exists.',
+                            duration: 2000
+                        });
+                    } else {
+                        toast({
+                            title: 'Error',
+                            description: 'An unexpected error occurred.',
+                            duration: 2000
+                        });
+                    }
+                },
+            }
         );
     };
 

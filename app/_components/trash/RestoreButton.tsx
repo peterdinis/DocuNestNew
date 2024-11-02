@@ -17,7 +17,7 @@ const RestoreButton: FC<RestoreButtonProps> = ({ id }) => {
             onClick={() => restoreMutation.mutate()}
             disabled={restoreMutation.isPending}
             className='rounded-md px-4 py-2'
-            variant={'outline'}
+            variant={"secondary"}
             size={'sm'}
         >
             {restoreMutation.isPending ? <Loading /> : 'Restore'}
