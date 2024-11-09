@@ -3,7 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { userId: string; page: number; limit: number, skip: number } },
+    {
+        params,
+    }: {
+        params: { userId: string; page: number; limit: number; skip: number };
+    },
 ) {
     try {
         const notifications = await db.notification.findMany({

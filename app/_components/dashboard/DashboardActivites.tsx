@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import { useToast } from '@/app/_hooks/shared/use-toast';
 import { TrashIcon } from 'lucide-react';
 import { NotificationType } from '@/app/_types/notificationTypes';
+import { limit, skip } from '@/app/_constants/applicationConstants';
 
 const DashboardActivities: FC = () => {
     const [notifications, setNotifications] = useState<NotificationType[]>([]);
@@ -18,8 +19,6 @@ const DashboardActivities: FC = () => {
     const { toast } = useToast();
 
     const userId = session?.user.id;
-    const limit = 10;
-    const skip = 1;
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
@@ -35,7 +34,7 @@ const DashboardActivities: FC = () => {
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
             toast({
-                title: "Failed to load messages",
+                title: 'Failed to load messages',
                 duration: 3000,
             });
         }
@@ -91,7 +90,7 @@ const DashboardActivities: FC = () => {
             <CardContent>
                 {notifications.length === 0 ? (
                     <p className='text-center text-sm text-muted-foreground'>
-                        No messages found
+                        No messages found 😔
                     </p>
                 ) : (
                     <ul className='space-y-4'>

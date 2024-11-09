@@ -33,7 +33,7 @@ const CreateNewWorkspaceModal: FC = () => {
     const [open, setOpen] = useState<boolean>(false);
     const { mutate: createWorkspace, isPending } = useCreateWorkspace();
     const form = useForm<WorkspaceFormData>();
-    const {toast} = useToast();
+    const { toast } = useToast();
 
     const onSubmit: SubmitHandler<WorkspaceFormData> = (data) => {
         createWorkspace(
@@ -51,18 +51,19 @@ const CreateNewWorkspaceModal: FC = () => {
                     if (error.response?.status === 400) {
                         toast({
                             title: 'Workspace creation failed',
-                            description: 'A workspace with this name already exists.',
-                            duration: 2000
+                            description:
+                                'A workspace with this name already exists.',
+                            duration: 2000,
                         });
                     } else {
                         toast({
                             title: 'Error',
                             description: 'An unexpected error occurred.',
-                            duration: 2000
+                            duration: 2000,
                         });
                     }
                 },
-            }
+            },
         );
     };
 
