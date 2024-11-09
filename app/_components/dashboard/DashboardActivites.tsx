@@ -90,7 +90,7 @@ const DashboardActivities: FC = () => {
             <CardContent>
                 {notifications.length === 0 ? (
                     <p className='text-center text-sm text-muted-foreground'>
-                        No messages found
+                        No messages found 😔
                     </p>
                 ) : (
                     <ul className='space-y-4'>
