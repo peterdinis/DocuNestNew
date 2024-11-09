@@ -28,7 +28,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
     workspaceId,
 }: ICreateDocumentModalProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const {toast} = useToast();
+    const { toast } = useToast();
     const { mutate: createDocument, isPending } = useCreateWorkspaceDocument();
     const { data: session } = useSession();
     const {
@@ -60,18 +60,21 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                 setIsOpen(false);
             },
             onError: (error: any) => {
-                if (error.response?.data?.error === 'Document with the same name already exists in this workspace') {
-                   toast({
-                        title: "Document with the same name already exists in this workspace",
+                if (
+                    error.response?.data?.error ===
+                    'Document with the same name already exists in this workspace'
+                ) {
+                    toast({
+                        title: 'Document with the same name already exists in this workspace',
                         duration: 2000,
-                        className: "bg-red-800 text-white font-bold text-xl"
-                   })
+                        className: 'bg-red-800 text-white font-bold text-xl',
+                    });
                 } else {
                     toast({
-                        title: "Failed to create new document for workspace",
+                        title: 'Failed to create new document for workspace',
                         duration: 2000,
-                        className: "bg-red-800 text-white font-bold text-xl"
-                   })
+                        className: 'bg-red-800 text-white font-bold text-xl',
+                    });
                 }
             },
         });

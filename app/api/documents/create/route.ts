@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         }
 
         const { name, content, workspaceId } = await req.json();
-        
+
         const existingDocument = await db.workspaceDocument.findFirst({
             where: {
                 name,
@@ -27,7 +27,9 @@ export async function POST(req: Request) {
 
         if (existingDocument) {
             return NextResponse.json(
-                { error: 'Document with the same name already exists in this workspace' },
+                {
+                    error: 'Document with the same name already exists in this workspace',
+                },
                 { status: 400 },
             );
         }

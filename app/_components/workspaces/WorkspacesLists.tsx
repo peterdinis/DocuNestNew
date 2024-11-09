@@ -100,17 +100,17 @@ const WorkspacesLists: FC = () => {
                                                 <CardTitle className='prose-p: prose break-all text-lg font-bold dark:text-white'>
                                                     {workspace.name}
                                                 </CardTitle>
-                                                <CardTitle className='prose-p: prose text-sm break-all text-gray-600 dark:text-white'>
+                                                <CardTitle className='prose-p: prose break-all text-sm text-gray-600 dark:text-white'>
                                                     {workspace.description ||
                                                         'No description'}
                                                 </CardTitle>
-                                                <CardTitle className='text-xs text-gray-400 break-all dark:text-white'>
+                                                <CardTitle className='break-all text-xs text-gray-400 dark:text-white'>
                                                     Created at:{' '}
                                                     {format(
                                                         new Date(
                                                             workspace.createdAt,
                                                         ),
-                                                        'MMMM dd, yyyy'
+                                                        'MMMM dd, yyyy',
                                                     )}
                                                 </CardTitle>
                                             </Link>
@@ -119,7 +119,7 @@ const WorkspacesLists: FC = () => {
                                 )
                             ) : (
                                 <motion.p
-                                    className='prose prose-p text-zinc-600 dark:text-white col-span-3 text-center'
+                                    className='prose-p prose col-span-3 text-center text-zinc-600 dark:text-white'
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}

@@ -34,7 +34,7 @@ const DashboardActivities: FC = () => {
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
             toast({
-                title: "Failed to load messages",
+                title: 'Failed to load messages',
                 duration: 3000,
             });
         }
