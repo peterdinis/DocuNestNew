@@ -106,7 +106,7 @@ const MemberWorkspaceLists: FC = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                             >
-                                No Member workspaces found
+                                No Member workspaces found 😔
                             </motion.p>
                         )}
                     </AnimatePresence>

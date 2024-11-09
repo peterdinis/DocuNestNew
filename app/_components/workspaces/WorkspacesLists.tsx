@@ -124,7 +124,7 @@ const WorkspacesLists: FC = () => {
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                 >
-                                    No workspaces found.
+                                    No workspaces found. 😔
                                 </motion.p>
                             )}
                         </AnimatePresence>
