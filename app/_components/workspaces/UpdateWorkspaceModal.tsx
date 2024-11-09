@@ -1,6 +1,7 @@
 'use client';
 
 import { FC, useState, ChangeEvent, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 import {
     Dialog,
     DialogContent,
@@ -34,6 +35,8 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
         description: '',
     });
 
+    const router = useRouter();
+
     // Call useUpdateWorkspace and handle success/error in the mutation
     const updateWorkspaceMutation = useUpdateWorkspace({ id: workspaceId });
 
@@ -63,6 +66,7 @@ const UpdateWorkspaceModal: FC<IUpdateWorkspaceModalProps> = ({
                 },
             },
         );
+        window.location.reload();
     };
 
     const onEmojiClick = (emojiObject: { emoji: string }) => {
