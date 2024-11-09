@@ -6,17 +6,29 @@ export async function GET(
     {
         params,
     }: {
-        params: { userId: string; page: number; limit: number; skip: number };
+        params: { userId: string };
     },
 ) {
+    const { searchParams } = new URL(req.url);
+    const limit = parseInt(searchParams.get('limit') || '10', 10);
+    const skip = parseInt(searchParams.get('skip') || '0', 10);
+
     try {
         const notifications = await db.notification.findMany({
             where: { userId: params.userId },
             orderBy: { createdAt: 'desc' },
-            skip: params.skip * params.limit,
-            take: params.limit,
+            skip,
+            take: limit,
         });
-        return NextResponse.json(notifications);
+
+        const totalCount = await db.notification.count({
+            where: { userId: params.userId },
+        });
+
+        return NextResponse.json({
+            notifications,
+            totalPages: Math.ceil(totalCount / limit),
+        });
     } catch (error) {
         return NextResponse.json(
             { error: 'Error fetching notifications' },

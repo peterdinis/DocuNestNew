@@ -25,9 +25,10 @@ const DashboardActivities: FC = () => {
 
     // Fetch paginated notifications from the API
     const fetchNotifications = async () => {
+        const computedSkip = (currentPage - 1) * limit;
         try {
             const response = await axios.get(
-                `/api/notifications/${userId}?page=${currentPage}&limit=${limit}&skip=${skip}`,
+                `/api/notifications/${userId}?page=${currentPage}&limit=${limit}&skip=${computedSkip}`,
             );
             setNotifications(response.data.notifications);
             setTotalPages(response.data.totalPages);
@@ -43,7 +44,7 @@ const DashboardActivities: FC = () => {
     useEffect(() => {
         fetchNotifications();
 
-        const newSocket = io(process.env.SOCKET_SERVER_URL, {
+        const newSocket = io("http://localhost:3001", {
             transports: ['websocket'],
         });
         setSocket(newSocket);

@@ -19,6 +19,13 @@ const io = new Server(server, {
     },
 });
 
+io.on('connect', () => {
+    console.log('Connected to WebSocket server');
+});
+io.on('connect_error', (err) => {
+    console.error('Connection error:', err);
+});
+
 server.listen(3001, () => {
     console.log(`Socket.IO server running on http://localhost:${3001}`);
 });
