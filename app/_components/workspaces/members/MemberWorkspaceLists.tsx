@@ -10,6 +10,7 @@ import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import AppPagination from '../../shared/AppPagination';
 import useDisplayMyMemberWorkspaces from '@/app/_hooks/workspace-mebers/useDisplayMyMemberWorkspaces';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';
+import { workspacesPerPage } from '@/app/_constants/applicationConstants';
 
 const MemberWorkspaceLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -46,7 +47,6 @@ const MemberWorkspaceLists: FC = () => {
 
     const workspaces = data?.workspaces || [];
     const totalWorkspaces = data?.totalWorkspaces || 0;
-    const workspacesPerPage = 10;
     const totalPages = Math.ceil(totalWorkspaces / workspacesPerPage);
 
     return (

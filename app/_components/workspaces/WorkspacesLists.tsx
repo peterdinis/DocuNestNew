@@ -12,6 +12,7 @@ import Loading from '../shared/Loading';
 import { WorkspacePaginationType } from '@/app/_types/workspaceTypes';
 import AppPagination from '../shared/AppPagination';
 import { format } from 'date-fns';
+import { workspacesPerPage } from '@/app/_constants/applicationConstants';
 
 const WorkspacesLists: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -48,7 +49,6 @@ const WorkspacesLists: FC = () => {
     }
 
     const totalWorkspaces = data?.totalWorkspaces || 0;
-    const workspacesPerPage = 6;
     const totalPages = Math.ceil(totalWorkspaces / workspacesPerPage);
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
