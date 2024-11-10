@@ -64,6 +64,7 @@ const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange }) => {
             theme='snow'
             modules={modules} // Pass modules with syntax enabled
             formats={formats}
+            className='quill-container'
             value={value}
             readOnly={readOnly}
             preserveWhitespace={true}

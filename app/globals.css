@@ -20,6 +20,16 @@
     }
 }
 
+.quill-container {
+    word-wrap: break-word; /* Ensure long words break */
+    white-space: pre-wrap; /* Preserve spacing and line breaks */
+}
+
+.ql-editor {
+    overflow-wrap: break-word; /* Break words when they are too long */
+    white-space: pre-wrap; /* Allow text to wrap */
+}
+
 html::-webkit-scrollbar {
     width: 16px;
     height: 16px;
