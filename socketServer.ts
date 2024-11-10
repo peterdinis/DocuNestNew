@@ -9,23 +9,29 @@ const io = new Server(server, {
     cors: {
         origin: 'http://localhost:3000',
         methods: ['GET', 'POST'],
-        allowedHeaders: [
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept',
-        ],
+        allowedHeaders: ['Content-Type', 'Authorization'], // List of allowed headers
+        credentials: true, // If using cookies or Authorization headers
     },
 });
 
 // Set up the connection event
 io.on('connection', (socket) => {
-    console.log('New client connected', socket.id);
+    console.log(`New client connected: ${socket.id}`);
 
+    // Handle custom events
+    socket.on('notification', (data) => {
+        console.log(`Notification received:`, data);
+        io.emit('notification', data); // Broadcast the notification to all clients
+    });
+
+    // Handle error events
     socket.on('error', (error) => {
         console.error('Socket error:', error);
     });
 
-    socket.on('disconnect', () => {
-        console.log('Client disconnected', socket.id);
+    // Handle client disconnection
+    socket.on('disconnect', (reason) => {
+        console.log(`Client disconnected: ${socket.id} (Reason: ${reason})`);
     });
 });
 

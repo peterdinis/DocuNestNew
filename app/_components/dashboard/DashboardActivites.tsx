@@ -23,29 +23,41 @@ const DashboardActivities: FC = () => {
     const [, setSocket] = useState<Socket | null>(null);
     const { data: session } = useSession();
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 5;
-    const {toast} = useToast();
+    const totalPages = 5; // Example value
+    const { toast } = useToast();
+
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
 
-    const userId = session?.user.id;
+    const userId = session?.user?.id;
 
     useEffect(() => {
-        
+        if (!userId) return;
+
         const fetchNotifications = async () => {
-            const response = await axios.get(`/api/notifications/${userId}`);
-            setNotifications(response.data);
+            try {
+                const response = await axios.get(`/api/notifications/${userId}`);
+                setNotifications(response.data);
+            } catch (error) {
+                console.error('Error fetching notifications:', error);
+            }
         };
+
         fetchNotifications();
 
-        const newSocket = io(process.env.SOCKET_SERVER_URL, {
+        const newSocket = io(process.env.NEXT_PUBLIC_SOCKET_SERVER_URL!, {
             transports: ['websocket'],
         });
+
         setSocket(newSocket);
 
         newSocket.on('notification', (notification: Notification) => {
             setNotifications((prev) => [notification, ...prev]);
+        });
+
+        newSocket.on('connect', () => {
+            console.log('Connected to WebSocket server');
         });
 
         newSocket.on('connect_error', (error) => {
@@ -57,15 +69,14 @@ const DashboardActivities: FC = () => {
         };
     }, [userId]);
 
-    // Function to remove a notification
     const handleDelete = async (notificationId: string) => {
         try {
             await axios.delete(`/api/notifications/${notificationId}`);
             toast({
-                title: "Notification was removed",
+                title: 'Notification removed',
                 duration: 2000,
-                className: "bg-green-600 text-white font-bold"
-            })
+                className: 'bg-green-600 text-white font-bold',
+            });
             setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
         } catch (error) {
             console.error('Failed to delete notification:', error);
@@ -73,17 +84,17 @@ const DashboardActivities: FC = () => {
     };
 
     return (
-        <Card className='mb-6'>
+        <Card className="mb-6">
             <CardHeader>
                 <CardTitle>Recent Activities</CardTitle>
             </CardHeader>
             <CardContent>
                 {notifications.length === 0 ? (
-                    <p className='text-center text-sm text-muted-foreground'>
+                    <p className="text-center text-sm text-muted-foreground">
                         No messages found
                     </p>
                 ) : (
-                    <ul className='space-y-4'>
+                    <ul className="space-y-4">
                         <AnimatePresence>
                             {notifications.map((notification) => (
                                 <motion.li
@@ -92,27 +103,25 @@ const DashboardActivities: FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.3 }}
-                                    className='flex items-center justify-between'
+                                    className="flex items-center justify-between"
                                 >
-                                    <div className='flex items-center'>
-                                        <div className='ml-4'>
-                                            <p className='text-sm font-medium'>
-                                                {notification.title}
-                                            </p>
-                                            <p className='text-sm text-muted-foreground'>
-                                                {notification.message}
-                                            </p>
-                                            <p className='text-xs text-muted-foreground'>
-                                                {new Date(notification.createdAt).toLocaleString()}
-                                            </p>
-                                        </div>
+                                    <div>
+                                        <p className="text-sm font-medium">
+                                            {notification.title}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {notification.message}
+                                        </p>
+                                        <p className="text-xs text-muted-foreground">
+                                            {new Date(notification.createdAt).toLocaleString()}
+                                        </p>
                                     </div>
                                     <button
                                         onClick={() => handleDelete(notification.id)}
-                                        className='text-red-500 hover:text-red-700'
-                                        aria-label='Delete notification'
+                                        className="text-red-500 hover:text-red-700"
+                                        aria-label="Delete notification"
                                     >
-                                        <TrashIcon className='h-5 w-5' />
+                                        <TrashIcon className="h-5 w-5" />
                                     </button>
                                 </motion.li>
                             ))}
