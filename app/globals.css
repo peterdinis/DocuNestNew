@@ -20,15 +20,18 @@
     }
 }
 
-.quill-container {
-    word-wrap: break-word; /* Ensure long words break */
-    white-space: pre-wrap; /* Preserve spacing and line breaks */
-}
-
-.ql-editor {
-    overflow-wrap: break-word; /* Break words when they are too long */
-    white-space: pre-wrap; /* Allow text to wrap */
-}
+.ql-container {
+    overflow-y: auto;
+    word-wrap: break-word; /* Ensures long words break */
+    white-space: pre-wrap; /* Keeps formatting and wraps long text */
+  }
+  
+  .ql-editor {
+    overflow-wrap: break-word; /* Breaks long continuous words */
+    word-break: break-word;    /* Ensures no visual overflow */
+    white-space: pre-wrap;     /* Maintains spacing and wraps text */
+    min-height: 100px;         /* Optional: Define a minimum height */
+  }
 
 html::-webkit-scrollbar {
     width: 16px;
