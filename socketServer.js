@@ -3,9 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.io = exports.server = void 0;
 var socket_io_1 = require("socket.io");
 var http = require("http");
-var dotenv = require("dotenv");
-dotenv.config();
-var PORT = process.env.SOCKET_SERVER_PORT;
+var PORT = 3001;
 var server = http.createServer();
 exports.server = server;
 var io = new socket_io_1.Server(server, {
@@ -19,12 +17,17 @@ var io = new socket_io_1.Server(server, {
     },
 });
 exports.io = io;
-server.listen(3001, function () {
-    io.on('connect', function () {
-        console.log('Connected to WebSocket server');
+// Set up the connection event
+io.on('connection', function (socket) {
+    console.log('New client connected', socket.id);
+    socket.on('error', function (error) {
+        console.error('Socket error:', error);
     });
-    io.on('connect_error', function (err) {
-        console.error('Connection error:', err);
+    socket.on('disconnect', function () {
+        console.log('Client disconnected', socket.id);
     });
-    console.log("Socket.IO server running on http://localhost:".concat(3001));
+});
+// Make the server listen on the defined port
+server.listen(PORT, function () {
+    console.log("Socket.IO server running on http://localhost:".concat(PORT));
 });
