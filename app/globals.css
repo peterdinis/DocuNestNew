@@ -20,6 +20,19 @@
     }
 }
 
+.ql-container {
+    overflow-y: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.ql-editor {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    min-height: 100px;
+}
+
 html::-webkit-scrollbar {
     width: 16px;
     height: 16px;

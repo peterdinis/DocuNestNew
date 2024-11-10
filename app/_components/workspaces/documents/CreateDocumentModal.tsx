@@ -109,7 +109,7 @@ const CreateDocumentModal: FC<ICreateDocumentModalProps> = ({
                         )}
                     </div>
 
-                    <div className='mt-5 h-[300px] overflow-y-auto break-words'>
+                    <div className='mt-5 h-[300px] overflow-y-auto break-all'>
                         <QuillEditor
                             value={content}
                             readOnly={false}
