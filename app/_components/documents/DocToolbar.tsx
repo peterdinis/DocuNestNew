@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -15,7 +13,8 @@ import {
     Text,
     PencilOff,
     ArrowLeft,
-} from 'lucide-react';
+    Globe,
+} from 'lucide-react'; // Added Globe icon for publish button
 import { FC } from 'react';
 import {
     AlertDialog,
@@ -39,6 +38,7 @@ interface DocToolbarProps {
     handleDownload: () => void;
     handleExportPDF: () => void;
     handleDocxDownload: () => void;
+    handlePublish: () => void; // Added publish handler
 }
 
 const DocToolbar: FC<DocToolbarProps> = ({
@@ -48,6 +48,7 @@ const DocToolbar: FC<DocToolbarProps> = ({
     handleDocxDownload,
     handleDownload,
     handleExportPDF,
+    handlePublish, // Added publish handler
 }: DocToolbarProps) => {
     const deleteDocumentMutation = useDeleteWorkspaceDocument({
         id: documentId,
@@ -105,6 +106,15 @@ const DocToolbar: FC<DocToolbarProps> = ({
                 />
             </div>
             <div className='flex items-center space-x-2'>
+                <TooltipWrapper
+                    triggerChildren={
+                        <Button onClick={handlePublish} variant='outline'>
+                            <Globe className='h-4 w-4' />
+                            Publish
+                        </Button>
+                    }
+                    contentText='Publish document'
+                />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant='outline'>

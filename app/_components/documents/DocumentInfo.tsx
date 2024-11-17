@@ -24,10 +24,8 @@ const DocumentInfo: FC = () => {
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
 
-    const { data, isLoading, isError, error } = useWorkspaceDocumentDetail({
-        id,
-    });
-    const { mutate: updateDocument } = useUpdateWorkspaceDocument({ id }); // Use the update hook
+    const { data, isLoading, isError, error } = useWorkspaceDocumentDetail({ id });
+    const { mutate: updateDocument } = useUpdateWorkspaceDocument({ id });
 
     useEffect(() => {
         if (data) {
@@ -42,23 +40,18 @@ const DocumentInfo: FC = () => {
 
     const handleSave = () => {
         if (isEditMode) {
-            // Call the update mutation
             updateDocument({ name, content });
-            setIsEditMode(false); // Exit edit mode after saving
+            setIsEditMode(false);
         }
     };
 
     const handleDownload = () => {
         const tempElement = document.createElement('div');
         tempElement.innerHTML = content;
-
-        const plainTextContent =
-            tempElement.textContent || tempElement.innerText || '';
-
+        const plainTextContent = tempElement.textContent || tempElement.innerText || '';
         const blob = new Blob([plainTextContent], {
             type: 'text/plain;charset=utf-8',
         });
-
         saveAs(blob, `${name}.txt`);
     };
 
@@ -73,11 +66,16 @@ const DocumentInfo: FC = () => {
         saveAs(converted, `${name}.docx`);
     };
 
+    const handlePublish = () => {
+        // Simulate publishing logic
+        console.log(`Publishing document: ${name}`);
+        // Optionally, call an API endpoint to publish the document
+    };
+
     if (isLoading) return <Loading />;
 
     if (isError) {
-        const errorMessage =
-            (error as Error)?.message || 'Something went wrong.';
+        const errorMessage = (error as Error)?.message || 'Something went wrong.';
         return <p className='text-xl font-bold text-red-700'>{errorMessage}</p>;
     }
 
@@ -92,9 +90,9 @@ const DocumentInfo: FC = () => {
                 handleDownload={handleDownload}
                 handleExportPDF={handleExportPDF}
                 handleDocxDownload={handleDocxDownload}
+                handlePublish={handlePublish}
                 documentId={id}
             />
-
             <div className='ml-4 mt-4'>
                 <form onSubmit={(e) => e.preventDefault()}>
                     <Input
@@ -106,11 +104,18 @@ const DocumentInfo: FC = () => {
                         <ConfettiButton
                             variant={'default'}
                             className='mt-4'
-                            onClick={handleSave} // Call handleSave on click
+                            onClick={handleSave}
                         >
                             Save document
                         </ConfettiButton>
                     )}
+                    <ConfettiButton
+                        variant={'outline'}
+                        className='mt-4 ml-2'
+                        onClick={handlePublish}
+                    >
+                        Publish document
+                    </ConfettiButton>
                     <div className='mt-4'>
                         <QuillEditor
                             value={content}
