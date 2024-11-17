@@ -6,9 +6,8 @@
 		"dev": "next dev --turbo && pnpm run socket-server",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
 		"socket-server": "tsc ./socketServer.ts && node ./socketServer.js",
-		"format": "pnpm biome check --write ."
+		"lint": "pnpm biome check --write ."
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
