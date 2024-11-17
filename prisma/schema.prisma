@@ -103,6 +103,8 @@ model WorkspaceDocument {
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade, name: "WorkspaceToDocuments") // Correct relation name
   userId      String
+  isPublic    Boolean   @default(false)
+  publicUrl   String?   @unique
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

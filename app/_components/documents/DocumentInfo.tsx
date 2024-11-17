@@ -14,7 +14,8 @@ import htmlDocx from 'html-docx-js/dist/html-docx';
 import useWorkspaceDocumentDetail from '@/app/_hooks/workspace-documents/useWorkspaceDocumentDetail';
 import useUpdateWorkspaceDocument from '@/app/_hooks/workspace-documents/useUpdateWorkspaceDocument';
 import Loading from '../shared/Loading';
-import { ConfettiButton } from '@/components/ui/confetti-button';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/app/_hooks/shared/use-toast';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -23,7 +24,7 @@ const DocumentInfo: FC = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
-
+    const {toast} = useToast();
     const { data, isLoading, isError, error } = useWorkspaceDocumentDetail({ id });
     const { mutate: updateDocument } = useUpdateWorkspaceDocument({ id });
 
@@ -67,9 +68,10 @@ const DocumentInfo: FC = () => {
     };
 
     const handlePublish = () => {
-        // Simulate publishing logic
-        console.log(`Publishing document: ${name}`);
-        // Optionally, call an API endpoint to publish the document
+        toast({
+            title: "Document was published",
+            className: "bg-green-600 text-white font-bold"
+        })
     };
 
     if (isLoading) return <Loading />;
@@ -101,21 +103,21 @@ const DocumentInfo: FC = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     {isEditMode && (
-                        <ConfettiButton
+                        <Button
                             variant={'default'}
                             className='mt-4'
                             onClick={handleSave}
                         >
                             Save document
-                        </ConfettiButton>
+                        </Button>
                     )}
-                    <ConfettiButton
+                    <Button
                         variant={'outline'}
                         className='mt-4 ml-2'
                         onClick={handlePublish}
                     >
                         Publish document
-                    </ConfettiButton>
+                    </Button>
                     <div className='mt-4'>
                         <QuillEditor
                             value={content}
