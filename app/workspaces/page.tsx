@@ -1,8 +1,8 @@
-import { NextPage } from 'next';
-import WorkspacesWrapper from '../_components/workspaces/WorkspacesWrapper';
+import type { NextPage } from "next";
+import WorkspacesWrapper from "../_components/workspaces/WorkspacesWrapper";
 
 const WorkspacesPage: NextPage = () => {
-    return <WorkspacesWrapper />;
+	return <WorkspacesWrapper />;
 };
 
 export default WorkspacesPage;
