@@ -1,5 +1,5 @@
-import { db } from '@/app/_utils/db';
-import { NextRequest, NextResponse } from 'next/server';
+import { db } from "@/app/_utils/db";
+import { type NextRequest, NextResponse } from "next/server";
 
 // GET method to fetch notifications by userId
 export async function GET(

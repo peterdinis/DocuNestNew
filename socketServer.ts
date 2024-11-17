@@ -1,5 +1,5 @@
-import { Server } from 'socket.io';
-import * as http from 'http';
+import * as http from "http";
+import { Server } from "socket.io";
 
 const PORT = 3001;
 
@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
 
 // Make the server listen on the defined port
 server.listen(PORT, () => {
-    console.log(`Socket.IO server running on http://localhost:${PORT}`);
+	console.log(`Socket.IO server running on http://localhost:${PORT}`);
 });
 
 export { server, io };

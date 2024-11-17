@@ -60,9 +60,9 @@ const DashboardActivities: FC = () => {
             console.log('Connected to WebSocket server');
         });
 
-        newSocket.on('connect_error', (error) => {
-            console.error('Socket connection error:', error);
-        });
+		newSocket.on("connect_error", (error) => {
+			console.error("Socket connection error:", error);
+		});
 
         return () => {
             newSocket.disconnect();

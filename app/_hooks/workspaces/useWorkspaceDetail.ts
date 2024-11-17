@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { fetchWorkspaceDetail } from '@/app/_store/queries/workspaceQueries';
-import { WorkspaceDetailType } from '@/app/_types/workspaceTypes';
-import { useQuery } from '@tanstack/react-query';
+import { fetchWorkspaceDetail } from "@/app/_store/queries/workspaceQueries";
+import type { WorkspaceDetailType } from "@/app/_types/workspaceTypes";
+import { useQuery } from "@tanstack/react-query";
 
 const useWorkspaceDetail = ({ id }: WorkspaceDetailType) => {
-    return useQuery({
-        queryKey: ['workspaceDetail', id],
-        queryFn: async () => {
-            if (!id) throw new Error('Invalid workspace ID');
-            return fetchWorkspaceDetail(id);
-        },
-        staleTime: Infinity,
-        refetchOnWindowFocus: true,
-        refetchOnMount: true,
-    });
+	return useQuery({
+		queryKey: ["workspaceDetail", id],
+		queryFn: async () => {
+			if (!id) throw new Error("Invalid workspace ID");
+			return fetchWorkspaceDetail(id);
+		},
+		staleTime: Number.POSITIVE_INFINITY,
+		refetchOnWindowFocus: true,
+		refetchOnMount: true,
+	});
 };
 
 export default useWorkspaceDetail;

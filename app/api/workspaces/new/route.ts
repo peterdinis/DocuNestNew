@@ -1,71 +1,68 @@
-import { db } from '@/app/_utils/db';
-import { getServerSession } from 'next-auth';
-import { revalidatePath } from 'next/cache';
-import { NextResponse } from 'next/server';
-import authOptions from '../../auth/authOptions';
+import { db } from "@/app/_utils/db";
+import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
+import authOptions from "../../auth/authOptions";
 
 export async function POST(req: Request) {
-    try {
-        const session = await getServerSession(authOptions);
+	try {
+		const session = await getServerSession(authOptions);
 
-        if (!session || !session.user) {
-            return NextResponse.json(
-                { error: 'Not authenticated' },
-                { status: 401 },
-            );
-        }
+		if (!session || !session.user) {
+			return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+		}
 
-        const { name, workspaceEmoji, description } = await req.json();
+		const { name, workspaceEmoji, description } = await req.json();
 
-        const user = await db.user.findUnique({
-            where: {
-                id: session.user.id,
-            },
-        });
+		const user = await db.user.findUnique({
+			where: {
+				id: session.user.id,
+			},
+		});
 
-        if (!user) {
-            throw new Error('User not found');
-        }
+		if (!user) {
+			throw new Error("User not found");
+		}
 
-        const existingWorkspace = await db.workspace.findFirst({
-            where: {
-                userId: user.id,
-                name: name,
-            },
-        });
+		const existingWorkspace = await db.workspace.findFirst({
+			where: {
+				userId: user.id,
+				name: name,
+			},
+		});
 
-        if (existingWorkspace) {
-            return NextResponse.json(
-                { error: 'A workspace with this name already exists' },
-                { status: 400 },
-            );
-        }
+		if (existingWorkspace) {
+			return NextResponse.json(
+				{ error: "A workspace with this name already exists" },
+				{ status: 400 },
+			);
+		}
 
-        const createNewWorkspace = await db.workspace.create({
-            data: {
-                userId: user.id,
-                name,
-                workspaceEmoji,
-                description,
-            },
-        });
+		const createNewWorkspace = await db.workspace.create({
+			data: {
+				userId: user.id,
+				name,
+				workspaceEmoji,
+				description,
+			},
+		});
 
-        /* await axios.post('/api/notifications', {
+		/* await axios.post('/api/notifications', {
             userId: user.id,
             title: 'New document',
             message: `New workspace was created ${createNewWorkspace.name}`,
         }); */
 
-        if (!createNewWorkspace) {
-            return new NextResponse('Failed to create workspace', {
-                status: 500,
-            });
-        }
+		if (!createNewWorkspace) {
+			return new NextResponse("Failed to create workspace", {
+				status: 500,
+			});
+		}
 
-        revalidatePath('/dashboard');
+		revalidatePath("/dashboard");
 
-        return NextResponse.json(createNewWorkspace, { status: 201 });
-    } catch (error) {
-        return new NextResponse('Server error', { status: 500 });
-    }
+		return NextResponse.json(createNewWorkspace, { status: 201 });
+	} catch (error) {
+		return new NextResponse("Server error", { status: 500 });
+	}
 }
