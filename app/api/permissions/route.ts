@@ -1,28 +1,25 @@
-import { getServerSession } from 'next-auth';
-import { NextResponse } from 'next/server';
-import authOptions from '../auth/authOptions';
-import { db } from '@/app/_utils/db';
+import { db } from "@/app/_utils/db";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
+import authOptions from "../auth/authOptions";
 
 export async function GET() {
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user) {
-        return NextResponse.json(
-            { error: 'Not authenticated' },
-            { status: 401 },
-        );
-    }
+	const session = await getServerSession(authOptions);
+	if (!session || !session.user) {
+		return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+	}
 
-    const findMemberInWorkspace = await db.workspaceMember.findFirst({
-        where: {
-            userId: session.user.id,
-        },
-    });
+	const findMemberInWorkspace = await db.workspaceMember.findFirst({
+		where: {
+			userId: session.user.id,
+		},
+	});
 
-    if (!findMemberInWorkspace) {
-        throw new Error('User does not exists in workspace');
-    }
+	if (!findMemberInWorkspace) {
+		throw new Error("User does not exists in workspace");
+	}
 
-    return NextResponse.json({
-        findMemberInWorkspace,
-    });
+	return NextResponse.json({
+		findMemberInWorkspace,
+	});
 }
