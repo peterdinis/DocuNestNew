@@ -44,7 +44,7 @@ export async function POST(req: Request) {
             userId: session.user.id,
             title: 'New Document',
             message: `New document was created for workspace - ${createWorkspaceDocument.name}`,
-        });
+        }); */
 
 		if (!createWorkspaceDocument) {
 			return new NextResponse("Failed to create workspace document", {
