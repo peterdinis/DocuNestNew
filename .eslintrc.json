@@ -1,7 +1,7 @@
 {
-    "extends": [
-        "next/core-web-vitals",
-        "next/typescript",
-        "plugin:@tanstack/eslint-plugin-query/recommended"
-    ]
+	"extends": [
+		"next/core-web-vitals",
+		"next/typescript",
+		"plugin:@tanstack/eslint-plugin-query/recommended"
+	]
 }

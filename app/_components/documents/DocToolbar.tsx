@@ -1,35 +1,36 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+'use client';
+
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import {
-    ChevronDown,
-    Pencil,
-    Trash,
-    Text,
-    PencilOff,
-    ArrowLeft,
-    Globe,
-} from 'lucide-react'; // Added Globe icon for publish button
-import { FC } from 'react';
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { FaRegFilePdf } from 'react-icons/fa6';
-import { FaFileWord } from 'react-icons/fa';
-import TooltipWrapper from '../shared/TooltipWrapper';
-import useDeleteWorkspaceDocument from '@/app/_hooks/workspace-documents/useDeleteWorkspaceDocument';
+	ArrowLeft,
+	ChevronDown,
+	Pencil,
+	PencilOff,
+	Text,
+	Trash,
+} from "lucide-react";
+import Link from "next/link";
+import type { FC } from "react";
+import { FaFileWord } from "react-icons/fa";
+import { FaRegFilePdf } from "react-icons/fa6";
+import TooltipWrapper from "../shared/TooltipWrapper";
+import useDeleteWorkspaceDocument from "@/app/_hooks/workspace-documents/useDeleteWorkspaceDocument";
 
 interface DocToolbarProps {
     isEditMode: boolean;
@@ -38,7 +39,6 @@ interface DocToolbarProps {
     handleDownload: () => void;
     handleExportPDF: () => void;
     handleDocxDownload: () => void;
-    handlePublish: () => void; // Added publish handler
 }
 
 const DocToolbar: FC<DocToolbarProps> = ({
@@ -48,15 +48,14 @@ const DocToolbar: FC<DocToolbarProps> = ({
     handleDocxDownload,
     handleDownload,
     handleExportPDF,
-    handlePublish, // Added publish handler
 }: DocToolbarProps) => {
-    const deleteDocumentMutation = useDeleteWorkspaceDocument({
-        id: documentId,
-    });
+	const deleteDocumentMutation = useDeleteWorkspaceDocument({
+		id: documentId,
+	});
 
-    const handleDelete = () => {
-        deleteDocumentMutation.mutate();
-    };
+	const handleDelete = () => {
+		deleteDocumentMutation.mutate();
+	};
 
     return (
         <div className='flex items-center justify-between border-b bg-background p-4'>
@@ -106,15 +105,6 @@ const DocToolbar: FC<DocToolbarProps> = ({
                 />
             </div>
             <div className='flex items-center space-x-2'>
-                <TooltipWrapper
-                    triggerChildren={
-                        <Button onClick={handlePublish} variant='outline'>
-                            <Globe className='h-4 w-4' />
-                            Publish
-                        </Button>
-                    }
-                    contentText='Publish document'
-                />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant='outline'>
